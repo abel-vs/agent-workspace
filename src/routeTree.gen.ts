@@ -66,6 +66,7 @@ import { Route as ApiSwarmCheckpointRouteImport } from './routes/api/swarm-check
 import { Route as ApiSwarmChatRouteImport } from './routes/api/swarm-chat'
 import { Route as ApiStartClaudeRouteImport } from './routes/api/start-claude'
 import { Route as ApiStartAgentRouteImport } from './routes/api/start-agent'
+import { Route as ApiSshTunnelRouteImport } from './routes/api/ssh-tunnel'
 import { Route as ApiSkillsRouteImport } from './routes/api/skills'
 import { Route as ApiSessionsRouteImport } from './routes/api/sessions'
 import { Route as ApiSessionStatusRouteImport } from './routes/api/session-status'
@@ -443,6 +444,11 @@ const ApiStartClaudeRoute = ApiStartClaudeRouteImport.update({
 const ApiStartAgentRoute = ApiStartAgentRouteImport.update({
   id: '/api/start-agent',
   path: '/api/start-agent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSshTunnelRoute = ApiSshTunnelRouteImport.update({
+  id: '/api/ssh-tunnel',
+  path: '/api/ssh-tunnel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSkillsRoute = ApiSkillsRouteImport.update({
@@ -977,6 +983,7 @@ export interface FileRoutesByFullPath {
   '/api/session-status': typeof ApiSessionStatusRoute
   '/api/sessions': typeof ApiSessionsRouteWithChildren
   '/api/skills': typeof ApiSkillsRouteWithChildren
+  '/api/ssh-tunnel': typeof ApiSshTunnelRoute
   '/api/start-agent': typeof ApiStartAgentRoute
   '/api/start-claude': typeof ApiStartClaudeRoute
   '/api/swarm-chat': typeof ApiSwarmChatRoute
@@ -1127,6 +1134,7 @@ export interface FileRoutesByTo {
   '/api/session-status': typeof ApiSessionStatusRoute
   '/api/sessions': typeof ApiSessionsRouteWithChildren
   '/api/skills': typeof ApiSkillsRouteWithChildren
+  '/api/ssh-tunnel': typeof ApiSshTunnelRoute
   '/api/start-agent': typeof ApiStartAgentRoute
   '/api/start-claude': typeof ApiStartClaudeRoute
   '/api/swarm-chat': typeof ApiSwarmChatRoute
@@ -1279,6 +1287,7 @@ export interface FileRoutesById {
   '/api/session-status': typeof ApiSessionStatusRoute
   '/api/sessions': typeof ApiSessionsRouteWithChildren
   '/api/skills': typeof ApiSkillsRouteWithChildren
+  '/api/ssh-tunnel': typeof ApiSshTunnelRoute
   '/api/start-agent': typeof ApiStartAgentRoute
   '/api/start-claude': typeof ApiStartClaudeRoute
   '/api/swarm-chat': typeof ApiSwarmChatRoute
@@ -1432,6 +1441,7 @@ export interface FileRouteTypes {
     | '/api/session-status'
     | '/api/sessions'
     | '/api/skills'
+    | '/api/ssh-tunnel'
     | '/api/start-agent'
     | '/api/start-claude'
     | '/api/swarm-chat'
@@ -1582,6 +1592,7 @@ export interface FileRouteTypes {
     | '/api/session-status'
     | '/api/sessions'
     | '/api/skills'
+    | '/api/ssh-tunnel'
     | '/api/start-agent'
     | '/api/start-claude'
     | '/api/swarm-chat'
@@ -1733,6 +1744,7 @@ export interface FileRouteTypes {
     | '/api/session-status'
     | '/api/sessions'
     | '/api/skills'
+    | '/api/ssh-tunnel'
     | '/api/start-agent'
     | '/api/start-claude'
     | '/api/swarm-chat'
@@ -1885,6 +1897,7 @@ export interface RootRouteChildren {
   ApiSessionStatusRoute: typeof ApiSessionStatusRoute
   ApiSessionsRoute: typeof ApiSessionsRouteWithChildren
   ApiSkillsRoute: typeof ApiSkillsRouteWithChildren
+  ApiSshTunnelRoute: typeof ApiSshTunnelRoute
   ApiStartAgentRoute: typeof ApiStartAgentRoute
   ApiStartClaudeRoute: typeof ApiStartClaudeRoute
   ApiSwarmChatRoute: typeof ApiSwarmChatRoute
@@ -2339,6 +2352,13 @@ declare module '@tanstack/react-router' {
       path: '/api/start-agent'
       fullPath: '/api/start-agent'
       preLoaderRoute: typeof ApiStartAgentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ssh-tunnel': {
+      id: '/api/ssh-tunnel'
+      path: '/api/ssh-tunnel'
+      fullPath: '/api/ssh-tunnel'
+      preLoaderRoute: typeof ApiSshTunnelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/skills': {
@@ -3265,6 +3285,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSessionStatusRoute: ApiSessionStatusRoute,
   ApiSessionsRoute: ApiSessionsRouteWithChildren,
   ApiSkillsRoute: ApiSkillsRouteWithChildren,
+  ApiSshTunnelRoute: ApiSshTunnelRoute,
   ApiStartAgentRoute: ApiStartAgentRoute,
   ApiStartClaudeRoute: ApiStartClaudeRoute,
   ApiSwarmChatRoute: ApiSwarmChatRoute,

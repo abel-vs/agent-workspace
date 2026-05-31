@@ -20,6 +20,22 @@ import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { getStateDir } from './workspace-state-dir'
+import { startConfiguredTunnel } from './ssh-tunnel'
+
+// Bring up the SSH tunnel (if HERMES_SSH_HOST / saved config enables one)
+// before the gateway probe runs — the probe targets 127.0.0.1:<port>, which
+// only resolves to the remote agent once the forward is established. Guarded so
+// repeated probes don't respawn an already-running tunnel.
+let tunnelKicked = false
+function ensureTunnelStarted(): void {
+  if (tunnelKicked) return
+  tunnelKicked = true
+  try {
+    startConfiguredTunnel()
+  } catch (err) {
+    console.warn('[ssh-tunnel] failed to start configured tunnel:', err)
+  }
+}
 
 type WorkspaceOverrides = {
   claudeApiUrl?: string
@@ -860,6 +876,7 @@ export async function probeGateway(options?: {
 }
 
 export async function ensureGatewayProbed(): Promise<GatewayCapabilities> {
+  ensureTunnelStarted()
   const isStale =
     Date.now() - lastProbeAt > effectiveProbeTtl(capabilities)
   if (!capabilities.probed || isStale) {
@@ -953,4 +970,5 @@ export function isClaudeConnected(): boolean {
   return capabilities.health || capabilities.dashboard.available
 }
 
+ensureTunnelStarted()
 void ensureGatewayProbed()
