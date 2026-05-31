@@ -159,6 +159,24 @@ Then restart the gateway, dashboard, and workspace. Hit the workspace from the r
 
 **If you've already started the workspace**, you can update both URLs from `Settings → Connection` without restarting. The values are persisted to `~/.hermes/workspace-overrides.json` and take effect immediately (gateway capabilities are reprobed on save). Editing `.env` still works for pre-start config and for CI/containers.
 
+#### Remote agent over SSH (no local agent install)
+
+If your agent runs on a VPS you already reach with `ssh hermes`, the workspace can forward the agent to your machine over SSH — no Tailscale, no exposing the gateway on `0.0.0.0`, and no local agent install. The gateway (`:8642`) and dashboard (`:9119`) stay loopback-bound on the VPS; the workspace tunnels them to the same ports on `localhost`, so the default Connection URLs reach the remote agent.
+
+Configure it from **Settings → Connection → "Remote agent over SSH"** (enter the SSH host, flip the toggle), or via env:
+
+```bash
+# In hermes-workspace/.env:
+echo 'HERMES_SSH_HOST=hermes' >> .env      # an ~/.ssh/config alias or user@host
+
+# On the VPS, the gateway HTTP API is opt-in — enable it once:
+ssh hermes "echo 'API_SERVER_ENABLED=true' >> ~/.hermes/.env"
+```
+
+The workspace then spawns and supervises `ssh -N -L 8642:127.0.0.1:8642 -L 9119:127.0.0.1:9119 hermes` with keepalive and automatic restart/backoff, and shows live status (Connected / Reconnecting / Error) in the settings panel. Requires **key-based** SSH access — the tunnel runs in `BatchMode` and never prompts for a password. Advanced knobs (`HERMES_SSH_PORT`, `HERMES_SSH_IDENTITY`, custom local/remote ports, `HERMES_SSH_EXTRA_ARGS` for a bastion `ProxyJump`) are documented in `.env.example`.
+
+> Prefer to do it by hand? `ssh -N -L 8642:127.0.0.1:8642 -L 9119:127.0.0.1:9119 hermes` in a spare terminal achieves the same thing; the built-in tunnel just supervises it for you.
+
 ---
 
 ### Manual install

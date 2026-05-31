@@ -62,6 +62,7 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
   const [serverLog, setServerLog] = useState<Array<string>>([])
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null)
   const [showManual, setShowManual] = useState(false)
+  const [showSsh, setShowSsh] = useState(false)
 
   const platform = useRef<Platform>(detectPlatform())
   const steps = getSetupSteps(platform.current)
@@ -298,6 +299,100 @@ export function ConnectionStartupScreen({ onConnected }: Props) {
                   </pre>
                 </div>
               ) : null}
+            </div>
+
+            {/* Remote / VPS over SSH */}
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={() => setShowSsh(!showSsh)}
+                aria-expanded={showSsh}
+                className="flex w-full items-center justify-between gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm font-medium text-white/80 transition hover:bg-white/10"
+              >
+                <span className="flex items-center gap-2">
+                  <span aria-hidden>🛰️</span>
+                  Running Hermes on a VPS or another device? Connect over SSH
+                </span>
+                <span
+                  className={[
+                    'shrink-0 text-white/40 transition-transform',
+                    showSsh ? 'rotate-90' : '',
+                  ].join(' ')}
+                  aria-hidden
+                >
+                  ›
+                </span>
+              </button>
+
+              <div
+                className={[
+                  'overflow-hidden transition-all duration-300',
+                  showSsh ? 'mt-3 max-h-[40rem] opacity-100' : 'max-h-0 opacity-0',
+                ].join(' ')}
+              >
+                <div className="rounded-xl border border-white/8 bg-black/20 p-4 text-left">
+                  <p className="text-sm leading-6 text-white/70">
+                    Your agent runs on a remote host you reach with{' '}
+                    <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-white/80">
+                      ssh hermes
+                    </code>
+                    . The workspace can forward its gateway (
+                    <code className="font-mono">8642</code>) and dashboard (
+                    <code className="font-mono">9119</code>) over SSH so this page
+                    connects to the remote agent — no local install.
+                  </p>
+
+                  <a
+                    href="/settings?section=connection"
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400"
+                  >
+                    Configure SSH tunnel in Settings →
+                  </a>
+                  <p className="mt-2 text-center text-xs text-white/40">
+                    Opens Settings → Connection → “Remote agent over SSH”. Enter
+                    your SSH host, flip the toggle, done.
+                  </p>
+
+                  <div className="my-4 flex items-center gap-3">
+                    <div className="h-px flex-1 bg-white/10" />
+                    <span className="text-[0.7rem] uppercase tracking-wide text-white/30">
+                      or do it by hand
+                    </span>
+                    <div className="h-px flex-1 bg-white/10" />
+                  </div>
+
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-xs text-white/50">
+                      Run this in a terminal and leave it open:
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleCopy(
+                          'ssh -N -L 8642:127.0.0.1:8642 -L 9119:127.0.0.1:9119 hermes',
+                          -2,
+                        )
+                      }
+                      className="shrink-0 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/60 transition hover:bg-white/10 hover:text-white/80"
+                    >
+                      {copiedIdx === -2 ? '✓ Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  <pre className="mt-2 overflow-x-auto rounded-lg bg-black/40 p-3 font-mono text-xs leading-5 text-white/80">
+                    <code>
+                      ssh -N -L 8642:127.0.0.1:8642 -L 9119:127.0.0.1:9119 hermes
+                    </code>
+                  </pre>
+                  <p className="mt-2 text-xs text-white/40">
+                    Requires key-based SSH access and{' '}
+                    <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-white/60">
+                      API_SERVER_ENABLED=true
+                    </code>{' '}
+                    in the agent’s <code className="font-mono">~/.hermes/.env</code>{' '}
+                    on the VPS.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Divider */}

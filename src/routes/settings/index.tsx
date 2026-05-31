@@ -348,7 +348,12 @@ function SettingsRoute() {
         {/* Content area */}
         <div className="flex-1 min-w-0 flex flex-col gap-4">
           {/* -- Connection ------------------ */}
-          {activeSection === 'connection' && <ConnectionSection />}
+          {activeSection === 'connection' && (
+            <>
+              <ConnectionSection />
+              <SshTunnelSection />
+            </>
+          )}
 
           {/* ── Hermes Agent ──────────────────────────────────── */}
           {activeSection === 'claude' && (
@@ -2931,6 +2936,315 @@ function ConnectionSection() {
         ) and ensure the gateway listens on <code>0.0.0.0</code> (set{' '}
         <code>API_SERVER_HOST=0.0.0.0</code> in the agent-side <code>.env</code>
         ). No workspace restart needed — capabilities reprobe on save.
+      </div>
+    </SettingsSection>
+  )
+}
+
+type SshTunnelStatus = {
+  enabled: boolean
+  configured: boolean
+  state: 'disabled' | 'starting' | 'running' | 'retrying' | 'error' | 'stopped'
+  pid: number | null
+  host: string
+  sshPort?: number
+  identity?: string
+  extraArgs?: string
+  gatewayLocalPort: number
+  dashboardLocalPort: number
+  gatewayRemotePort: number
+  dashboardRemotePort: number
+  startedAt: number | null
+  restarts: number
+  lastError: string | null
+  lastExitCode: number | null
+  source: 'override' | 'env' | 'default'
+}
+
+const SSH_TUNNEL_STATE_STYLES: Record<
+  SshTunnelStatus['state'],
+  { label: string; dot: string; text: string }
+> = {
+  running: {
+    label: 'Connected',
+    dot: 'bg-emerald-500',
+    text: 'text-emerald-600',
+  },
+  starting: { label: 'Starting…', dot: 'bg-amber-500', text: 'text-amber-600' },
+  retrying: {
+    label: 'Reconnecting…',
+    dot: 'bg-amber-500',
+    text: 'text-amber-600',
+  },
+  error: { label: 'Error', dot: 'bg-red-500', text: 'text-red-500' },
+  stopped: { label: 'Stopped', dot: 'bg-primary-400', text: 'text-primary-600' },
+  disabled: { label: 'Off', dot: 'bg-primary-300', text: 'text-primary-500' },
+}
+
+function SshTunnelSection() {
+  const [status, setStatus] = useState<SshTunnelStatus | null>(null)
+  const [host, setHost] = useState('')
+  const [sshPort, setSshPort] = useState('')
+  const [identity, setIdentity] = useState('')
+  const [gatewayRemotePort, setGatewayRemotePort] = useState('')
+  const [dashboardRemotePort, setDashboardRemotePort] = useState('')
+  const [gatewayLocalPort, setGatewayLocalPort] = useState('')
+  const [dashboardLocalPort, setDashboardLocalPort] = useState('')
+  const [extraArgs, setExtraArgs] = useState('')
+  const [showAdvanced, setShowAdvanced] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
+  const [isError, setIsError] = useState(false)
+
+  const applyStatus = useCallback((data: SshTunnelStatus) => {
+    setStatus(data)
+    setHost(data.host)
+    setSshPort(data.sshPort ? String(data.sshPort) : '')
+    setIdentity(data.identity ?? '')
+    setGatewayRemotePort(String(data.gatewayRemotePort))
+    setDashboardRemotePort(String(data.dashboardRemotePort))
+    setGatewayLocalPort(String(data.gatewayLocalPort))
+    setDashboardLocalPort(String(data.dashboardLocalPort))
+    setExtraArgs(data.extraArgs ?? '')
+  }, [])
+
+  const refresh = useCallback(async () => {
+    try {
+      const res = await fetch('/api/ssh-tunnel')
+      if (!res.ok) return
+      applyStatus((await res.json()) as SshTunnelStatus)
+    } catch {
+      // non-fatal
+    }
+  }, [applyStatus])
+
+  useEffect(() => {
+    void refresh()
+  }, [refresh])
+
+  const submit = async (overrides: Record<string, unknown>) => {
+    setBusy(true)
+    setMessage(null)
+    setIsError(false)
+    try {
+      const res = await fetch('/api/ssh-tunnel', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          host: host.trim(),
+          sshPort: sshPort.trim(),
+          identity: identity.trim(),
+          gatewayRemotePort: gatewayRemotePort.trim(),
+          dashboardRemotePort: dashboardRemotePort.trim(),
+          gatewayLocalPort: gatewayLocalPort.trim(),
+          dashboardLocalPort: dashboardLocalPort.trim(),
+          extraArgs: extraArgs.trim(),
+          ...overrides,
+        }),
+      })
+      const data = (await res.json()) as SshTunnelStatus & {
+        error?: string
+        reachable?: boolean
+      }
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`)
+      applyStatus(data)
+      if (data.enabled) {
+        setMessage(
+          data.reachable
+            ? 'Tunnel up — gateway reachable on localhost.'
+            : 'Tunnel started. Waiting for the agent to respond…',
+        )
+        setIsError(!data.reachable)
+      } else {
+        setMessage('Tunnel disabled.')
+      }
+    } catch (err) {
+      setIsError(true)
+      setMessage(err instanceof Error ? err.message : 'Failed to save')
+    } finally {
+      setBusy(false)
+      setTimeout(() => setMessage(null), 8000)
+    }
+  }
+
+  const inputClass =
+    'h-9 w-full rounded-lg border border-primary-200 bg-primary-50 px-3 text-sm text-primary-900 font-mono outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400'
+
+  const pill = status ? SSH_TUNNEL_STATE_STYLES[status.state] : null
+
+  return (
+    <SettingsSection
+      title="Remote agent over SSH"
+      description="Run the agent on a VPS you reach with `ssh hermes` and let the workspace forward its gateway + dashboard over an SSH tunnel — no local agent install needed."
+      icon={CloudIcon}
+    >
+      <SettingsRow
+        label="Enable SSH tunnel"
+        description="The workspace spawns and supervises `ssh -N -L …` with keepalive + auto-restart."
+      >
+        <div className="flex items-center gap-3">
+          {pill ? (
+            <span className={cn('flex items-center gap-1.5 text-xs', pill.text)}>
+              <span className={cn('size-2 rounded-full', pill.dot)} />
+              {pill.label}
+            </span>
+          ) : null}
+          <Switch
+            checked={status?.enabled ?? false}
+            disabled={busy || !host.trim()}
+            onCheckedChange={(checked) => void submit({ enabled: checked })}
+            aria-label="Enable SSH tunnel"
+          />
+        </div>
+      </SettingsRow>
+
+      <SettingsRow
+        label="SSH host"
+        description="An ~/.ssh/config alias (e.g. hermes) or user@host. Key-based auth only — no password prompt."
+      >
+        <input
+          className={inputClass}
+          value={host}
+          onChange={(e) => setHost(e.target.value)}
+          placeholder="hermes"
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="off"
+        />
+      </SettingsRow>
+
+      <button
+        type="button"
+        className="text-left text-xs font-medium text-primary-600 underline-offset-2 hover:underline"
+        onClick={() => setShowAdvanced((v) => !v)}
+      >
+        {showAdvanced
+          ? 'Hide advanced options'
+          : 'Advanced options (ports, key, extra args)'}
+      </button>
+
+      {showAdvanced ? (
+        <div className="space-y-4">
+          <SettingsRow label="SSH port" description="Remote ssh port. Blank = 22.">
+            <input
+              className={inputClass}
+              value={sshPort}
+              onChange={(e) => setSshPort(e.target.value)}
+              placeholder="22"
+              inputMode="numeric"
+              spellCheck={false}
+            />
+          </SettingsRow>
+          <SettingsRow
+            label="Identity file"
+            description="Path to a private key (ssh -i). Blank uses your ssh-agent / default keys."
+          >
+            <input
+              className={inputClass}
+              value={identity}
+              onChange={(e) => setIdentity(e.target.value)}
+              placeholder="~/.ssh/id_ed25519"
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="off"
+            />
+          </SettingsRow>
+          <SettingsRow
+            label="Gateway port (remote → local)"
+            description="The gateway port on the VPS and the localhost port it's forwarded to."
+          >
+            <div className="flex items-center gap-2">
+              <input
+                className={cn(inputClass, 'w-24')}
+                value={gatewayRemotePort}
+                onChange={(e) => setGatewayRemotePort(e.target.value)}
+                placeholder="8642"
+                inputMode="numeric"
+              />
+              <span className="text-primary-400">→</span>
+              <input
+                className={cn(inputClass, 'w-24')}
+                value={gatewayLocalPort}
+                onChange={(e) => setGatewayLocalPort(e.target.value)}
+                placeholder="8642"
+                inputMode="numeric"
+              />
+            </div>
+          </SettingsRow>
+          <SettingsRow
+            label="Dashboard port (remote → local)"
+            description="The dashboard port on the VPS and the localhost port it's forwarded to."
+          >
+            <div className="flex items-center gap-2">
+              <input
+                className={cn(inputClass, 'w-24')}
+                value={dashboardRemotePort}
+                onChange={(e) => setDashboardRemotePort(e.target.value)}
+                placeholder="9119"
+                inputMode="numeric"
+              />
+              <span className="text-primary-400">→</span>
+              <input
+                className={cn(inputClass, 'w-24')}
+                value={dashboardLocalPort}
+                onChange={(e) => setDashboardLocalPort(e.target.value)}
+                placeholder="9119"
+                inputMode="numeric"
+              />
+            </div>
+          </SettingsRow>
+          <SettingsRow
+            label="Extra ssh args"
+            description="Appended verbatim, space-separated (e.g. -o ProxyJump=bastion)."
+          >
+            <input
+              className={inputClass}
+              value={extraArgs}
+              onChange={(e) => setExtraArgs(e.target.value)}
+              placeholder="-o ProxyJump=bastion"
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="off"
+            />
+          </SettingsRow>
+        </div>
+      ) : null}
+
+      <div className="flex items-center gap-2 pt-2">
+        <Button
+          size="sm"
+          onClick={() => void submit({})}
+          disabled={busy || !host.trim()}
+        >
+          {busy ? 'Saving…' : 'Save & connect'}
+        </Button>
+        {message ? (
+          <span
+            className={cn(
+              'text-xs',
+              isError ? 'text-amber-600' : 'text-emerald-600',
+            )}
+          >
+            {message}
+          </span>
+        ) : null}
+      </div>
+
+      {status?.lastError && status.state !== 'running' ? (
+        <div className="rounded-lg border border-red-200 bg-red-50/60 p-3 text-xs text-red-600">
+          <strong className="font-semibold">ssh:</strong>{' '}
+          <span className="font-mono break-all">{status.lastError}</span>
+        </div>
+      ) : null}
+
+      <div className="rounded-lg border border-primary-200 bg-primary-100/50 p-3 text-xs text-primary-600">
+        <strong className="font-semibold">How it works:</strong> the agent's
+        gateway (<code>8642</code>) and dashboard (<code>9119</code>) are
+        loopback-bound on the VPS. This forwards them to the same ports on{' '}
+        <code>localhost</code>, so the default Connection URLs above reach the
+        remote agent. Requires key-based SSH access (no password prompt) and{' '}
+        <code>API_SERVER_ENABLED=true</code> in the agent's{' '}
+        <code>~/.hermes/.env</code>.
       </div>
     </SettingsSection>
   )
