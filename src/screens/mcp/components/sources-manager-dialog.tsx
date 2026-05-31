@@ -41,8 +41,8 @@ const EMPTY_FORM: AddSourceInput = {
   enabled: true,
 }
 
-const FIELD = 'h-9 w-full rounded-lg border border-primary-200 bg-primary-100/60 px-3 text-sm text-ink outline-none transition-colors focus:border-primary'
-const LABEL = 'flex flex-col gap-1 text-sm text-primary-500'
+const FIELD = 'h-9 w-full rounded-lg border border-border bg-card/60 px-3 text-sm text-foreground outline-none transition-colors focus:border-primary'
+const LABEL = 'flex flex-col gap-1 text-sm text-muted-foreground'
 const ERROR_TEXT = 'mt-0.5 text-xs text-red-600 dark:text-red-400'
 
 function fieldError(errors: MutationError[], path: string): string | undefined {
@@ -112,7 +112,7 @@ function SourceForm({ initial, isEdit, onSave, onCancel, saving, serverErrors }:
           autoFocus
         />
         {idErr ? <p className={ERROR_TEXT}>{idErr}</p> : null}
-        <p className="text-[11px] text-primary-400">Lowercase, alphanumeric + _ -. Cannot be changed after creation.</p>
+        <p className="text-[11px] text-muted-foreground">Lowercase, alphanumeric + _ -. Cannot be changed after creation.</p>
       </div>
 
       <div className={LABEL}>
@@ -138,7 +138,7 @@ function SourceForm({ initial, isEdit, onSave, onCancel, saving, serverErrors }:
           type="url"
         />
         {urlErr ? <p className={ERROR_TEXT}>{urlErr}</p> : null}
-        <p className="text-[11px] text-primary-400">HTTPS only. Must return JSON.</p>
+        <p className="text-[11px] text-muted-foreground">HTTPS only. Must return JSON.</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
@@ -180,9 +180,9 @@ function SourceForm({ initial, isEdit, onSave, onCancel, saving, serverErrors }:
           checked={form.enabled}
           onChange={(e) => set('enabled', e.target.checked)}
           disabled={saving}
-          className="h-4 w-4 rounded border-primary-200 text-primary accent-primary"
+          className="h-4 w-4 rounded border-border text-primary accent-primary"
         />
-        <label htmlFor="enabled-toggle" className="text-sm text-ink cursor-pointer">
+        <label htmlFor="enabled-toggle" className="text-sm text-foreground cursor-pointer">
           Enabled
         </label>
       </div>
@@ -218,26 +218,26 @@ const TRUST_PILL: Record<string, string> = {
 
 function SourceRow({ source, onEdit, onDelete, deleting }: SourceRowProps) {
   return (
-    <div className="flex items-start justify-between gap-3 rounded-lg border border-primary-200 bg-primary-100/40 px-3 py-2.5">
+    <div className="flex items-start justify-between gap-3 rounded-lg border border-border bg-card/40 px-3 py-2.5">
       <div className="min-w-0 flex-1 space-y-0.5">
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-sm font-medium text-ink truncate">{source.name}</span>
+          <span className="text-sm font-medium text-foreground truncate">{source.name}</span>
           <span className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${TRUST_PILL[source.trust] ?? TRUST_PILL.unverified}`}>
             {source.trust}
           </span>
           {source.builtin ? (
-            <span className="rounded border border-primary-200 bg-primary-100/50 px-1.5 py-0.5 text-[10px] text-primary-500">
+            <span className="rounded border border-border bg-card/50 px-1.5 py-0.5 text-[10px] text-muted-foreground">
               built-in
             </span>
           ) : null}
           {!source.enabled ? (
-            <span className="rounded border border-primary-200 bg-primary-100/50 px-1.5 py-0.5 text-[10px] text-primary-400">
+            <span className="rounded border border-border bg-card/50 px-1.5 py-0.5 text-[10px] text-muted-foreground">
               disabled
             </span>
           ) : null}
         </div>
-        <p className="text-xs text-primary-400 truncate">{source.url}</p>
-        <p className="text-[11px] text-primary-400">{source.format} · {source.id}</p>
+        <p className="text-xs text-muted-foreground truncate">{source.url}</p>
+        <p className="text-[11px] text-muted-foreground">{source.format} · {source.id}</p>
       </div>
       {!source.builtin ? (
         <div className="flex shrink-0 items-center gap-1">
@@ -347,22 +347,22 @@ export function SourcesManagerDialog({ open, onClose }: Props) {
 
   return (
     <DialogRoot open={open} onOpenChange={(o) => { if (!o) handleClose() }}>
-      <DialogContent className="w-[min(560px,95vw)] border-primary-200 bg-primary-50/95 backdrop-blur-sm">
-        <div className="border-b border-primary-200 px-5 py-4">
+      <DialogContent className="w-[min(560px,95vw)] border-border bg-background/95 backdrop-blur-sm">
+        <div className="border-b border-border px-5 py-4">
           <div className="flex items-center justify-between gap-3">
             {mode !== 'list' ? (
               <button
                 onClick={() => { setMode('list'); setEditingSource(null); setServerErrors([]) }}
-                className="text-sm text-primary-500 hover:text-ink transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 ← Back
               </button>
             ) : null}
-            <DialogTitle className="text-base font-semibold text-ink flex-1">
+            <DialogTitle className="text-base font-semibold text-foreground flex-1">
               {title}
             </DialogTitle>
           </div>
-          <DialogDescription className="mt-0.5 text-xs text-primary-400">
+          <DialogDescription className="mt-0.5 text-xs text-muted-foreground">
             {mode === 'list'
               ? 'Built-in sources are read-only. User-defined sources can be added, edited, or removed.'
               : mode === 'add'
@@ -375,7 +375,7 @@ export function SourcesManagerDialog({ open, onClose }: Props) {
           {mode === 'list' ? (
             <div className="flex flex-col gap-3">
               {query.isLoading ? (
-                <p className="text-sm text-primary-400">Loading sources…</p>
+                <p className="text-sm text-muted-foreground">Loading sources…</p>
               ) : query.error ? (
                 <p className="text-sm text-red-600">Failed to load sources.</p>
               ) : (
@@ -390,7 +390,7 @@ export function SourcesManagerDialog({ open, onClose }: Props) {
                     />
                   ))}
                   {sources.length === 0 ? (
-                    <p className="text-sm text-primary-400">No sources found.</p>
+                    <p className="text-sm text-muted-foreground">No sources found.</p>
                   ) : null}
                 </div>
               )}
@@ -401,7 +401,7 @@ export function SourcesManagerDialog({ open, onClose }: Props) {
                 </div>
               ) : null}
 
-              <div className="flex items-center justify-between pt-1 border-t border-primary-200">
+              <div className="flex items-center justify-between pt-1 border-t border-border">
                 <Button
                   size="sm"
                   onClick={() => { setServerErrors([]); setMode('add') }}

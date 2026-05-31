@@ -113,10 +113,10 @@ function statusStyles(state: WorkerState) {
     return { dot: 'bg-red-500', ring: 'text-red-500', label: 'Error', progress: 'failed' as const, avatar: 'failed' as const }
   }
   if (state === 'offline') {
-    return { dot: 'bg-primary-300', ring: 'text-primary-300', label: 'Offline', progress: 'queued' as const, avatar: 'idle' as const }
+    return { dot: 'bg-muted', ring: 'text-muted-foreground', label: 'Offline', progress: 'queued' as const, avatar: 'idle' as const }
   }
   if (state === 'idle') {
-    return { dot: 'bg-primary-300', ring: 'text-primary-300', label: 'Idle', progress: 'queued' as const, avatar: 'idle' as const }
+    return { dot: 'bg-muted', ring: 'text-muted-foreground', label: 'Idle', progress: 'queued' as const, avatar: 'idle' as const }
   }
   if (state === 'waiting') {
     return { dot: 'bg-amber-500', ring: 'text-amber-500', label: 'Waiting', progress: 'queued' as const, avatar: 'idle' as const }
@@ -700,7 +700,7 @@ export function OperationalWorkerCard({
                 </button>
                 <button
                   type="button"
-                  className="rounded-xl bg-[var(--theme-accent)] px-3 py-2 text-[11px] font-semibold text-primary-950 hover:bg-[var(--theme-accent-strong)]"
+                  className="rounded-xl bg-[var(--theme-accent)] px-3 py-2 text-[11px] font-semibold text-foreground hover:bg-[var(--theme-accent-strong)]"
                   onClick={() => {
                     const next: WorkerCardSettings = {
                       displayName: draftName.trim() || undefined,

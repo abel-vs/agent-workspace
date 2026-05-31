@@ -1,4 +1,4 @@
-import { Avatar } from '@base-ui/react/avatar'
+import { Avatar } from 'radix-ui'
 import { Markdown } from './markdown'
 import {
   TooltipContent,
@@ -40,7 +40,7 @@ function MessageAvatar({
     <Avatar.Root className={cn('h-8 w-8 shrink-0', className)}>
       <Avatar.Image src={src} alt={alt} />
       {fallback && (
-        <Avatar.Fallback delay={delayMs}>{fallback}</Avatar.Fallback>
+        <Avatar.Fallback delayMs={delayMs}>{fallback}</Avatar.Fallback>
       )}
     </Avatar.Root>
   )
@@ -87,7 +87,7 @@ function MessageActions({
 }: MessageActionsProps) {
   return (
     <div
-      className={cn('text-primary-600 flex items-center gap-2', className)}
+      className={cn('text-muted-foreground flex items-center gap-2', className)}
       {...props}
     >
       {children}

@@ -255,16 +255,16 @@ type SectionProps = {
 
 function SettingsSection({ title, description, icon, children }: SectionProps) {
   return (
-    <section className="rounded-2xl border border-primary-200 bg-primary-50/80 p-4 shadow-sm backdrop-blur-xl md:p-5">
+    <section className="rounded-2xl border border-border bg-background/80 p-4 shadow-sm backdrop-blur-xl md:p-5">
       <div className="mb-4 flex items-start gap-3">
-        <span className="inline-flex size-9 items-center justify-center rounded-xl border border-primary-200 bg-primary-100/70">
+        <span className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-card/70">
           <HugeiconsIcon icon={icon} size={20} strokeWidth={1.5} />
         </span>
         <div className="min-w-0">
-          <h2 className="text-base font-medium text-primary-900 text-balance">
+          <h2 className="text-base font-medium text-foreground text-balance">
             {title}
           </h2>
-          <p className="text-sm text-primary-600 text-pretty">{description}</p>
+          <p className="text-sm text-muted-foreground text-pretty">{description}</p>
         </div>
       </div>
       <div className="space-y-4">{children}</div>
@@ -282,11 +282,11 @@ function SettingsRow({ label, description, children }: RowProps) {
   return (
     <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-primary-900 text-balance">
+        <p className="text-sm font-medium text-foreground text-balance">
           {label}
         </p>
         {description ? (
-          <p className="text-xs text-primary-600 text-pretty">{description}</p>
+          <p className="text-xs text-muted-foreground text-pretty">{description}</p>
         ) : null}
       </div>
       <div className="flex w-full items-center gap-2 md:w-auto md:justify-end">
@@ -336,9 +336,9 @@ function SettingsRoute() {
   const activeSection: SettingsSectionId = section ?? 'claude'
 
   return (
-    <div className="min-h-screen bg-surface text-primary-900">
-      <div className="pointer-events-none fixed inset-0 bg-radial from-primary-400/20 via-transparent to-transparent" />
-      <div className="pointer-events-none fixed inset-0 bg-gradient-to-br from-primary-100/25 via-transparent to-primary-300/20" />
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="pointer-events-none fixed inset-0 bg-radial from-muted-foreground/20 via-transparent to-transparent" />
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-br from-card/25 via-transparent to-muted/20" />
 
       <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-4 px-4 pt-6 pb-24 sm:px-6 md:flex-row md:gap-6 md:pb-8 lg:pt-8">
         <SettingsSidebar activeId={activeSection} />
@@ -377,10 +377,10 @@ function SettingsRoute() {
               >
                 <div className="space-y-2">
                   <div>
-                    <p className="text-sm font-medium text-primary-900">
+                    <p className="text-sm font-medium text-foreground">
                       Theme
                     </p>
-                    <p className="text-xs text-primary-600 text-pretty">
+                    <p className="text-xs text-muted-foreground text-pretty">
                       Choose the workspace palette. Light and dark variants are
                       both available.
                     </p>
@@ -414,13 +414,13 @@ function SettingsRoute() {
                     onChange={(e) =>
                       updateSettings({ editorFontSize: Number(e.target.value) })
                     }
-                    className="w-full accent-primary-900 dark:accent-primary-400"
+                    className="w-full accent-primary dark:accent-primary"
                     aria-label={`Editor font size: ${settings.editorFontSize} pixels`}
                     aria-valuemin={12}
                     aria-valuemax={20}
                     aria-valuenow={settings.editorFontSize}
                   />
-                  <span className="w-12 text-right text-sm tabular-nums text-primary-700">
+                  <span className="w-12 text-right text-sm tabular-nums text-foreground">
                     {settings.editorFontSize}px
                   </span>
                 </div>
@@ -469,7 +469,7 @@ function SettingsRoute() {
                     setLocale(e.target.value as LocaleId)
                     window.location.reload()
                   }}
-                  className="h-9 w-full rounded-lg border border-primary-200 dark:border-gray-600 bg-primary-50 dark:bg-gray-800 px-3 text-sm text-primary-900 dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 md:max-w-xs"
+                  className="h-9 w-full rounded-lg border border-border dark:border-gray-600 bg-background dark:bg-gray-800 px-3 text-sm text-foreground dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring md:max-w-xs"
                 >
                   {(
                     Object.entries(LOCALE_LABELS) as Array<[LocaleId, string]>
@@ -517,14 +517,14 @@ function SettingsRoute() {
                           usageThreshold: Number(e.target.value),
                         })
                       }
-                      className="w-full accent-primary-900 dark:accent-primary-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full accent-primary dark:accent-primary disabled:opacity-50 disabled:cursor-not-allowed"
                       disabled={!settings.notificationsEnabled}
                       aria-label={`Usage threshold: ${settings.usageThreshold} percent`}
                       aria-valuemin={50}
                       aria-valuemax={100}
                       aria-valuenow={settings.usageThreshold}
                     />
-                    <span className="w-12 text-right text-sm tabular-nums text-primary-700">
+                    <span className="w-12 text-right text-sm tabular-nums text-foreground">
                       {settings.usageThreshold}%
                     </span>
                   </div>
@@ -557,7 +557,7 @@ function SettingsRoute() {
                     onChange={(e) =>
                       updateSettings({ preferredBudgetModel: e.target.value })
                     }
-                    className="h-9 w-full rounded-lg border border-primary-200 dark:border-gray-600 bg-primary-50 dark:bg-gray-800 px-3 text-sm text-primary-900 dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 dark:focus-visible:ring-primary-500 md:max-w-xs"
+                    className="h-9 w-full rounded-lg border border-border dark:border-gray-600 bg-background dark:bg-gray-800 px-3 text-sm text-foreground dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring dark:focus-visible:ring-ring md:max-w-xs"
                     aria-label="Preferred budget model"
                   >
                     <option value="">Auto-detect</option>
@@ -580,7 +580,7 @@ function SettingsRoute() {
                     onChange={(e) =>
                       updateSettings({ preferredPremiumModel: e.target.value })
                     }
-                    className="h-9 w-full rounded-lg border border-primary-200 dark:border-gray-600 bg-primary-50 dark:bg-gray-800 px-3 text-sm text-primary-900 dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 dark:focus-visible:ring-primary-500 md:max-w-xs"
+                    className="h-9 w-full rounded-lg border border-border dark:border-gray-600 bg-background dark:bg-gray-800 px-3 text-sm text-foreground dark:text-gray-100 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring dark:focus-visible:ring-ring md:max-w-xs"
                     aria-label="Preferred premium model"
                   >
                     <option value="">Auto-detect</option>
@@ -611,7 +611,7 @@ function SettingsRoute() {
           )}
 
           <footer className="mt-auto pt-4">
-            <div className="flex items-center gap-2 rounded-2xl border border-primary-200 bg-primary-50/70 p-3 text-sm text-primary-600 backdrop-blur-sm">
+            <div className="flex items-center gap-2 rounded-2xl border border-border bg-background/70 p-3 text-sm text-muted-foreground backdrop-blur-sm">
               <HugeiconsIcon
                 icon={Settings02Icon}
                 size={20}
@@ -707,8 +707,8 @@ function _ProfileSection() {
           alt={displayName}
         />
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-primary-900">{displayName}</p>
-          <p className="text-xs text-primary-500">
+          <p className="text-sm font-medium text-foreground">{displayName}</p>
+          <p className="text-xs text-muted-foreground">
             Shown in the sidebar and chat messages.
           </p>
         </div>
@@ -749,7 +749,7 @@ function _ProfileSection() {
                 onChange={handleAvatarUpload}
                 disabled={profileProcessing}
                 aria-label="Upload profile picture"
-                className="block w-full cursor-pointer text-xs text-primary-700 dark:text-gray-300 md:max-w-xs file:mr-2 file:cursor-pointer file:rounded-md file:border file:border-primary-200 dark:file:border-gray-600 file:bg-primary-100 dark:file:bg-gray-700 file:px-2.5 file:py-1.5 file:text-xs file:font-medium file:text-primary-900 dark:file:text-gray-100 file:transition-colors hover:file:bg-primary-200 dark:hover:file:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
+                className="block w-full cursor-pointer text-xs text-foreground dark:text-gray-300 md:max-w-xs file:mr-2 file:cursor-pointer file:rounded-md file:border file:border-border dark:file:border-gray-600 file:bg-card dark:file:bg-gray-700 file:px-2.5 file:py-1.5 file:text-xs file:font-medium file:text-foreground dark:file:text-gray-100 file:transition-colors hover:file:bg-muted dark:hover:file:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </label>
             <Button
@@ -851,7 +851,7 @@ function ChatDisplaySection() {
                 chatWidth: e.target.value as 'comfortable' | 'wide' | 'full',
               })
             }
-            className="h-8 rounded-md border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400"
+            className="h-8 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Chat content width"
           >
             <option value="comfortable">Comfortable (900px)</option>
@@ -930,7 +930,7 @@ function LoaderPreview({ style }: { style: LoaderStyle }) {
       preset={preset}
       size={16}
       speed={120}
-      className="text-primary-500"
+      className="text-muted-foreground"
     />
   ) : (
     <ThreeDotsSpinner />
@@ -958,8 +958,8 @@ function _LoaderStyleSection() {
               className={cn(
                 'flex min-h-16 flex-col items-center justify-center gap-2 rounded-xl border px-2 py-2 transition-colors',
                 active
-                  ? 'border-primary-500 bg-primary-200/60 text-primary-900'
-                  : 'border-primary-200 bg-primary-50 text-primary-700 hover:bg-primary-100',
+                  ? 'border-border bg-muted/60 text-foreground'
+                  : 'border-border bg-background text-foreground hover:bg-card',
               )}
               aria-pressed={active}
             >
@@ -1293,7 +1293,7 @@ function ClaudeConfigSection({
   }
 
   const selectClassName =
-    'h-9 w-full rounded-lg border border-primary-200 bg-primary-50 px-3 text-sm text-primary-900 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 md:max-w-sm'
+    'h-9 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring md:max-w-sm'
 
   const readNumber = (value: unknown, fallback: number) => {
     if (typeof value === 'number' && Number.isFinite(value)) return value
@@ -1592,13 +1592,13 @@ function ClaudeConfigSection({
           </div>
         </SettingsRow>
 
-        <div className="rounded-xl border border-primary-200 bg-white/80 px-3 py-3">
+        <div className="rounded-xl border border-border bg-white/80 px-3 py-3">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div className="space-y-0.5">
-              <p className="text-sm font-medium text-primary-900">
+              <p className="text-sm font-medium text-foreground">
                 Fallback model (optional)
               </p>
-              <p className="text-xs text-primary-600">
+              <p className="text-xs text-muted-foreground">
                 Used only if the primary model fails. Keep empty to disable — avoids mixing this
                 up with your main provider (for example OpenRouter only here, local primary above).
               </p>
@@ -1614,10 +1614,10 @@ function ClaudeConfigSection({
             </Button>
           </div>
           {showFallbackRow ? (
-            <div className="mt-3 space-y-3 border-t border-primary-200 pt-3">
+            <div className="mt-3 space-y-3 border-t border-border pt-3">
               <div className="grid gap-3 md:grid-cols-2">
                 <label className="space-y-1">
-                  <span className="text-xs font-medium text-primary-600">Fallback provider</span>
+                  <span className="text-xs font-medium text-muted-foreground">Fallback provider</span>
                   <Input
                     value={fallbackProviderInput}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1628,7 +1628,7 @@ function ClaudeConfigSection({
                   />
                 </label>
                 <label className="space-y-1">
-                  <span className="text-xs font-medium text-primary-600">Fallback model id</span>
+                  <span className="text-xs font-medium text-muted-foreground">Fallback model id</span>
                   <Input
                     value={fallbackModelInput}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1640,7 +1640,7 @@ function ClaudeConfigSection({
                 </label>
               </div>
               <label className="block space-y-1">
-                <span className="text-xs font-medium text-primary-600">Fallback base URL</span>
+                <span className="text-xs font-medium text-muted-foreground">Fallback base URL</span>
                 <Input
                   value={fallbackBaseUrlInput}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1829,10 +1829,10 @@ function ClaudeConfigSection({
         description="Configure a custom OpenAI-compatible endpoint. Add named rows (with a title like Qwen3.6.Eclipse) to custom_providers; optional manifest env key and URL below only apply if you use that path."
         icon={CloudIcon}
       >
-        <div className="space-y-4 rounded-xl border border-primary-200 bg-primary-50/80 p-4">
+        <div className="space-y-4 rounded-xl border border-border bg-background/80 p-4">
           <div>
-            <p className="text-sm font-medium text-primary-900">Add custom provider</p>
-            <p className="mt-1 text-xs text-primary-600">
+            <p className="text-sm font-medium text-foreground">Add custom provider</p>
+            <p className="mt-1 text-xs text-muted-foreground">
               <span className="font-medium">Title</span> is for your list only (e.g.{' '}
               <span className="font-mono">Qwen3.6.Eclipse</span> = model + host).{' '}
               <span className="font-medium">Provider id</span> is the config name Hermes uses — leave
@@ -1842,7 +1842,7 @@ function ClaudeConfigSection({
           </div>
           <div className="grid gap-3 md:grid-cols-2">
             <label className="space-y-1 md:col-span-2">
-              <span className="text-xs font-medium text-primary-600">Title</span>
+              <span className="text-xs font-medium text-muted-foreground">Title</span>
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                 <Input
                   value={addCpTitle}
@@ -1871,7 +1871,7 @@ function ClaudeConfigSection({
               </div>
             </label>
             <label className="space-y-1">
-              <span className="text-xs font-medium text-primary-600">Provider id (optional)</span>
+              <span className="text-xs font-medium text-muted-foreground">Provider id (optional)</span>
               <Input
                 value={addCpProviderId}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1882,7 +1882,7 @@ function ClaudeConfigSection({
               />
             </label>
             <label className="space-y-1">
-              <span className="text-xs font-medium text-primary-600">Base URL</span>
+              <span className="text-xs font-medium text-muted-foreground">Base URL</span>
               <Input
                 value={addCpBaseUrl}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -1897,7 +1897,7 @@ function ClaudeConfigSection({
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="h-auto px-0 py-0 text-xs text-primary-700 underline"
+                className="h-auto px-0 py-0 text-xs text-foreground underline"
                 onClick={() => {
                   setAddCpBaseUrl(baseUrlInput.trim())
                   setAddCpTitle((t) =>
@@ -1911,7 +1911,7 @@ function ClaudeConfigSection({
               </Button>
             </div>
             <label className="space-y-1 md:col-span-2">
-              <span className="text-xs font-medium text-primary-600">
+              <span className="text-xs font-medium text-muted-foreground">
                 Optional API key (this row only)
               </span>
               <Input
@@ -1935,11 +1935,11 @@ function ClaudeConfigSection({
           </Button>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-primary-200 bg-white/90">
-          <div className="flex flex-col gap-2 border-b border-primary-200 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-primary-700">
-              <span className="font-medium text-primary-900">Saved &amp; detected endpoints</span>
-              <span className="text-primary-600">
+        <div className="overflow-x-auto rounded-xl border border-border bg-white/90">
+          <div className="flex flex-col gap-2 border-b border-border px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-foreground">
+              <span className="font-medium text-foreground">Saved &amp; detected endpoints</span>
+              <span className="text-muted-foreground">
                 {' '}
                 (
                 {customProviders.length +
@@ -1960,7 +1960,7 @@ function ClaudeConfigSection({
           </div>
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-primary-200 bg-primary-100/70 text-left text-[11px] font-semibold uppercase tracking-wide text-primary-600">
+              <tr className="border-b border-border bg-card/70 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 <th className="px-3 py-2">Source</th>
                 <th className="px-3 py-2">Title</th>
                 <th className="px-3 py-2">Provider id</th>
@@ -1975,7 +1975,7 @@ function ClaudeConfigSection({
                 <tr>
                   <td
                     colSpan={5}
-                    className="px-3 py-4 text-xs leading-relaxed text-primary-600"
+                    className="px-3 py-4 text-xs leading-relaxed text-muted-foreground"
                   >
                     No rows in <span className="font-mono">custom_providers</span> yet, and no
                     primary base URL or manifest URL was detected. Use{' '}
@@ -1990,16 +1990,16 @@ function ClaudeConfigSection({
                 return (
                   <tr
                     key={`saved-${key}-${index}`}
-                    className="border-b border-primary-100 odd:bg-primary-50/40"
+                    className="border-b border-border odd:bg-background/40"
                   >
-                    <td className="px-3 py-2 align-top text-xs text-primary-600">Saved</td>
-                    <td className="max-w-[160px] px-3 py-2 align-top text-xs font-medium text-primary-900 break-words">
+                    <td className="px-3 py-2 align-top text-xs text-muted-foreground">Saved</td>
+                    <td className="max-w-[160px] px-3 py-2 align-top text-xs font-medium text-foreground break-words">
                       {entry.title || '—'}
                     </td>
-                    <td className="px-3 py-2 align-top font-mono text-xs text-primary-800">
+                    <td className="px-3 py-2 align-top font-mono text-xs text-foreground">
                       {entry.name || '—'}
                     </td>
-                    <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-primary-700 break-all">
+                    <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-foreground break-all">
                       {entry.base_url || '—'}
                     </td>
                     <td className="px-3 py-2 align-top text-right">
@@ -2030,15 +2030,15 @@ function ClaudeConfigSection({
                 )
               })}
               {extraPrimaryNotInList ? (
-                <tr className="border-b border-primary-100 bg-amber-50/50">
+                <tr className="border-b border-border bg-amber-50/50">
                   <td className="px-3 py-2 align-top text-xs text-amber-900">Active (not in list)</td>
-                  <td className="max-w-[160px] px-3 py-2 align-top text-xs text-primary-800 break-words">
+                  <td className="max-w-[160px] px-3 py-2 align-top text-xs text-foreground break-words">
                     {suggestCustomProviderTitle(modelInput, extraPrimaryNotInList.base_url)}
                   </td>
-                  <td className="px-3 py-2 align-top font-mono text-xs font-medium text-primary-900">
+                  <td className="px-3 py-2 align-top font-mono text-xs font-medium text-foreground">
                     {extraPrimaryNotInList.name}
                   </td>
-                  <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-primary-700 break-all">
+                  <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-foreground break-all">
                     {extraPrimaryNotInList.base_url}
                   </td>
                   <td className="px-3 py-2 align-top text-right">
@@ -2081,9 +2081,9 @@ function ClaudeConfigSection({
                 </tr>
               ) : null}
               {extraManifestNotInList ? (
-                <tr className="border-b border-primary-100 bg-sky-50/50">
+                <tr className="border-b border-border bg-sky-50/50">
                   <td className="px-3 py-2 align-top text-xs text-sky-900">Manifest block</td>
-                  <td className="max-w-[160px] px-3 py-2 align-top text-xs text-primary-800 break-words">
+                  <td className="max-w-[160px] px-3 py-2 align-top text-xs text-foreground break-words">
                     {(() => {
                       try {
                         const h = new URL(extraManifestNotInList.base_url).hostname
@@ -2094,10 +2094,10 @@ function ClaudeConfigSection({
                       }
                     })()}
                   </td>
-                  <td className="px-3 py-2 align-top font-mono text-xs text-primary-600">
+                  <td className="px-3 py-2 align-top font-mono text-xs text-muted-foreground">
                     (env key path)
                   </td>
-                  <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-primary-700 break-all">
+                  <td className="max-w-[240px] px-3 py-2 align-top font-mono text-xs text-foreground break-all">
                     {extraManifestNotInList.base_url}
                   </td>
                   <td className="px-3 py-2 align-top text-right">
@@ -2141,7 +2141,7 @@ function ClaudeConfigSection({
           }
         >
           <div className="flex w-full max-w-sm flex-col gap-1">
-            <p className="text-[11px] text-primary-500">
+            <p className="text-[11px] text-muted-foreground">
               Leave blank if unused. Add only when your manifest integration requires this key.
             </p>
             <div className="flex items-center gap-2">
@@ -2213,7 +2213,7 @@ function ClaudeConfigSection({
           }
         >
           <div className="flex w-full max-w-sm flex-col gap-1">
-            <p className="text-[11px] text-primary-500">
+            <p className="text-[11px] text-muted-foreground">
               This updates <span className="font-mono">providers.manifest</span> only. Primary model
               base URL stays under Model &amp; Provider.
             </p>
@@ -2853,7 +2853,7 @@ function ConnectionSection() {
   }
 
   const inputClass =
-    'h-9 w-full rounded-lg border border-primary-200 bg-primary-50 px-3 text-sm text-primary-900 font-mono outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400'
+    'h-9 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground font-mono outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring'
 
   const sourceLabel: Record<ConnectionSettings['source'], string> = {
     override: 'Runtime override (saved in workspace-overrides.json)',
@@ -2867,7 +2867,7 @@ function ConnectionSection() {
       description="Point the workspace at your Hermes Agent services. Useful for Tailscale, LAN, or remote-server setups (#101)."
       icon={Link01Icon}
     >
-      <div className="text-xs text-primary-600">
+      <div className="text-xs text-muted-foreground">
         {current ? sourceLabel[current.source] : 'Loading…'}
       </div>
 
@@ -2925,7 +2925,7 @@ function ConnectionSection() {
         ) : null}
       </div>
 
-      <div className="mt-3 rounded-lg border border-primary-200 bg-primary-100/50 p-3 text-xs text-primary-600">
+      <div className="mt-3 rounded-lg border border-border bg-card/50 p-3 text-xs text-muted-foreground">
         <strong className="font-semibold">Tailscale / remote tip:</strong> Set
         the gateway to its Tailscale IP (e.g. <code>http://100.x.y.z:8642</code>
         ) and ensure the gateway listens on <code>0.0.0.0</code> (set{' '}

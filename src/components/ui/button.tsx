@@ -1,15 +1,14 @@
 'use client'
 
-import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
 import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
-import type * as React from 'react'
+import * as React from 'react'
+import { Slot } from 'radix-ui'
 
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0] select-none duration-150',
+  'relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 select-none duration-150',
   {
     defaultVariants: {
       size: 'default',
@@ -27,38 +26,70 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          'bg-primary-950 text-primary-50 hover:bg-primary-900 shadow-sm outline outline-primary-900/10 shadow-2xs',
+          'bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm outline outline-foreground/10 shadow-2xs',
         secondary:
-          'bg-primary-50 text-primary-950 hover:bg-primary-200 outline outline-primary-900/10 shadow-2xs',
+          'bg-background text-foreground hover:bg-muted outline outline-foreground/10 shadow-2xs',
         outline:
-          'border-primary-200 bg-transparent text-primary-900 hover:bg-primary-50 shadow-2xs outline outline-primary-900/10',
-        ghost: 'text-primary-900 hover:bg-primary-200 hover:text-primary-950',
-        destructive: 'bg-red-600 text-primary-50 hover:bg-red-700 shadow-sm',
+          'border border-border bg-transparent text-foreground hover:bg-muted shadow-2xs',
+        ghost: 'text-foreground hover:bg-muted hover:text-foreground',
+        destructive:
+          'bg-destructive text-white hover:bg-destructive/90 shadow-sm',
       },
     },
   },
 )
 
-interface ButtonProps extends useRender.ComponentProps<'button'> {
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: VariantProps<typeof buttonVariants>['variant']
   size?: VariantProps<typeof buttonVariants>['size']
+  /** Canonical shadcn polymorphism: render as the single child element. */
+  asChild?: boolean
+  /**
+   * Back-compat with the previous Base UI API: render as the given element
+   * (the button's classes/props are merged onto it). Kept so existing
+   * `render={<Link .../>}` call sites keep working.
+   */
+  render?: React.ReactElement
 }
 
-function Button({ className, variant, size, render, ...props }: ButtonProps) {
-  const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>['type'] =
-    render ? undefined : 'button'
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  render,
+  type,
+  children,
+  ...props
+}: ButtonProps) {
+  const classes = cn(buttonVariants({ className, size, variant }))
 
-  const defaultProps = {
-    className: cn(buttonVariants({ className, size, variant })),
-    'data-slot': 'button',
-    type: typeValue,
+  if (render && React.isValidElement(render)) {
+    const r = render as React.ReactElement<Record<string, unknown>>
+    return React.cloneElement(
+      r,
+      {
+        ...props,
+        ...r.props,
+        className: cn(classes, r.props.className as string | undefined),
+        'data-slot': 'button',
+      },
+      (r.props.children as React.ReactNode) ?? children,
+    )
   }
 
-  return useRender({
-    defaultTagName: 'button',
-    props: mergeProps<'button'>(defaultProps, props),
-    render,
-  })
+  const Comp = (asChild ? Slot.Root : 'button') as React.ElementType
+  return (
+    <Comp
+      className={classes}
+      data-slot="button"
+      type={asChild ? undefined : (type ?? 'button')}
+      {...props}
+    >
+      {children}
+    </Comp>
+  )
 }
 
 export { Button, buttonVariants }

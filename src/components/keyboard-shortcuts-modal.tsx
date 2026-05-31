@@ -94,20 +94,20 @@ export function KeyboardShortcutsModal() {
 
           {/* Modal */}
           <motion.div
-            className="relative z-10 mx-4 w-full max-w-lg overflow-hidden rounded-2xl border border-primary-200 bg-primary-50/95 shadow-2xl backdrop-blur-xl"
+            className="relative z-10 mx-4 w-full max-w-lg overflow-hidden rounded-2xl border border-border bg-background/95 shadow-2xl backdrop-blur-xl"
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-primary-200 px-5 py-3.5">
-              <h2 className="text-sm font-semibold text-primary-900">
+            <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
+              <h2 className="text-sm font-semibold text-foreground">
                 Keyboard Shortcuts
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg p-1.5 text-primary-500 transition hover:bg-primary-100 hover:text-primary-900"
+                className="rounded-lg p-1.5 text-muted-foreground transition hover:bg-card hover:text-foreground"
                 aria-label="Close"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -125,7 +125,7 @@ export function KeyboardShortcutsModal() {
             <div className="max-h-[60vh] overflow-y-auto p-5">
               {SHORTCUT_GROUPS.map((group) => (
                 <div key={group.title} className="mb-5 last:mb-0">
-                  <h3 className="mb-2.5 text-xs font-medium uppercase tracking-wider text-primary-500">
+                  <h3 className="mb-2.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                     {group.title}
                   </h3>
                   <div className="space-y-1.5">
@@ -134,14 +134,14 @@ export function KeyboardShortcutsModal() {
                         key={item.label}
                         className="flex items-center justify-between rounded-lg px-2 py-1.5"
                       >
-                        <span className="text-sm text-primary-700">
+                        <span className="text-sm text-foreground">
                           {item.label}
                         </span>
                         <div className="flex items-center gap-1">
                           {item.keys.map((key) => (
                             <kbd
                               key={key}
-                              className="inline-flex min-w-[24px] items-center justify-center rounded-md border border-primary-200 bg-primary-100/80 px-1.5 py-0.5 text-xs font-medium text-primary-700"
+                              className="inline-flex min-w-[24px] items-center justify-center rounded-md border border-border bg-card/80 px-1.5 py-0.5 text-xs font-medium text-foreground"
                             >
                               {key}
                             </kbd>
@@ -155,13 +155,13 @@ export function KeyboardShortcutsModal() {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-primary-200 px-5 py-2.5 text-center text-xs text-primary-500">
+            <div className="border-t border-border px-5 py-2.5 text-center text-xs text-muted-foreground">
               Press{' '}
-              <kbd className="mx-0.5 rounded border border-primary-200 bg-primary-100/80 px-1 text-[10px] font-medium">
+              <kbd className="mx-0.5 rounded border border-border bg-card/80 px-1 text-[10px] font-medium">
                 ?
               </kbd>{' '}
               to toggle ·{' '}
-              <kbd className="mx-0.5 rounded border border-primary-200 bg-primary-100/80 px-1 text-[10px] font-medium">
+              <kbd className="mx-0.5 rounded border border-border bg-card/80 px-1 text-[10px] font-medium">
                 Esc
               </kbd>{' '}
               to close

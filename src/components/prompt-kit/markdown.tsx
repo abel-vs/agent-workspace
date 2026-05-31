@@ -103,7 +103,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
 
     if (isInline) {
       return (
-        <code className="rounded bg-primary-100 px-1.5 py-0.5 text-[0.9em] font-mono text-primary-900 border border-primary-200">
+        <code className="rounded bg-card px-1.5 py-0.5 text-[0.9em] font-mono text-foreground border border-border">
           {children}
         </code>
       )
@@ -123,7 +123,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   h1: function H1Component({ children }) {
     return (
-      <h1 className="mt-5 mb-2 text-2xl leading-tight font-medium text-primary-950 text-balance first:mt-0">
+      <h1 className="mt-5 mb-2 text-2xl leading-tight font-medium text-foreground text-balance first:mt-0">
         {children}
       </h1>
     )
@@ -133,7 +133,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
     return (
       <h2
         id={id}
-        className="mt-5 mb-2 text-xl leading-tight font-medium text-primary-950 text-balance first:mt-0"
+        className="mt-5 mb-2 text-xl leading-tight font-medium text-foreground text-balance first:mt-0"
       >
         <a
           href={`#${id}`}
@@ -142,7 +142,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
           <span>{children}</span>
           <span
             aria-hidden="true"
-            className="text-primary-500 opacity-0 transition-opacity group-hover/heading:opacity-100"
+            className="text-muted-foreground opacity-0 transition-opacity group-hover/heading:opacity-100"
           >
             #
           </span>
@@ -155,7 +155,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
     return (
       <h3
         id={id}
-        className="mt-4 mb-1.5 text-lg leading-tight font-medium text-primary-950 text-balance first:mt-0"
+        className="mt-4 mb-1.5 text-lg leading-tight font-medium text-foreground text-balance first:mt-0"
       >
         <a
           href={`#${id}`}
@@ -164,7 +164,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
           <span>{children}</span>
           <span
             aria-hidden="true"
-            className="text-primary-500 opacity-0 transition-opacity group-hover/heading:opacity-100"
+            className="text-muted-foreground opacity-0 transition-opacity group-hover/heading:opacity-100"
           >
             #
           </span>
@@ -174,40 +174,40 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   h4: function H4Component({ children }) {
     return (
-      <h4 className="mt-4 mb-1.5 text-base leading-tight font-medium text-primary-950 text-balance first:mt-0">
+      <h4 className="mt-4 mb-1.5 text-base leading-tight font-medium text-foreground text-balance first:mt-0">
         {children}
       </h4>
     )
   },
   h5: function H5Component({ children }) {
     return (
-      <h5 className="mt-3.5 mb-1 text-sm leading-tight font-medium text-primary-950 text-balance first:mt-0">
+      <h5 className="mt-3.5 mb-1 text-sm leading-tight font-medium text-foreground text-balance first:mt-0">
         {children}
       </h5>
     )
   },
   h6: function H6Component({ children }) {
     return (
-      <h6 className="mt-3.5 mb-1 text-sm leading-tight font-medium text-primary-900 text-balance first:mt-0">
+      <h6 className="mt-3.5 mb-1 text-sm leading-tight font-medium text-foreground text-balance first:mt-0">
         {children}
       </h6>
     )
   },
   p: function PComponent({ children }) {
     return (
-      <p className="text-primary-950 text-pretty leading-relaxed">{children}</p>
+      <p className="text-foreground text-pretty leading-relaxed">{children}</p>
     )
   },
   ul: function UlComponent({ children }) {
     return (
-      <ul className="ml-4 list-disc text-primary-950 marker:text-primary-400">
+      <ul className="ml-4 list-disc text-foreground marker:text-muted-foreground">
         {children}
       </ul>
     )
   },
   ol: function OlComponent({ children }) {
     return (
-      <ol className="ml-4 list-decimal text-primary-950 marker:text-primary-500">
+      <ol className="ml-4 list-decimal text-foreground marker:text-muted-foreground">
         {children}
       </ol>
     )
@@ -217,12 +217,12 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   a: function AComponent({ children, href }) {
     if (!href) {
-      return <span className="text-primary-950">{children}</span>
+      return <span className="text-foreground">{children}</span>
     }
     return (
       <a
         href={href}
-        className="text-primary-950 underline decoration-primary-300 underline-offset-4 transition-colors hover:text-primary-950 hover:decoration-primary-500"
+        className="text-foreground underline decoration-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:decoration-muted-foreground"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -238,19 +238,19 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   blockquote: function BlockquoteComponent({ children }) {
     return (
-      <blockquote className="border-l-2 border-primary-300 pl-4 text-primary-900 italic">
+      <blockquote className="border-l-2 border-border pl-4 text-foreground italic">
         {children}
       </blockquote>
     )
   },
   strong: function StrongComponent({ children }) {
-    return <strong className="font-medium text-primary-950">{children}</strong>
+    return <strong className="font-medium text-foreground">{children}</strong>
   },
   em: function EmComponent({ children }) {
-    return <em className="italic text-primary-950">{children}</em>
+    return <em className="italic text-foreground">{children}</em>
   },
   hr: function HrComponent() {
-    return <hr className="my-3 border-primary-200" />
+    return <hr className="my-3 border-border" />
   },
   table: function TableComponent({ children }) {
     const headersRef = useRef<Array<string>>([])
@@ -260,7 +260,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       <TableRenderContext.Provider
         value={{ headersRef, columnIndexRef, collectingHeaderRef }}
       >
-        <div className="my-3 max-w-full overflow-x-auto rounded-lg border border-primary-200 bg-primary-50/20">
+        <div className="my-3 max-w-full overflow-x-auto rounded-lg border border-border bg-background/20">
           <table className="w-full min-w-max border-collapse text-sm sm:min-w-full tabular-nums">
             {children}
           </table>
@@ -276,7 +276,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       context.headersRef.current = []
     }
     return (
-      <thead className="sticky top-0 z-10 border-b border-primary-200 bg-primary-100/95 backdrop-blur-sm max-sm:hidden">
+      <thead className="sticky top-0 z-10 border-b border-border bg-card/95 backdrop-blur-sm max-sm:hidden">
         {children}
       </thead>
     )
@@ -288,7 +288,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       context.columnIndexRef.current = 0
     }
     return (
-      <tbody className="divide-y divide-primary-100 max-sm:block max-sm:divide-y-0">
+      <tbody className="divide-y divide-border max-sm:block max-sm:divide-y-0">
         {children}
       </tbody>
     )
@@ -299,7 +299,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       context.columnIndexRef.current = 0
     }
     return (
-      <tr className="odd:bg-primary-50/60 even:bg-primary-100/20 transition-colors hover:bg-primary-100/45 max-sm:mb-3 max-sm:block max-sm:overflow-hidden max-sm:rounded-lg max-sm:border max-sm:border-primary-200 max-sm:bg-primary-50">
+      <tr className="odd:bg-background/60 even:bg-card/20 transition-colors hover:bg-card/45 max-sm:mb-3 max-sm:block max-sm:overflow-hidden max-sm:rounded-lg max-sm:border max-sm:border-border max-sm:bg-background">
         {children}
       </tr>
     )
@@ -314,7 +314,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       }
     }
     return (
-      <th className="px-3 py-2 text-left font-medium text-primary-950 whitespace-nowrap">
+      <th className="px-3 py-2 text-left font-medium text-foreground whitespace-nowrap">
         {children}
       </th>
     )
@@ -330,7 +330,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
     return (
       <td
         data-label={label}
-        className="px-3 py-2 text-primary-950 align-top max-sm:grid max-sm:grid-cols-[minmax(0,9rem)_1fr] max-sm:gap-3 max-sm:border-b max-sm:border-primary-100 max-sm:px-3 max-sm:py-2 max-sm:last:border-b-0 max-sm:before:content-[attr(data-label)] max-sm:before:text-xs max-sm:before:font-medium max-sm:before:text-primary-700"
+        className="px-3 py-2 text-foreground align-top max-sm:grid max-sm:grid-cols-[minmax(0,9rem)_1fr] max-sm:gap-3 max-sm:border-b max-sm:border-border max-sm:px-3 max-sm:py-2 max-sm:last:border-b-0 max-sm:before:content-[attr(data-label)] max-sm:before:text-xs max-sm:before:font-medium max-sm:before:text-foreground"
       >
         {children}
       </td>
@@ -338,7 +338,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   },
   tfoot: function TfootComponent({ children }) {
     return (
-      <tfoot className="border-t border-primary-200 bg-primary-100/40">
+      <tfoot className="border-t border-border bg-card/40">
         {children}
       </tfoot>
     )

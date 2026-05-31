@@ -4,8 +4,61 @@
 /* Tailwind v4 — enable dark: variant on .dark class (set by __root.tsx) */
 @variant dark (&:where(.dark, .dark *));
 
+/* ═══════════════════════════════════════════════════════════════
+   shadcn/ui semantic tokens (canonical)
+   Sourced from the --theme-* layer (the per-theme source of truth set
+   by [data-theme] blocks below + scifi-theme.css), so every named theme
+   (claude-*, matrix, scifi, …) and light/dark resolves automatically via
+   the CSS cascade. @theme inline emits `var(--theme-*)` directly into the
+   generated utilities, so theme switching at runtime just works.
+
+   NOTE: --primary is the high-contrast NEUTRAL (= --theme-text), matching
+   both canonical shadcn (neutral baseColor) and the app's existing buttons
+   (old `bg-primary-950 text-primary-50`). The brand hue keeps its own
+   --theme-accent / accent-* scale and surfaces here as --ring. */
+@theme inline {
+  --color-background: var(--theme-bg);
+  --color-foreground: var(--theme-text);
+  --color-card: var(--theme-card);
+  --color-card-foreground: var(--theme-text);
+  --color-popover: var(--theme-card);
+  --color-popover-foreground: var(--theme-text);
+  --color-primary: var(--theme-text);
+  --color-primary-foreground: var(--theme-bg);
+  --color-secondary: var(--theme-card2);
+  --color-secondary-foreground: var(--theme-text);
+  --color-muted: var(--theme-card2);
+  --color-muted-foreground: var(--theme-muted);
+  --color-accent: var(--theme-card2);
+  --color-accent-foreground: var(--theme-text);
+  --color-destructive: var(--theme-danger);
+  --color-destructive-foreground: oklch(0.985 0 0);
+  --color-border: var(--theme-border);
+  --color-input: var(--theme-input);
+  --color-ring: var(--theme-accent);
+  --color-sidebar: var(--theme-sidebar);
+  --color-sidebar-foreground: var(--theme-text);
+  --color-sidebar-primary: var(--theme-accent);
+  --color-sidebar-primary-foreground: var(--theme-bg);
+  --color-sidebar-accent: var(--theme-card2);
+  --color-sidebar-accent-foreground: var(--theme-text);
+  --color-sidebar-border: var(--theme-border);
+  --color-sidebar-ring: var(--theme-accent);
+  /* Brand accent scale (the themed hue used for links/focus/highlights).
+     Distinct from shadcn's --primary (neutral) and --accent (subtle surface).
+     Kept registered so the existing accent-400/500/600 utilities keep working. */
+  --color-accent-400: var(--theme-accent-secondary);
+  --color-accent-500: var(--theme-accent);
+  --color-accent-600: var(--theme-accent);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
 :root {
   --tabbar-h: 80px;
+  --radius: 0.5rem;
   /* Chat content max-width — controlled by Settings > Chat Display (see #89).
    * Keep 900px default to match prior layout; 'wide' = 1200px, 'full' = 100%. */
   --chat-content-max-width: 900px;

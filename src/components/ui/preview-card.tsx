@@ -1,28 +1,36 @@
 'use client'
 
-import { PreviewCard as PreviewCardPrimitive } from '@base-ui/react/preview-card'
-import { cn } from '@/lib/utils'
+import { HoverCard as HoverCardPrimitive } from 'radix-ui'
+import { cn, renderChild } from '@/lib/utils'
 
-const PreviewCard = PreviewCardPrimitive.Root
+const PreviewCard = HoverCardPrimitive.Root
 
 type PreviewCardTriggerProps = React.ComponentProps<
-  typeof PreviewCardPrimitive.Trigger
->
+  typeof HoverCardPrimitive.Trigger
+> & { render?: React.ReactElement }
 
-function PreviewCardTrigger({ className, ...props }: PreviewCardTriggerProps) {
+function PreviewCardTrigger({
+  className,
+  render,
+  asChild,
+  children,
+  ...props
+}: PreviewCardTriggerProps) {
   return (
-    <PreviewCardPrimitive.Trigger
+    <HoverCardPrimitive.Trigger
       className={cn(className)}
       data-slot="preview-card-trigger"
+      asChild={!!render || asChild}
       {...props}
-    />
+    >
+      {renderChild(render, children)}
+    </HoverCardPrimitive.Trigger>
   )
 }
 
-type PreviewCardPopupProps = PreviewCardPrimitive.Popup.Props & {
-  align?: PreviewCardPrimitive.Positioner.Props['align']
-  sideOffset?: PreviewCardPrimitive.Positioner.Props['sideOffset']
-}
+type PreviewCardPopupProps = React.ComponentProps<
+  typeof HoverCardPrimitive.Content
+>
 
 function PreviewCardPopup({
   className,
@@ -32,30 +40,25 @@ function PreviewCardPopup({
   ...props
 }: PreviewCardPopupProps) {
   return (
-    <PreviewCardPrimitive.Portal>
-      <PreviewCardPrimitive.Positioner
+    <HoverCardPrimitive.Portal>
+      <HoverCardPrimitive.Content
         align={align}
-        className="z-50"
-        data-slot="preview-card-positioner"
         sideOffset={sideOffset}
+        className={cn(
+          'relative z-50 w-64 origin-(--radix-hover-card-content-transform-origin) rounded-lg p-3 text-sm text-pretty outline shadow-2xs',
+          className,
+        )}
+        data-slot="preview-card-content"
+        style={{
+          background: 'var(--theme-card)',
+          color: 'var(--theme-text)',
+          outlineColor: 'var(--theme-border)',
+        }}
+        {...props}
       >
-        <PreviewCardPrimitive.Popup
-          className={cn(
-            'relative w-64 origin-(--transform-origin) rounded-lg p-3 text-sm text-pretty outline shadow-2xs',
-            className,
-          )}
-          data-slot="preview-card-content"
-          style={{
-            background: 'var(--theme-card)',
-            color: 'var(--theme-text)',
-            outlineColor: 'var(--theme-border)',
-          }}
-          {...props}
-        >
-          {children}
-        </PreviewCardPrimitive.Popup>
-      </PreviewCardPrimitive.Positioner>
-    </PreviewCardPrimitive.Portal>
+        {children}
+      </HoverCardPrimitive.Content>
+    </HoverCardPrimitive.Portal>
   )
 }
 

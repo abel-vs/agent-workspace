@@ -108,13 +108,13 @@ function SectionHeader({
 }) {
   return (
     <div className="mb-2">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         Settings
       </p>
-      <h3 className="text-base font-semibold text-primary-900 dark:text-neutral-100">
+      <h3 className="text-base font-semibold text-foreground dark:text-neutral-100">
         {title}
       </h3>
-      <p className="text-xs text-primary-500 dark:text-neutral-400">
+      <p className="text-xs text-muted-foreground dark:text-neutral-400">
         {description}
       </p>
     </div>
@@ -133,11 +133,11 @@ function Row({
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 py-1.5">
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-primary-900 dark:text-neutral-100">
+        <p className="text-sm font-medium text-foreground dark:text-neutral-100">
           {label}
         </p>
         {description && (
-          <p className="text-xs text-primary-500 dark:text-neutral-400">
+          <p className="text-xs text-muted-foreground dark:text-neutral-400">
             {description}
           </p>
         )}
@@ -148,7 +148,7 @@ function Row({
 }
 
 const SETTINGS_CARD_CLASS =
-  'rounded-xl border border-primary-200 bg-primary-50/80 px-4 py-3 shadow-sm'
+  'rounded-xl border border-border bg-background/80 px-4 py-3 shadow-sm'
 
 // ── Section components ──────────────────────────────────────────────────
 
@@ -759,7 +759,7 @@ function HermesContent() {
                   </Button>
                 </div>
 
-                <div className="rounded-lg border border-primary-200 bg-primary-50/80 px-3 py-2 text-xs text-primary-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+                <div className="rounded-lg border border-border bg-background/80 px-3 py-2 text-xs text-foreground dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
                   {oauthMessage || 'Start the browser-based OAuth flow.'}
                   {oauthUserCode ? (
                     <div className="mt-2">
@@ -810,7 +810,7 @@ function HermesContent() {
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-primary-200 bg-primary-50/80 px-3 py-2 text-xs text-primary-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+                <div className="rounded-lg border border-border bg-background/80 px-3 py-2 text-xs text-foreground dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
                   {disc?.online ? (
                     <>
                       Detected {disc.modelCount} model
@@ -1354,10 +1354,10 @@ function _ProfileContent() {
         <div className="flex items-center gap-3">
           <UserAvatar size={44} src={cs.avatarDataUrl} alt={displayName} />
           <div>
-            <p className="text-sm font-medium text-primary-900 dark:text-neutral-100">
+            <p className="text-sm font-medium text-foreground dark:text-neutral-100">
               {displayName}
             </p>
-            <p className="text-xs text-primary-500 dark:text-neutral-400">
+            <p className="text-xs text-muted-foreground dark:text-neutral-400">
               No email connected
             </p>
           </div>
@@ -1370,7 +1370,7 @@ function _ProfileContent() {
               value={cs.displayName}
               onChange={(e) => handleNameChange(e.target.value)}
               placeholder="User"
-              className="h-8 w-full rounded-lg border-primary-200 text-sm"
+              className="h-8 w-full rounded-lg border-border text-sm"
               maxLength={50}
               aria-label="Display name"
               aria-invalid={!!nameError}
@@ -1396,7 +1396,7 @@ function _ProfileContent() {
                 onChange={handleAvatarUpload}
                 disabled={processing}
                 aria-label="Upload profile picture"
-                className="block max-w-[13rem] cursor-pointer text-xs text-primary-700 dark:text-neutral-300 file:mr-2 file:cursor-pointer file:rounded-lg file:border file:border-primary-200 file:bg-primary-100 file:px-2.5 file:py-1.5 file:text-xs file:font-medium file:text-primary-900 file:transition-colors hover:file:bg-primary-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className="block max-w-[13rem] cursor-pointer text-xs text-foreground dark:text-neutral-300 file:mr-2 file:cursor-pointer file:rounded-lg file:border file:border-border file:bg-card file:px-2.5 file:py-1.5 file:text-xs file:font-medium file:text-foreground file:transition-colors hover:file:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
               />
             </label>
             <Button
@@ -1404,7 +1404,7 @@ function _ProfileContent() {
               size="sm"
               onClick={() => updateCS({ avatarDataUrl: null })}
               disabled={!cs.avatarDataUrl || processing}
-              className="h-8 rounded-lg border-primary-200 px-3"
+              className="h-8 rounded-lg border-border px-3"
             >
               Remove
             </Button>
@@ -1453,10 +1453,10 @@ function AppearanceContent() {
         description="Theme and color accents."
       />
       <div className={SETTINGS_CARD_CLASS}>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Theme Mode
         </p>
-        <div className="inline-flex rounded-lg border border-primary-200 p-1">
+        <div className="inline-flex rounded-lg border border-border p-1">
           {[
             { value: 'light', label: 'Light', icon: Sun01Icon },
             { value: 'dark', label: 'Dark', icon: Moon01Icon },
@@ -1470,7 +1470,7 @@ function AppearanceContent() {
                 'flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors',
                 settings.theme === option.value
                   ? 'bg-accent-500 text-white'
-                  : 'text-primary-600 hover:bg-primary-100',
+                  : 'text-muted-foreground hover:bg-card',
               )}
             >
               <HugeiconsIcon icon={option.icon} size={16} strokeWidth={1.5} />
@@ -1481,7 +1481,7 @@ function AppearanceContent() {
       </div>
       {/* Accent color removed — themes control accent */}
       <div className={SETTINGS_CARD_CLASS}>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Enterprise Theme
         </p>
         <EnterpriseThemePicker />
@@ -1670,12 +1670,12 @@ function EnterpriseThemePicker() {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between rounded-lg border border-primary-200 px-3 py-2">
+      <div className="flex items-center justify-between rounded-lg border border-border px-3 py-2">
         <div>
-          <p className="text-xs font-semibold text-primary-900 dark:text-neutral-100">
+          <p className="text-xs font-semibold text-foreground dark:text-neutral-100">
             {currentMode === 'dark' ? 'Dark mode' : 'Light mode'}
           </p>
-          <p className="text-[11px] text-primary-500 dark:text-neutral-400">
+          <p className="text-[11px] text-muted-foreground dark:text-neutral-400">
             Toggle the current theme family between paired light and dark
             variants.
           </p>
@@ -1683,7 +1683,7 @@ function EnterpriseThemePicker() {
         <button
           type="button"
           onClick={toggleEnterpriseThemeMode}
-          className="inline-flex items-center gap-2 rounded-lg border border-primary-200 bg-primary-50 px-3 py-1.5 text-xs font-medium text-primary-900 transition-colors hover:bg-primary-100"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-card"
           aria-label={
             currentMode === 'dark'
               ? 'Switch enterprise theme to light mode'
@@ -1710,13 +1710,13 @@ function EnterpriseThemePicker() {
                 'flex flex-col gap-1.5 rounded-lg border p-2 text-left transition-colors',
                 isActive
                   ? 'border-accent-500 bg-accent-50 text-accent-700'
-                  : 'border-primary-200 bg-primary-50/80 hover:bg-primary-100',
+                  : 'border-border bg-background/80 hover:bg-card',
               )}
             >
               <ThemeSwatch colors={t.preview} />
               <div className="flex items-center gap-1">
                 <span className="text-xs">{t.icon}</span>
-                <span className="text-xs font-semibold text-primary-900 dark:text-neutral-100">
+                <span className="text-xs font-semibold text-foreground dark:text-neutral-100">
                   {t.label}
                 </span>
                 {isActive && (
@@ -1725,7 +1725,7 @@ function EnterpriseThemePicker() {
                   </span>
                 )}
               </div>
-              <p className="text-[10px] text-primary-500 dark:text-neutral-400 leading-tight">
+              <p className="text-[10px] text-muted-foreground dark:text-neutral-400 leading-tight">
                 {t.desc}
               </p>
             </button>
@@ -1769,7 +1769,7 @@ function _LoaderContent() {
         preset={p}
         size={16}
         speed={120}
-        className="text-primary-500"
+        className="text-muted-foreground"
       />
     ) : (
       <ThreeDotsSpinner />
@@ -1777,7 +1777,7 @@ function _LoaderContent() {
   }
   return (
     <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         Loading animation
       </p>
       <div className="grid grid-cols-4 gap-2">
@@ -1790,7 +1790,7 @@ function _LoaderContent() {
               'flex min-h-14 flex-col items-center justify-center gap-1.5 rounded-lg border px-1.5 py-1.5 transition-colors',
               cs.loaderStyle === o.value
                 ? 'border-accent-500 bg-accent-50 text-accent-700'
-                : 'border-primary-200 bg-primary-50/80 text-primary-700 hover:bg-primary-100',
+                : 'border-border bg-background/80 text-foreground hover:bg-card',
             )}
             aria-pressed={cs.loaderStyle === o.value}
           >
@@ -1871,7 +1871,7 @@ function ChatContent() {
                 chatWidth: e.target.value as 'comfortable' | 'wide' | 'full',
               })
             }
-            className="h-8 rounded-md border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-400"
+            className="h-8 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Chat content width"
           >
             <option value="comfortable">Comfortable (900px)</option>
@@ -1925,14 +1925,14 @@ function NotificationsContent() {
               onChange={(e) =>
                 updateSettings({ usageThreshold: Number(e.target.value) })
               }
-              className="w-full accent-primary-900 dark:accent-primary-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full accent-primary dark:accent-primary disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!settings.notificationsEnabled}
               aria-label={`Usage threshold: ${settings.usageThreshold} percent`}
               aria-valuemin={50}
               aria-valuemax={100}
               aria-valuenow={settings.usageThreshold}
             />
-            <span className="w-10 text-right text-sm tabular-nums text-primary-700 dark:text-neutral-300">
+            <span className="w-10 text-right text-sm tabular-nums text-foreground dark:text-neutral-300">
               {settings.usageThreshold}%
             </span>
           </div>
@@ -1993,7 +1993,7 @@ function _AdvancedContent() {
               placeholder="https://api.claudeworkspace.app"
               value={settings.claudeUrl}
               onChange={(e) => validateAndUpdateUrl(e.target.value)}
-              className="h-8 w-full rounded-lg border-primary-200 text-sm"
+              className="h-8 w-full rounded-lg border-border text-sm"
               aria-label="Hermes Agent URL"
               aria-invalid={!!urlError}
               aria-describedby={urlError ? urlErrorId : undefined}
@@ -2020,7 +2020,7 @@ function _AdvancedContent() {
               connectionStatus === 'testing' &&
                 'border-accent-500/35 bg-accent-500/10 text-accent-600',
               connectionStatus === 'idle' &&
-                'border-primary-300 bg-primary-100 text-primary-700',
+                'border-border bg-card text-foreground',
             )}
           >
             {connectionStatus === 'idle'
@@ -2036,7 +2036,7 @@ function _AdvancedContent() {
             size="sm"
             onClick={() => void testConnection()}
             disabled={connectionStatus === 'testing' || !!urlError}
-            className="h-8 rounded-lg border-primary-200 px-3"
+            className="h-8 rounded-lg border-border px-3"
           >
             <HugeiconsIcon
               icon={CheckmarkCircle02Icon}
@@ -2073,7 +2073,7 @@ class SettingsErrorBoundary extends Component<
             </p>
             <button
               onClick={() => this.setState({ error: null })}
-              className="text-xs text-primary-600 underline hover:text-primary-900"
+              className="text-xs text-muted-foreground underline hover:text-foreground"
             >
               Try again
             </button>
@@ -2145,7 +2145,7 @@ function AgentBehaviorContent() {
             max={100}
             value={Number(config.max_turns) || 50}
             onChange={(e) => save('max_turns', Number(e.target.value))}
-            className="h-8 w-20 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-center text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 w-20 rounded-lg border border-border bg-background px-2 text-sm text-center text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           />
         </Row>
         <Row label="Gateway timeout" description="Seconds before timeout">
@@ -2155,14 +2155,14 @@ function AgentBehaviorContent() {
             max={600}
             value={Number(config.gateway_timeout) || 120}
             onChange={(e) => save('gateway_timeout', Number(e.target.value))}
-            className="h-8 w-20 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-center text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 w-20 rounded-lg border border-border bg-background px-2 text-sm text-center text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           />
         </Row>
         <Row label="Tool enforcement" description="When agent must use tools">
           <select
             value={String(config.tool_use_enforcement || 'auto')}
             onChange={(e) => save('tool_use_enforcement', e.target.value)}
-            className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           >
             <option value="auto">Auto</option>
             <option value="required">Required</option>
@@ -2247,14 +2247,14 @@ function VoiceContent() {
         </div>
       )}
       <div className={SETTINGS_CARD_CLASS}>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Text-to-Speech
         </p>
         <Row label="TTS Provider">
           <select
             value={ttsProvider}
             onChange={(e) => saveTts('provider', e.target.value)}
-            className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           >
             <option value="edge">Edge TTS</option>
             <option value="elevenlabs">ElevenLabs</option>
@@ -2274,7 +2274,7 @@ function VoiceContent() {
                   voice: e.target.value,
                 })
               }
-              className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+              className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
             >
               {['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'].map(
                 (v) => (
@@ -2288,7 +2288,7 @@ function VoiceContent() {
         )}
       </div>
       <div className={SETTINGS_CARD_CLASS}>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary-500">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Speech-to-Text
         </p>
         <Row label="Enable STT">
@@ -2301,7 +2301,7 @@ function VoiceContent() {
           <select
             value={sttProvider}
             onChange={(e) => saveStt('provider', e.target.value)}
-            className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           >
             {STT_PROVIDER_OPTIONS.map((provider) => (
               <option key={provider.value} value={provider.value}>
@@ -2321,7 +2321,7 @@ function VoiceContent() {
                     model: e.target.value,
                   })
                 }
-                className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+                className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
               >
                 {GROQ_STT_MODELS.map((model) => (
                   <option key={model} value={model}>
@@ -2399,7 +2399,7 @@ function DisplayContent() {
           <select
             value={String(config.personality || 'default')}
             onChange={(e) => save('personality', e.target.value)}
-            className="h-8 rounded-lg border border-primary-200 bg-primary-50 px-2 text-sm text-primary-900 outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+            className="h-8 rounded-lg border border-border bg-background px-2 text-sm text-foreground outline-none dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
           >
             <option value="default">Default</option>
             <option value="concise">Concise</option>
@@ -2456,7 +2456,7 @@ function LanguageContent() {
             setLocale(e.target.value as LocaleId)
             window.location.reload()
           }}
-          className="h-9 w-full rounded-lg border border-primary-200 dark:border-neutral-700 bg-primary-50 dark:bg-neutral-800 px-3 text-sm text-primary-900 dark:text-neutral-100 outline-none md:max-w-xs"
+          className="h-9 w-full rounded-lg border border-border dark:border-neutral-700 bg-background dark:bg-neutral-800 px-3 text-sm text-foreground dark:text-neutral-100 outline-none md:max-w-xs"
         >
           {(Object.entries(LOCALE_LABELS) as Array<[LocaleId, string]>).map(
             ([id, label]) => (
@@ -2513,11 +2513,11 @@ export function SettingsDialog({
 
   return (
     <DialogRoot open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="inset-0 h-full w-full max-w-none translate-x-0 translate-y-0 overflow-hidden rounded-none border-0 p-0 shadow-xl md:inset-auto md:left-1/2 md:top-1/2 md:h-[min(88dvh,740px)] md:min-h-[520px] md:w-full md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-2xl md:border md:border-primary-200 bg-[var(--theme-bg)]">
+      <DialogContent className="inset-0 h-full w-full max-w-none translate-x-0 translate-y-0 overflow-hidden rounded-none border-0 p-0 shadow-xl md:inset-auto md:left-1/2 md:top-1/2 md:h-[min(88dvh,740px)] md:min-h-[520px] md:w-full md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-2xl md:border md:border-border bg-[var(--theme-bg)]">
         <div className="flex h-full min-h-0 flex-col">
-          <div className="flex items-center justify-between border-b border-primary-200 bg-primary-50/80 px-4 py-4 md:rounded-t-2xl md:px-5">
+          <div className="flex items-center justify-between border-b border-border bg-background/80 px-4 py-4 md:rounded-t-2xl md:px-5">
             <div>
-              <DialogTitle className="text-base font-semibold text-primary-900 dark:text-neutral-100">
+              <DialogTitle className="text-base font-semibold text-foreground dark:text-neutral-100">
                 Settings
               </DialogTitle>
               <DialogDescription className="sr-only">
@@ -2529,7 +2529,7 @@ export function SettingsDialog({
                 <Button
                   size="icon-sm"
                   variant="ghost"
-                  className="rounded-full text-primary-500 hover:bg-primary-100 dark:text-neutral-400 dark:hover:bg-neutral-800"
+                  className="rounded-full text-muted-foreground hover:bg-card dark:text-neutral-400 dark:hover:bg-neutral-800"
                   aria-label="Close"
                 >
                   <HugeiconsIcon
@@ -2546,7 +2546,7 @@ export function SettingsDialog({
             <div className="flex min-h-0 flex-1 flex-col md:flex-row">
               <aside
                 className={cn(
-                  'w-full bg-primary-50/60 p-2 md:w-44 md:shrink-0 md:border-r md:border-primary-200',
+                  'w-full bg-background/60 p-2 md:w-44 md:shrink-0 md:border-r md:border-border',
                   mobileView === 'content' && 'hidden md:block',
                 )}
               >
@@ -2557,7 +2557,7 @@ export function SettingsDialog({
                       type="button"
                       onClick={() => handleSectionSelect(s.id)}
                       className={cn(
-                        'flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm text-primary-600 transition-colors hover:bg-primary-100',
+                        'flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-card',
                         active === s.id &&
                           'bg-accent-50 font-medium text-accent-700',
                       )}
@@ -2584,7 +2584,7 @@ export function SettingsDialog({
                     variant="ghost"
                     size="sm"
                     onClick={() => setMobileView('nav')}
-                    className="h-8 gap-1.5 rounded-lg px-2 text-primary-600 hover:bg-primary-100"
+                    className="h-8 gap-1.5 rounded-lg px-2 text-muted-foreground hover:bg-card"
                   >
                     <HugeiconsIcon
                       icon={ArrowLeft01Icon}
@@ -2599,11 +2599,11 @@ export function SettingsDialog({
             </div>
           </SettingsErrorBoundary>
 
-          <div className="sticky bottom-0 z-10 border-t border-primary-200 bg-primary-50/60 px-4 py-3 text-xs text-primary-500 dark:text-neutral-400 md:rounded-b-2xl md:px-5">
+          <div className="sticky bottom-0 z-10 border-t border-border bg-background/60 px-4 py-3 text-xs text-muted-foreground dark:text-neutral-400 md:rounded-b-2xl md:px-5">
             Most changes save automatically; the default model commits only when you click Set as default.{' '}
             <a
               href="/settings"
-              className="ml-2 font-medium underline underline-offset-2 hover:text-primary-700 dark:hover:text-neutral-200"
+              className="ml-2 font-medium underline underline-offset-2 hover:text-foreground dark:hover:text-neutral-200"
             >
               All settings →
             </a>

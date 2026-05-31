@@ -67,7 +67,7 @@ export function SettingsSidebar({ activeId }: { activeId: SettingsNavId }) {
   const activeClass =
     'bg-[var(--theme-accent-subtle)] text-[var(--theme-accent)] font-semibold'
   const inactiveClass =
-    'text-primary-600 hover:bg-primary-100 hover:text-primary-900'
+    'text-muted-foreground hover:bg-card hover:text-foreground'
   const indicator = (
     <span
       aria-hidden
@@ -78,7 +78,7 @@ export function SettingsSidebar({ activeId }: { activeId: SettingsNavId }) {
   return (
     <nav className="hidden w-48 shrink-0 md:block">
       <div className="sticky top-8">
-        <h1 className="mb-4 px-3 text-lg font-semibold text-primary-900">
+        <h1 className="mb-4 px-3 text-lg font-semibold text-foreground">
           Settings
         </h1>
         <div className="flex flex-col gap-0.5">
@@ -101,7 +101,7 @@ export function SettingsMobilePills({ activeId }: { activeId: SettingsNavId }) {
   const activeClass =
     'bg-[var(--theme-accent)] text-[var(--theme-bg)] font-semibold'
   const inactiveClass =
-    'bg-primary-100 text-primary-600 hover:bg-primary-200'
+    'bg-card text-muted-foreground hover:bg-muted'
   return (
     <div className="scrollbar-none flex gap-1.5 overflow-x-auto pb-2 md:hidden">
       {SETTINGS_NAV_ITEMS.map((item) => {

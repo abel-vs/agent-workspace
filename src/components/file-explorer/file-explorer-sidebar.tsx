@@ -335,8 +335,8 @@ export function FileExplorerSidebar({
               })
             }}
             className={cn(
-              'group flex w-full items-center gap-2 rounded-md py-1.5 text-left text-sm text-primary-900',
-              'hover:bg-primary-200',
+              'group flex w-full items-center gap-2 rounded-md py-1.5 text-left text-sm text-foreground',
+              'hover:bg-muted',
             )}
             style={{ paddingLeft: padding }}
           >
@@ -371,15 +371,15 @@ export function FileExplorerSidebar({
   return (
     <aside
       className={cn(
-        'border-r border-primary-200 bg-primary-100 h-full flex flex-col transition-all duration-200 ease-out',
+        'border-r border-border bg-card h-full flex flex-col transition-all duration-200 ease-out',
         collapsed
           ? 'w-0 opacity-0 pointer-events-none'
           : 'w-[260px] opacity-100',
         className,
       )}
     >
-      <div className="flex items-center justify-between h-12 px-3 border-b border-primary-200">
-        <div className="text-sm font-semibold text-primary-900">
+      <div className="flex items-center justify-between h-12 px-3 border-b border-border">
+        <div className="text-sm font-semibold text-foreground">
           {ROOT_LABEL}
         </div>
         <div className="flex items-center gap-1">
@@ -415,29 +415,29 @@ export function FileExplorerSidebar({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search files"
-          className="w-full rounded-md border border-primary-200 bg-primary-50 px-2 py-1 text-sm text-primary-900 placeholder:text-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-300"
+          className="w-full rounded-md border border-border bg-background px-2 py-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <ScrollAreaRoot className="flex-1 min-h-0">
         <ScrollAreaViewport className="px-1">
           {loading ? (
-            <div className="px-3 py-2 text-xs text-primary-500">Loading…</div>
+            <div className="px-3 py-2 text-xs text-muted-foreground">Loading…</div>
           ) : error ? (
             <div className="flex flex-col items-center justify-center gap-3 px-4 py-8 text-center">
-              <div className="flex size-10 items-center justify-center rounded-xl border border-primary-200 bg-primary-100/60">
+              <div className="flex size-10 items-center justify-center rounded-xl border border-border bg-card/60">
                 <HugeiconsIcon
                   icon={Folder01Icon}
                   size={20}
                   strokeWidth={1.5}
-                  className="text-primary-500"
+                  className="text-muted-foreground"
                 />
               </div>
               <div>
-                <p className="text-sm font-medium text-primary-800">
+                <p className="text-sm font-medium text-foreground">
                   No workspace selected
                 </p>
-                <p className="mt-1 text-xs text-primary-500 text-pretty">
+                <p className="mt-1 text-xs text-muted-foreground text-pretty">
                   Select a folder to browse and edit files.
                 </p>
               </div>
@@ -453,19 +453,19 @@ export function FileExplorerSidebar({
             </div>
           ) : entries.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-3 px-4 py-8 text-center">
-              <div className="flex size-10 items-center justify-center rounded-xl border border-primary-200 bg-primary-100/60">
+              <div className="flex size-10 items-center justify-center rounded-xl border border-border bg-card/60">
                 <HugeiconsIcon
                   icon={Folder01Icon}
                   size={20}
                   strokeWidth={1.5}
-                  className="text-primary-500"
+                  className="text-muted-foreground"
                 />
               </div>
               <div>
-                <p className="text-sm font-medium text-primary-800">
+                <p className="text-sm font-medium text-foreground">
                   Workspace is empty
                 </p>
-                <p className="mt-1 text-xs text-primary-500 text-pretty">
+                <p className="mt-1 text-xs text-muted-foreground text-pretty">
                   Create files or upload content to get started.
                 </p>
               </div>
@@ -515,11 +515,11 @@ export function FileExplorerSidebar({
 
       {contextMenu ? (
         <div
-          className="fixed z-50 min-w-[160px] rounded-lg bg-primary-50 p-1 text-sm text-primary-900 shadow-lg outline outline-primary-900/10"
+          className="fixed z-50 min-w-[160px] rounded-lg bg-background p-1 text-sm text-foreground shadow-lg outline outline-foreground/10"
           style={{ top: contextMenu.y, left: contextMenu.x }}
         >
           <button
-            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-primary-100"
+            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-card"
             onClick={() => {
               handleRename(contextMenu.entry)
               setContextMenu(null)
@@ -530,7 +530,7 @@ export function FileExplorerSidebar({
           {contextMenu.entry.type === 'folder' ? (
             <>
               <button
-                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-primary-100"
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-card"
                 onClick={() => {
                   handleNewFile(contextMenu.entry)
                   setContextMenu(null)
@@ -539,7 +539,7 @@ export function FileExplorerSidebar({
                 <HugeiconsIcon icon={PlusSignIcon} size={16} /> New file
               </button>
               <button
-                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-primary-100"
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-card"
                 onClick={() => {
                   handleNewFolder(contextMenu.entry)
                   setContextMenu(null)
@@ -548,7 +548,7 @@ export function FileExplorerSidebar({
                 <HugeiconsIcon icon={Folder01Icon} size={16} /> New folder
               </button>
               <button
-                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-primary-100"
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-card"
                 onClick={() => {
                   handleUploadClick(contextMenu.entry.path)
                   setContextMenu(null)
@@ -559,7 +559,7 @@ export function FileExplorerSidebar({
             </>
           ) : (
             <button
-              className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-primary-100"
+              className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 hover:bg-card"
               onClick={() => {
                 void handleDownload(contextMenu.entry)
                 setContextMenu(null)
@@ -603,7 +603,7 @@ export function FileExplorerSidebar({
             <input
               value={promptValue}
               onChange={(event) => setPromptValue(event.target.value)}
-              className="w-full rounded-md border border-primary-200 bg-primary-50 px-3 py-2 text-sm text-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               autoFocus
             />
             <div className="flex justify-end gap-2 pt-2">

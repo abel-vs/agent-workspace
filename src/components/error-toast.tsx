@@ -78,19 +78,19 @@ function ToastItem({ entry, onDismiss }: ToastItemProps) {
       className={cn(
         'flex items-start gap-3 max-w-sm w-full',
         'rounded-xl border border-red-200',
-        'shadow-lg px-4 py-3 bg-surface',
+        'shadow-lg px-4 py-3 bg-background',
         'animate-in slide-in-from-top-2 fade-in duration-200',
       )}
       role="alert"
     >
       <span className="text-red-500 text-base shrink-0 mt-0.5">⚠</span>
-      <span className="flex-1 text-[13px] text-ink leading-snug">
+      <span className="flex-1 text-[13px] text-foreground leading-snug">
         {entry.message}
       </span>
       <button
         type="button"
         onClick={() => onDismiss(entry.id)}
-        className="shrink-0 text-primary-400 hover:text-primary-600 transition-colors text-lg leading-none"
+        className="shrink-0 text-muted-foreground hover:text-muted-foreground transition-colors text-lg leading-none"
         aria-label="Dismiss"
       >
         ×

@@ -178,7 +178,7 @@ export function Swarm2OrchestratorCard({
                 className={cn(
                   'rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors',
                   viewMode === mode
-                    ? 'bg-[var(--theme-accent)] text-primary-950'
+                    ? 'bg-[var(--theme-accent)] text-foreground'
                     : 'text-[var(--theme-muted)] hover:bg-[var(--theme-card2)] hover:text-[var(--theme-text)]',
                 )}
               >
@@ -299,14 +299,14 @@ export function Swarm2OrchestratorCard({
                 <button
                   type="button"
                   onClick={() => setSwarmCardMode('cards')}
-                  className={cn('rounded-lg px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em]', swarmCardMode === 'cards' ? 'bg-[var(--theme-accent)] text-primary-950' : 'text-[var(--theme-muted)] hover:bg-[var(--theme-bg)] hover:text-[var(--theme-text)]')}
+                  className={cn('rounded-lg px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em]', swarmCardMode === 'cards' ? 'bg-[var(--theme-accent)] text-foreground' : 'text-[var(--theme-muted)] hover:bg-[var(--theme-bg)] hover:text-[var(--theme-text)]')}
                 >
                   Active Swarm
                 </button>
                 <button
                   type="button"
                   onClick={() => setSwarmCardMode('office')}
-                  className={cn('rounded-lg px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em]', swarmCardMode === 'office' ? 'bg-[var(--theme-accent)] text-primary-950' : 'text-[var(--theme-muted)] hover:bg-[var(--theme-bg)] hover:text-[var(--theme-text)]')}
+                  className={cn('rounded-lg px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em]', swarmCardMode === 'office' ? 'bg-[var(--theme-accent)] text-foreground' : 'text-[var(--theme-muted)] hover:bg-[var(--theme-bg)] hover:text-[var(--theme-text)]')}
                 >
                   Office
                 </button>

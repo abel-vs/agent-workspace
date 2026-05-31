@@ -37,8 +37,8 @@ function getStatusStyles(status: OperationsAgent['status']) {
   }
 
   return {
-    dot: 'bg-primary-300',
-    ring: 'text-primary-300',
+    dot: 'bg-muted',
+    ring: 'text-muted-foreground',
     label: 'Idle',
   }
 }
@@ -153,7 +153,7 @@ export function OperationsInlineChat({
           />
           <Button
             size="icon-sm"
-            className="rounded-lg bg-[var(--theme-accent)] text-primary-950 hover:bg-[var(--theme-accent-strong)]"
+            className="rounded-lg bg-[var(--theme-accent)] text-foreground hover:bg-[var(--theme-accent-strong)]"
             onClick={() => void handleSend()}
             disabled={!draft.trim() || isSending}
             aria-label={isSending ? 'Sending message' : 'Send message'}
@@ -387,7 +387,7 @@ export function OperationsAgentCard({
                             className="peer sr-only"
                             aria-label={job.enabled ? 'Disable job' : 'Enable job'}
                           />
-                          <span className="h-5 w-9 rounded-full bg-primary-200 transition-colors peer-checked:bg-[var(--theme-accent)]" />
+                          <span className="h-5 w-9 rounded-full bg-muted transition-colors peer-checked:bg-[var(--theme-accent)]" />
                           <span className="absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-[var(--theme-card)] shadow-sm transition-transform peer-checked:translate-x-4" />
                         </label>
                         <div className="min-w-0 flex-1">

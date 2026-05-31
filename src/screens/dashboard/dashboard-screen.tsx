@@ -227,7 +227,7 @@ function MetricTile({
           <div className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted">
             {label}
           </div>
-          <div className="text-2xl font-bold tabular-nums text-ink">
+          <div className="text-2xl font-bold tabular-nums text-foreground">
             {value}
           </div>
           {sub && <div className="text-[11px] text-muted">{sub}</div>}
@@ -592,7 +592,7 @@ function SessionRow({
       className="w-full text-left px-4 py-2.5 rounded-lg hover:bg-[var(--theme-card2)] transition-colors group"
     >
       <div className="flex items-center gap-2 mb-1">
-        <span className="text-[13px] font-medium text-ink truncate flex-1 group-hover:text-ink">
+        <span className="text-[13px] font-medium text-foreground truncate flex-1 group-hover:text-foreground">
           {session.title || session.id}
         </span>
         <span className="text-[10px] tabular-nums text-muted shrink-0">

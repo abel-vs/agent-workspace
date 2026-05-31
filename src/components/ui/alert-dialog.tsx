@@ -1,8 +1,8 @@
 'use client'
 
-import { AlertDialog } from '@base-ui/react/alert-dialog'
+import { AlertDialog } from 'radix-ui'
 import { Button } from './button'
-import { cn } from '@/lib/utils'
+import { cn, renderChild } from '@/lib/utils'
 
 type AlertDialogRootProps = React.ComponentProps<typeof AlertDialog.Root>
 
@@ -10,10 +10,26 @@ function AlertDialogRoot({ children, ...props }: AlertDialogRootProps) {
   return <AlertDialog.Root {...props}>{children}</AlertDialog.Root>
 }
 
-type AlertDialogTriggerProps = React.ComponentProps<typeof AlertDialog.Trigger>
+type AlertDialogTriggerProps = React.ComponentProps<
+  typeof AlertDialog.Trigger
+> & { render?: React.ReactElement }
 
-function AlertDialogTrigger({ className, ...props }: AlertDialogTriggerProps) {
-  return <AlertDialog.Trigger className={cn(className)} {...props} />
+function AlertDialogTrigger({
+  className,
+  render,
+  asChild,
+  children,
+  ...props
+}: AlertDialogTriggerProps) {
+  return (
+    <AlertDialog.Trigger
+      className={cn(className)}
+      asChild={!!render || asChild}
+      {...props}
+    >
+      {renderChild(render, children)}
+    </AlertDialog.Trigger>
+  )
 }
 
 type AlertDialogContentProps = {
@@ -24,13 +40,13 @@ type AlertDialogContentProps = {
 function AlertDialogContent({ className, children }: AlertDialogContentProps) {
   return (
     <AlertDialog.Portal>
-      <AlertDialog.Backdrop
-        className="fixed inset-0 transition-all duration-150 data-[state=open]:opacity-100 data-[state=closed]:opacity-0"
+      <AlertDialog.Overlay
+        className="fixed inset-0 z-50 transition-all duration-150 data-[state=open]:opacity-100 data-[state=closed]:opacity-0"
         style={{ background: 'rgba(0,0,0,0.5)' }}
       />
-      <AlertDialog.Popup
+      <AlertDialog.Content
         className={cn(
-          'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+          'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2',
           'w-[min(400px,92vw)] rounded-xl border p-0 shadow-xl',
           'transition-all duration-150',
           'data-[state=open]:opacity-100 data-[state=closed]:opacity-0',
@@ -43,7 +59,7 @@ function AlertDialogContent({ className, children }: AlertDialogContentProps) {
         }}
       >
         {children}
-      </AlertDialog.Popup>
+      </AlertDialog.Content>
     </AlertDialog.Portal>
   )
 }
@@ -77,25 +93,35 @@ function AlertDialogDescription({
   )
 }
 
-type AlertDialogCancelProps = React.ComponentProps<typeof AlertDialog.Close>
+type AlertDialogCancelProps = React.ComponentProps<typeof AlertDialog.Cancel>
 
-function AlertDialogCancel({ className, ...props }: AlertDialogCancelProps) {
+function AlertDialogCancel({
+  className,
+  children,
+  ...props
+}: AlertDialogCancelProps) {
   return (
-    <AlertDialog.Close
-      render={<Button variant="outline" className={cn(className)} />}
-      {...props}
-    />
+    <AlertDialog.Cancel asChild {...props}>
+      <Button variant="outline" className={cn(className)}>
+        {children}
+      </Button>
+    </AlertDialog.Cancel>
   )
 }
 
-type AlertDialogActionProps = React.ComponentProps<typeof AlertDialog.Close>
+type AlertDialogActionProps = React.ComponentProps<typeof AlertDialog.Action>
 
-function AlertDialogAction({ className, ...props }: AlertDialogActionProps) {
+function AlertDialogAction({
+  className,
+  children,
+  ...props
+}: AlertDialogActionProps) {
   return (
-    <AlertDialog.Close
-      render={<Button variant="destructive" className={cn(className)} />}
-      {...props}
-    />
+    <AlertDialog.Action asChild {...props}>
+      <Button variant="destructive" className={cn(className)}>
+        {children}
+      </Button>
+    </AlertDialog.Action>
   )
 }
 

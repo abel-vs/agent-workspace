@@ -35,9 +35,9 @@ export function AgentChatMessages({
   if (isLoading) {
     return (
       <div className="space-y-2 p-4">
-        <div className="h-12 w-[72%] animate-pulse rounded-2xl bg-primary-200/70" />
-        <div className="ml-auto h-10 w-[56%] animate-pulse rounded-2xl bg-primary-200/70" />
-        <div className="h-11 w-[64%] animate-pulse rounded-2xl bg-primary-200/70" />
+        <div className="h-12 w-[72%] animate-pulse rounded-2xl bg-muted/70" />
+        <div className="ml-auto h-10 w-[56%] animate-pulse rounded-2xl bg-muted/70" />
+        <div className="h-11 w-[64%] animate-pulse rounded-2xl bg-muted/70" />
       </div>
     )
   }
@@ -45,7 +45,7 @@ export function AgentChatMessages({
   if (messages.length === 0) {
     return (
       <div className="grid min-h-40 place-items-center px-6 py-8">
-        <p className="text-center text-sm text-pretty text-primary-700">
+        <p className="text-center text-sm text-pretty text-foreground">
           Start the conversation with this agent.
         </p>
       </div>
@@ -73,8 +73,8 @@ export function AgentChatMessages({
                   className={cn(
                     'rounded-2xl border px-3 py-2 text-sm leading-relaxed text-pretty shadow-sm backdrop-blur-sm',
                     isUser
-                      ? 'border-primary-400/60 bg-primary-300/70 text-primary-900'
-                      : 'border-primary-300/70 bg-primary-100/85 text-primary-900',
+                      ? 'border-border/60 bg-muted/70 text-foreground'
+                      : 'border-border/70 bg-card/85 text-foreground',
                     message.status === 'error'
                       ? 'border-red-500/60 bg-red-500/15 text-red-200'
                       : '',
@@ -85,7 +85,7 @@ export function AgentChatMessages({
                   ) : (
                     <MessageContent
                       markdown
-                      className="text-inherit bg-transparent w-full text-pretty [&_pre]:rounded-lg [&_pre]:bg-primary-200/50 [&_pre]:p-2 [&_code]:text-xs"
+                      className="text-inherit bg-transparent w-full text-pretty [&_pre]:rounded-lg [&_pre]:bg-muted/50 [&_pre]:p-2 [&_code]:text-xs"
                     >
                       {message.text}
                     </MessageContent>
@@ -95,8 +95,8 @@ export function AgentChatMessages({
                   className={cn(
                     'flex items-center gap-1 text-xs tabular-nums',
                     isUser
-                      ? 'justify-end text-primary-700'
-                      : 'justify-start text-primary-700',
+                      ? 'justify-end text-foreground'
+                      : 'justify-start text-foreground',
                   )}
                 >
                   <MessageTimestamp timestamp={message.timestamp} />
@@ -113,11 +113,11 @@ export function AgentChatMessages({
         <motion.div
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-2 px-1 text-xs text-primary-700 tabular-nums"
+          className="flex items-center gap-2 px-1 text-xs text-foreground tabular-nums"
         >
           <span className="relative inline-flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary-500/60" />
-            <span className="relative inline-flex size-2 rounded-full bg-primary-600" />
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-muted-foreground/60" />
+            <span className="relative inline-flex size-2 rounded-full bg-muted-foreground" />
           </span>
           Agent is typing…
         </motion.div>

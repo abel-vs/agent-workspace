@@ -1,6 +1,6 @@
 'use client'
 
-import { ScrollArea } from '@base-ui/react/scroll-area'
+import { ScrollArea } from 'radix-ui'
 import { cn } from '@/lib/utils'
 
 type ScrollAreaRootProps = React.ComponentProps<typeof ScrollArea.Root>
@@ -9,9 +9,10 @@ function ScrollAreaRoot({ className, ...props }: ScrollAreaRootProps) {
   return (
     <ScrollArea.Root
       className={cn(
-        'group/scroll-area relative outline-none focus-visible:outline-none',
+        'group/scroll-area relative overflow-hidden outline-none focus-visible:outline-none',
         className,
       )}
+      scrollHideDelay={300}
       {...props}
     />
   )
@@ -23,9 +24,10 @@ function ScrollAreaViewport({ className, ...props }: ScrollAreaViewportProps) {
   return (
     <ScrollArea.Viewport
       className={cn(
-        'h-full w-full outline-none focus-visible:outline-none',
+        'size-full rounded-[inherit] outline-none focus-visible:outline-none',
         className,
       )}
+      data-slot="scroll-area-viewport"
       {...props}
     />
   )
@@ -37,16 +39,20 @@ type ScrollAreaScrollbarProps = React.ComponentProps<
 
 function ScrollAreaScrollbar({
   className,
+  orientation = 'vertical',
   ...props
 }: ScrollAreaScrollbarProps) {
   return (
     <ScrollArea.Scrollbar
+      orientation={orientation}
       className={cn(
-        'flex w-2 touch-none select-none p-0.5 outline-none focus-visible:outline-none',
-        'opacity-0 transition-opacity duration-150',
-        'data-hovering:opacity-100 data-scrolling:opacity-100 group-hover/scroll-area:opacity-100',
+        'flex touch-none select-none p-0.5 outline-none transition-opacity duration-150 focus-visible:outline-none',
+        orientation === 'vertical' && 'h-full w-2',
+        orientation === 'horizontal' && 'h-2 flex-col',
+        'data-[state=hidden]:opacity-0',
         className,
       )}
+      data-slot="scroll-area-scrollbar"
       {...props}
     />
   )
@@ -58,7 +64,7 @@ function ScrollAreaThumb({ className, ...props }: ScrollAreaThumbProps) {
   return (
     <ScrollArea.Thumb
       className={cn(
-        'flex-1 rounded-full bg-primary-500 outline-none focus-visible:outline-none',
+        'relative flex-1 rounded-full bg-muted-foreground outline-none focus-visible:outline-none',
         className,
       )}
       {...props}
@@ -71,10 +77,7 @@ type ScrollAreaCornerProps = React.ComponentProps<typeof ScrollArea.Corner>
 function ScrollAreaCorner({ className, ...props }: ScrollAreaCornerProps) {
   return (
     <ScrollArea.Corner
-      className={cn(
-        'bg-primary-100 outline-none focus-visible:outline-none',
-        className,
-      )}
+      className={cn('bg-card outline-none focus-visible:outline-none', className)}
       {...props}
     />
   )

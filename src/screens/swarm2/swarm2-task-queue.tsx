@@ -236,7 +236,7 @@ export function Swarm2TaskQueue({
                 type="button"
                 disabled={!draftTitle.trim() || createMutation.isPending}
                 onClick={() => void createMutation.mutateAsync()}
-                className="rounded-md bg-[var(--theme-accent)] px-2 py-1 font-semibold text-primary-950 disabled:opacity-40"
+                className="rounded-md bg-[var(--theme-accent)] px-2 py-1 font-semibold text-foreground disabled:opacity-40"
               >
                 {createMutation.isPending ? 'Adding…' : 'Add task'}
               </button>

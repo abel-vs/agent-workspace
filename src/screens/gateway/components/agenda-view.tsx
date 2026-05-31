@@ -159,7 +159,7 @@ function SectionCard({
         'rounded-xl border p-3 sm:p-4',
         tone === 'attention'
           ? 'border-red-900/60 bg-red-950/20'
-          : 'border-primary-800 bg-primary-900',
+          : 'border-foreground bg-primary',
       )}
     >
       <button
@@ -167,12 +167,12 @@ function SectionCard({
         onClick={() => onToggle(id)}
         className="flex w-full items-center justify-between gap-3 text-left"
       >
-        <h3 className="text-sm font-semibold text-primary-100">{title}</h3>
+        <h3 className="text-sm font-semibold text-primary-foreground">{title}</h3>
         <div className="flex items-center gap-2">
-          <span className="inline-flex min-w-6 items-center justify-center rounded-full border border-primary-700 bg-primary-800 px-2 py-0.5 text-[11px] font-medium text-primary-200">
+          <span className="inline-flex min-w-6 items-center justify-center rounded-full border border-foreground bg-primary px-2 py-0.5 text-[11px] font-medium text-primary-foreground">
             {count}
           </span>
-          <span className="text-xs text-primary-300" aria-hidden>
+          <span className="text-xs text-muted-foreground" aria-hidden>
             {open ? 'Hide' : 'Show'}
           </span>
         </div>
@@ -188,9 +188,9 @@ function SectionCard({
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div className="mt-3 border-t border-primary-800/80 pt-3">
+            <div className="mt-3 border-t border-foreground/80 pt-3">
               {count === 0 ? (
-                <p className="text-xs text-primary-400">{emptyText}</p>
+                <p className="text-xs text-muted-foreground">{emptyText}</p>
               ) : (
                 children
               )}
@@ -283,10 +283,10 @@ export function AgendaView({
 
   return (
     <div className="space-y-3">
-      <header className="rounded-xl border border-primary-800 bg-primary-900 p-4">
-        <p className="text-xs uppercase tracking-wide text-primary-400">Today overview</p>
-        <h2 className="mt-1 text-lg font-semibold text-primary-100">{greeting}</h2>
-        <p className="text-xs text-primary-300">Here is your daily briefing.</p>
+      <header className="rounded-xl border border-foreground bg-primary p-4">
+        <p className="text-xs uppercase tracking-wide text-muted-foreground">Today overview</p>
+        <h2 className="mt-1 text-lg font-semibold text-primary-foreground">{greeting}</h2>
+        <p className="text-xs text-muted-foreground">Here is your daily briefing.</p>
       </header>
 
       <SectionCard
@@ -300,9 +300,9 @@ export function AgendaView({
       >
         <ul className="space-y-2">
           {needsAttention.map((item) => (
-            <li key={`${item.type}-${item.id}`} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
-              <p className="text-sm font-medium text-primary-100">{item.title}</p>
-              <p className="mt-0.5 text-xs text-primary-300">
+            <li key={`${item.type}-${item.id}`} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
+              <p className="text-sm font-medium text-primary-foreground">{item.title}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 {item.type === 'mission' ? `Mission ${formatStatus(item.status)}` : 'Failed run'}
                 {' · '}
                 {formatTimeAgo(item.at, nowTs)}
@@ -322,9 +322,9 @@ export function AgendaView({
       >
         <ul className="space-y-2">
           {activeNow.map((mission) => (
-            <li key={mission.id} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
-              <p className="text-sm font-medium text-primary-100">{mission.title}</p>
-              <p className="mt-0.5 text-xs text-primary-300">
+            <li key={mission.id} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
+              <p className="text-sm font-medium text-primary-foreground">{mission.title}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 {mission.agents} agent{mission.agents === 1 ? '' : 's'}
                 {' · '}
                 {formatDuration(nowTs - mission.startedAt)} elapsed
@@ -344,9 +344,9 @@ export function AgendaView({
       >
         <ul className="space-y-2">
           {tasksDueToday.map((task) => (
-            <li key={task.id} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
-              <p className="text-sm font-medium text-primary-100">{task.title}</p>
-              <p className="mt-0.5 text-xs text-primary-300">
+            <li key={task.id} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
+              <p className="text-sm font-medium text-primary-foreground">{task.title}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 {task.priority}
                 {' · '}
                 {formatStatus(task.status)}
@@ -367,9 +367,9 @@ export function AgendaView({
       >
         <ul className="space-y-2">
           {upcoming24h.map((cron) => (
-            <li key={cron.id} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
-              <p className="text-sm font-medium text-primary-100">{cron.name}</p>
-              <p className="mt-0.5 text-xs text-primary-300">
+            <li key={cron.id} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
+              <p className="text-sm font-medium text-primary-foreground">{cron.name}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 {formatCountdown(cron.nextRunAt, nowTs)}
                 {' · '}
                 {cron.schedule}
@@ -389,21 +389,21 @@ export function AgendaView({
       >
         <ul className="space-y-2">
           {recentlyCompleted.map((completion) => (
-            <li key={completion.id} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
+            <li key={completion.id} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
               <div className="flex items-start justify-between gap-2">
-                <p className="text-sm font-medium text-primary-100">{completion.title}</p>
+                <p className="text-sm font-medium text-primary-foreground">{completion.title}</p>
                 <span
                   className={cn(
                     'rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide',
                     completion.status === 'complete'
-                      ? 'bg-primary-800 text-primary-200'
+                      ? 'bg-primary text-primary-foreground'
                       : 'bg-red-950/40 text-red-300',
                   )}
                 >
                   {completion.status}
                 </span>
               </div>
-              <p className="mt-0.5 text-xs text-primary-300">{formatTimeAgo(completion.completedAt, nowTs)}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{formatTimeAgo(completion.completedAt, nowTs)}</p>
             </li>
           ))}
         </ul>
@@ -422,9 +422,9 @@ export function AgendaView({
             const isActive = agent.status === 'active'
             const isWaiting = agent.status === 'waiting_for_input'
             return (
-              <article key={agent.id} className="rounded-lg border border-primary-800 bg-primary-950/60 px-3 py-2">
+              <article key={agent.id} className="rounded-lg border border-foreground bg-primary/60 px-3 py-2">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-sm font-medium text-primary-100">{agent.name}</p>
+                  <p className="truncate text-sm font-medium text-primary-foreground">{agent.name}</p>
                   <span
                     className={cn(
                       'inline-block size-2 rounded-full',
@@ -432,12 +432,12 @@ export function AgendaView({
                         ? 'bg-accent-400'
                         : isWaiting
                           ? 'bg-red-400'
-                          : 'bg-primary-400',
+                          : 'bg-muted-foreground',
                     )}
                     aria-hidden
                   />
                 </div>
-                <p className="mt-0.5 text-xs capitalize text-primary-300">
+                <p className="mt-0.5 text-xs capitalize text-muted-foreground">
                   {formatStatus(agent.status)}
                 </p>
               </article>

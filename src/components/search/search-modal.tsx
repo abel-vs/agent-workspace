@@ -400,7 +400,7 @@ export function SearchModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.16, ease: 'easeOut' }}
-          className="fixed inset-0 z-50 flex items-start justify-center bg-ink/45 px-4 pt-[9vh] backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/45 px-4 pt-[9vh] backdrop-blur-md"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
               closeModal()
@@ -413,7 +413,7 @@ export function SearchModal() {
             exit={{ opacity: 0, scale: 0.98, y: 8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
             className={cn(
-              'w-[min(640px,92vw)] max-h-[480px] rounded-xl border border-primary-200 bg-primary-50/90 shadow-2xl',
+              'w-[min(640px,92vw)] max-h-[480px] rounded-xl border border-border bg-background/90 shadow-2xl',
               'overflow-hidden backdrop-blur-xl',
             )}
             onMouseDown={(event) => {
@@ -438,7 +438,7 @@ export function SearchModal() {
                       'rounded-md border px-2.5 py-1 text-xs font-medium transition-colors',
                       scope === tab.value
                         ? 'border-accent-500/40 bg-accent-500/20 text-accent-400'
-                        : 'border-primary-200 bg-primary-100/60 text-primary-500 hover:bg-primary-100',
+                        : 'border-border bg-card/60 text-muted-foreground hover:bg-card',
                     )}
                   >
                     <span>{tab.label}</span>
@@ -447,7 +447,7 @@ export function SearchModal() {
               </div>
             </div>
 
-            <div className="max-h-[360px] overflow-y-auto border-t border-primary-200 p-3">
+            <div className="max-h-[360px] overflow-y-auto border-t border-border p-3">
               {query.trim().length === 0 ? (
                 <QuickActions
                   recentSearches={recentSearches}
@@ -475,7 +475,7 @@ export function SearchModal() {
               )}
             </div>
 
-            <div className="flex items-center justify-between border-t border-primary-200 bg-primary-50/80 px-3 py-2 text-[11px] text-primary-500">
+            <div className="flex items-center justify-between border-t border-border bg-background/80 px-3 py-2 text-[11px] text-muted-foreground">
               <div className="flex items-center gap-1.5">
                 <HugeiconsIcon icon={CommandIcon} size={20} strokeWidth={1.5} />
                 <span>Arrow keys to navigate</span>

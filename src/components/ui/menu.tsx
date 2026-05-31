@@ -1,24 +1,41 @@
 'use client'
 
-import { Menu } from '@base-ui/react/menu'
-import { cn } from '@/lib/utils'
+import { DropdownMenu } from 'radix-ui'
+import { cn, renderChild } from '@/lib/utils'
 
-type MenuRootProps = React.ComponentProps<typeof Menu.Root>
+type MenuRootProps = React.ComponentProps<typeof DropdownMenu.Root>
 
 function MenuRoot({ children, ...props }: MenuRootProps) {
-  return <Menu.Root {...props}>{children}</Menu.Root>
+  return <DropdownMenu.Root {...props}>{children}</DropdownMenu.Root>
 }
 
-type MenuTriggerProps = React.ComponentProps<typeof Menu.Trigger>
+type MenuTriggerProps = React.ComponentProps<typeof DropdownMenu.Trigger> & {
+  render?: React.ReactElement
+}
 
-function MenuTrigger({ className, ...props }: MenuTriggerProps) {
-  return <Menu.Trigger className={cn(className)} {...props} />
+function MenuTrigger({
+  className,
+  render,
+  asChild,
+  children,
+  ...props
+}: MenuTriggerProps) {
+  return (
+    <DropdownMenu.Trigger
+      className={cn(className)}
+      asChild={!!render || asChild}
+      {...props}
+    >
+      {renderChild(render, children)}
+    </DropdownMenu.Trigger>
+  )
 }
 
 type MenuContentProps = {
   className?: string
   side?: 'top' | 'bottom' | 'left' | 'right'
   align?: 'start' | 'center' | 'end'
+  sideOffset?: number
   children: React.ReactNode
 }
 
@@ -26,53 +43,44 @@ function MenuContent({
   className,
   side = 'bottom',
   align = 'end',
+  sideOffset = 4,
   children,
 }: MenuContentProps) {
   return (
-    <Menu.Portal>
-      <Menu.Positioner side={side} align={align}>
-        <Menu.Popup
-          className={cn(
-            'min-w-[110px] rounded-lg p-1 text-sm shadow-lg',
-            className,
-          )}
-          style={{
-            background: 'var(--theme-card)',
-            color: 'var(--theme-text)',
-            border: '1px solid var(--theme-border)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            opacity: 1,
-            zIndex: 9999,
-          }}
-        >
-          {children}
-        </Menu.Popup>
-      </Menu.Positioner>
-    </Menu.Portal>
+    <DropdownMenu.Portal>
+      <DropdownMenu.Content
+        side={side}
+        align={align}
+        sideOffset={sideOffset}
+        className={cn(
+          'z-[9999] min-w-[110px] rounded-lg p-1 text-sm shadow-lg',
+          'origin-(--radix-dropdown-menu-content-transform-origin)',
+          className,
+        )}
+        style={{
+          background: 'var(--theme-card)',
+          color: 'var(--theme-text)',
+          border: '1px solid var(--theme-border)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        }}
+      >
+        {children}
+      </DropdownMenu.Content>
+    </DropdownMenu.Portal>
   )
 }
 
-type MenuItemProps = React.ComponentProps<typeof Menu.Item>
+type MenuItemProps = React.ComponentProps<typeof DropdownMenu.Item>
 
 function MenuItem({ className, ...props }: MenuItemProps) {
   return (
-    <Menu.Item
+    <DropdownMenu.Item
       className={cn(
-        'flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm select-none font-[450]',
+        'flex w-full cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm font-[450] text-[var(--theme-text)] outline-none select-none data-[highlighted]:bg-[var(--theme-card2)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
         className,
       )}
-      style={{
-        color: 'var(--theme-text)',
-      }}
-      onMouseEnter={(e) => {
-        ;(e.currentTarget as HTMLElement).style.background =
-          'var(--theme-card2)'
-      }}
-      onMouseLeave={(e) => {
-        ;(e.currentTarget as HTMLElement).style.background = 'transparent'
-      }}
       {...props}
     />
   )

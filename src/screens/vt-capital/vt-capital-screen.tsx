@@ -80,7 +80,7 @@ function stateClass(state: string | undefined): string {
     return 'bg-amber-500/15 text-amber-200 border-amber-500/30'
   if (state === 'blocked' || state === 'offline')
     return 'bg-red-500/15 text-red-200 border-red-500/30'
-  return 'bg-primary-500/15 text-primary-200 border-primary-500/30'
+  return 'bg-muted-foreground/15 text-primary-foreground border-border/30'
 }
 
 function modeLabel(mode: string): string {
@@ -141,7 +141,7 @@ function MiniEvent({
       <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
         {label}
       </div>
-      <div className="mt-1 text-sm font-semibold text-ink">{scopeLine(event)}</div>
+      <div className="mt-1 text-sm font-semibold text-foreground">{scopeLine(event)}</div>
       <div className="mt-1 text-xs text-muted">
         approval {fieldValue(event, 'approval_id')} · stato{' '}
         {fieldValue(event, 'status') !== '—'
@@ -528,7 +528,7 @@ export function VtCapitalScreen() {
                       }}
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <div className="font-semibold text-ink">
+                        <div className="font-semibold text-foreground">
                           {String(
                             item.asset ??
                               item.symbol ??
@@ -611,7 +611,7 @@ export function VtCapitalScreen() {
                         borderColor: 'var(--theme-border)',
                       }}
                     >
-                      <summary className="cursor-pointer text-sm font-medium text-ink">
+                      <summary className="cursor-pointer text-sm font-medium text-foreground">
                         {entryTitle(entry, `Record ${index + 1}`)} ·{' '}
                         {decisionLabel(entry)}
                       </summary>
@@ -638,7 +638,7 @@ export function VtCapitalScreen() {
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <div className="font-semibold text-ink">
+                    <div className="font-semibold text-foreground">
                       {worker.workerId}
                     </div>
                     <span
@@ -652,7 +652,7 @@ export function VtCapitalScreen() {
                     {worker.identityExists ? 'ok' : 'missing'}
                   </div>
                   {worker.currentTask ? (
-                    <div className="mt-2 text-xs text-ink">
+                    <div className="mt-2 text-xs text-foreground">
                       Task: {worker.currentTask}
                     </div>
                   ) : null}
@@ -685,7 +685,7 @@ export function VtCapitalScreen() {
                       borderColor: 'var(--theme-border)',
                     }}
                   >
-                    <div className="font-medium text-ink">{note.title}</div>
+                    <div className="font-medium text-foreground">{note.title}</div>
                     <div className="mt-1 text-xs text-muted">
                       {formatTime(note.mtimeMs)} ·{' '}
                       {Math.round(note.size / 1024)} KB

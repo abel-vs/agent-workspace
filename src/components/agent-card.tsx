@@ -128,8 +128,8 @@ export function AgentCard({
   return (
     <div
       className={cn(
-        'rounded-xl border border-primary-300/70 bg-primary-100/95 p-3 shadow-sm',
-        'dark:border-primary-800 dark:bg-primary-950/80',
+        'rounded-xl border border-border/70 bg-card/95 p-3 shadow-sm',
+        'dark:border-foreground dark:bg-primary/80',
         className,
       )}
     >
@@ -143,16 +143,16 @@ export function AgentCard({
         </span>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-primary-950 dark:text-primary-100">
+          <p className="truncate text-sm font-semibold text-foreground dark:text-primary-foreground">
             {sessionLabel}
           </p>
-          <p className="truncate text-xs text-primary-600 dark:text-primary-400">
+          <p className="truncate text-xs text-muted-foreground dark:text-muted-foreground">
             {model}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
             <StatusIndicator status={status} />
             {hasTokens ? (
-              <span className="rounded-full border border-primary-300/70 bg-primary-200/70 px-2 py-0.5 text-[10px] font-medium text-primary-700 dark:border-primary-800 dark:bg-primary-900 dark:text-primary-300">
+              <span className="rounded-full border border-border/70 bg-muted/70 px-2 py-0.5 text-[10px] font-medium text-foreground dark:border-foreground dark:bg-primary dark:text-muted-foreground">
                 {formatTokenBadge(tokenCount)}
               </span>
             ) : null}
@@ -160,14 +160,14 @@ export function AgentCard({
         </div>
 
         {resolvedRuntime ? (
-          <span className="shrink-0 text-xs text-primary-500 dark:text-primary-400 tabular-nums">
+          <span className="shrink-0 text-xs text-muted-foreground dark:text-muted-foreground tabular-nums">
             {resolvedRuntime}
           </span>
         ) : null}
       </div>
 
       {footer ? (
-        <div className="mt-2 border-t border-primary-300/60 pt-2 dark:border-primary-800">
+        <div className="mt-2 border-t border-border/60 pt-2 dark:border-foreground">
           {footer}
         </div>
       ) : null}

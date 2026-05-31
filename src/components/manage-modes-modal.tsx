@@ -73,20 +73,20 @@ export function ManageModesModal({
           role="dialog"
           aria-labelledby="manage-modes-title"
           aria-modal="true"
-          className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-xl border border-primary-200 bg-surface p-6 shadow-xl"
+          className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background p-6 shadow-xl"
         >
           <h2
             id="manage-modes-title"
-            className="mb-4 text-lg font-semibold text-primary-900"
+            className="mb-4 text-lg font-semibold text-foreground"
           >
             Manage Modes
           </h2>
-          <p className="mb-6 text-sm text-primary-500">No modes saved.</p>
+          <p className="mb-6 text-sm text-muted-foreground">No modes saved.</p>
           <div className="flex justify-end">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="rounded-lg bg-muted-foreground px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Close
             </button>
@@ -111,11 +111,11 @@ export function ManageModesModal({
         role="dialog"
         aria-labelledby="manage-modes-title"
         aria-modal="true"
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-xl border border-primary-200 bg-surface p-6 shadow-xl"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background p-6 shadow-xl"
       >
         <h2
           id="manage-modes-title"
-          className="mb-4 text-lg font-semibold text-primary-900"
+          className="mb-4 text-lg font-semibold text-foreground"
         >
           Manage Modes
         </h2>
@@ -129,10 +129,10 @@ export function ManageModesModal({
             return (
               <div
                 key={mode.id}
-                className="rounded-lg border border-primary-200 bg-primary-50 p-4"
+                className="rounded-lg border border-border bg-background p-4"
               >
                 <div className="mb-2 flex items-start justify-between">
-                  <h3 className="font-medium text-primary-900">
+                  <h3 className="font-medium text-foreground">
                     {mode.name}
                     {modelUnavailable && (
                       <span
@@ -147,7 +147,7 @@ export function ManageModesModal({
                     <button
                       type="button"
                       onClick={() => setModeToRename(mode)}
-                      className="rounded-lg border border-primary-200 bg-surface px-3 py-1 text-xs font-medium text-primary-700 transition-colors hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-400"
+                      className="rounded-lg border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-card focus:outline-none focus:ring-2 focus:ring-ring"
                       aria-label={`Rename ${mode.name}`}
                     >
                       Rename
@@ -155,7 +155,7 @@ export function ManageModesModal({
                     <button
                       type="button"
                       onClick={() => setModeToDelete(mode)}
-                      className="rounded-lg border border-red-200 bg-surface px-3 py-1 text-xs font-medium text-red-700 transition-colors hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400"
+                      className="rounded-lg border border-red-200 bg-background px-3 py-1 text-xs font-medium text-red-700 transition-colors hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400"
                       aria-label={`Delete ${mode.name}`}
                     >
                       Delete
@@ -163,7 +163,7 @@ export function ManageModesModal({
                   </div>
                 </div>
 
-                <div className="space-y-1 text-xs text-primary-600">
+                <div className="space-y-1 text-xs text-muted-foreground">
                   {mode.preferredModel && (
                     <div>
                       <span className="font-medium">Model:</span>{' '}
@@ -202,7 +202,7 @@ export function ManageModesModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+            className="rounded-lg bg-muted-foreground px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring"
           >
             Close
           </button>
@@ -229,15 +229,15 @@ export function ManageModesModal({
             role="dialog"
             aria-labelledby="delete-mode-title"
             aria-modal="true"
-            className="fixed left-1/2 top-1/2 z-[60] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-primary-200 bg-surface p-6 shadow-xl"
+            className="fixed left-1/2 top-1/2 z-[60] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background p-6 shadow-xl"
           >
             <h2
               id="delete-mode-title"
-              className="mb-2 text-lg font-semibold text-primary-900"
+              className="mb-2 text-lg font-semibold text-foreground"
             >
               Delete Mode
             </h2>
-            <p className="mb-6 text-sm text-primary-600">
+            <p className="mb-6 text-sm text-muted-foreground">
               Are you sure you want to delete "{modeToDelete.name}"? This action
               cannot be undone.
             </p>
@@ -245,7 +245,7 @@ export function ManageModesModal({
               <button
                 type="button"
                 onClick={() => setModeToDelete(null)}
-                className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
+                className="rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
               >
                 Cancel
               </button>

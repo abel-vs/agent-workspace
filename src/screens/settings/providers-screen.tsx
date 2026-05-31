@@ -537,7 +537,7 @@ function searchMatchesSetting(
 
 function ProviderStatusBadge({ status }: { status: ProviderStatus }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-primary-300 bg-white px-2 py-0.5 text-xs font-medium text-primary-700">
+    <span className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-2 py-0.5 text-xs font-medium text-foreground">
       <HugeiconsIcon icon={CheckmarkCircle02Icon} size={20} strokeWidth={1.5} />
       {status === 'active' ? 'Active' : 'Configured'}
     </span>
@@ -609,27 +609,27 @@ function SettingCard(props: {
   }
 
   return (
-    <article className="rounded-2xl border border-primary-200 bg-white p-4 shadow-sm">
+    <article className="rounded-2xl border border-border bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="min-w-0 space-y-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-sm font-semibold text-primary-900">
+            <h3 className="text-sm font-semibold text-foreground">
               {setting.label}
             </h3>
             {setting.unsupported ? (
-              <span className="rounded-full border border-primary-300 bg-primary-100 px-2 py-0.5 text-[11px] font-medium text-primary-700">
+              <span className="rounded-full border border-border bg-card px-2 py-0.5 text-[11px] font-medium text-foreground">
                 Not available
               </span>
             ) : null}
             {isActiveSave ? (
-              <span className="rounded-full border border-primary-300 bg-primary-50 px-2 py-0.5 text-[11px] font-medium text-primary-700">
+              <span className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px] font-medium text-foreground">
                 Saving...
               </span>
             ) : null}
           </div>
-          <p className="text-sm text-primary-600">{setting.description}</p>
+          <p className="text-sm text-muted-foreground">{setting.description}</p>
           {setting.path ? (
-            <p className="text-xs text-primary-500">{setting.path}</p>
+            <p className="text-xs text-muted-foreground">{setting.path}</p>
           ) : null}
         </div>
 
@@ -654,7 +654,7 @@ function SettingCard(props: {
 
           {setting.kind === 'select' ? (
             <select
-              className="w-full rounded-lg border border-primary-200 bg-surface px-3 py-2 text-sm text-primary-900 outline-none"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none"
               value={coerceString(currentValue)}
               disabled={disabled}
               onChange={(event) => {
@@ -744,7 +744,7 @@ function SettingCard(props: {
 
           {setting.kind === 'multiline' ? (
             <textarea
-              className="min-h-[88px] w-full rounded-lg border border-primary-200 bg-surface px-3 py-2 text-sm text-primary-900 outline-none placeholder:text-primary-500"
+              className="min-h-[88px] w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
               value={draftValue}
               disabled={disabled}
               rows={setting.rows ?? 4}
@@ -904,17 +904,17 @@ function ModelConfigSection(props: {
   return (
     <section className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-4 shadow-sm">
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-primary-900">{title}</h3>
-        <p className="text-sm text-primary-600">{description}</p>
+        <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <label className="space-y-1.5">
-          <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
+          <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
             Provider
           </span>
           <select
-            className="h-10 w-full rounded-lg border border-[var(--theme-border)] bg-[var(--theme-card)] px-3 text-sm text-primary-900 outline-none"
+            className="h-10 w-full rounded-lg border border-[var(--theme-border)] bg-[var(--theme-card)] px-3 text-sm text-foreground outline-none"
             value={value.provider}
             onChange={(event) => {
               onChange({
@@ -932,7 +932,7 @@ function ModelConfigSection(props: {
         </label>
 
         <label className="space-y-1.5">
-          <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
+          <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
             Model Name
           </span>
           <Input
@@ -951,7 +951,7 @@ function ModelConfigSection(props: {
       </div>
 
       <label className="mt-4 block space-y-1.5">
-        <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
+        <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
           Base URL
         </span>
         <Input
@@ -1098,10 +1098,10 @@ function ActiveModelCard({
     <section className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-4 shadow-sm md:p-5">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="space-y-1">
-          <h3 className="text-base font-medium text-primary-900">
+          <h3 className="text-base font-medium text-foreground">
             Model Configuration
           </h3>
-          <p className="text-sm text-primary-600">
+          <p className="text-sm text-muted-foreground">
             Update the primary model, optional fallback, and stream timeout
             settings saved in the active profile configuration.
           </p>
@@ -1116,7 +1116,7 @@ function ActiveModelCard({
       </div>
 
       {configQuery.isPending ? (
-        <p className="mt-4 text-sm text-primary-500">
+        <p className="mt-4 text-sm text-muted-foreground">
           Loading configuration...
         </p>
       ) : configQuery.error ? (
@@ -1138,10 +1138,10 @@ function ActiveModelCard({
           <section className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-4 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div className="space-y-1">
-                <h3 className="text-sm font-semibold text-primary-900">
+                <h3 className="text-sm font-semibold text-foreground">
                   Fallback Model
                 </h3>
-                <p className="text-sm text-primary-600">
+                <p className="text-sm text-muted-foreground">
                   Optional secondary model Hermes Agent can use if the primary path
                   fails.
                 </p>
@@ -1175,10 +1175,10 @@ function ActiveModelCard({
 
           <section className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-4 shadow-sm">
             <div className="space-y-1">
-              <h3 className="text-sm font-semibold text-primary-900">
+              <h3 className="text-sm font-semibold text-foreground">
                 Performance
               </h3>
-              <p className="text-sm text-primary-600">
+              <p className="text-sm text-muted-foreground">
                 Increase these timeouts for slower local models or larger
                 prompts that stream output more gradually.
               </p>
@@ -1186,7 +1186,7 @@ function ActiveModelCard({
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <label className="space-y-1.5">
-                <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
+                <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
                   Stream Stale Timeout
                 </span>
                 <Input
@@ -1201,11 +1201,11 @@ function ActiveModelCard({
                     }))
                   }}
                 />
-                <p className="text-xs text-primary-500">Default: 90s</p>
+                <p className="text-xs text-muted-foreground">Default: 90s</p>
               </label>
 
               <label className="space-y-1.5">
-                <span className="text-xs font-medium uppercase tracking-[0.12em] text-primary-600">
+                <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">
                   Stream Read Timeout
                 </span>
                 <Input
@@ -1220,11 +1220,11 @@ function ActiveModelCard({
                     }))
                   }}
                 />
-                <p className="text-xs text-primary-500">Default: 60s</p>
+                <p className="text-xs text-muted-foreground">Default: 60s</p>
               </label>
             </div>
 
-            <p className="mt-4 rounded-xl border border-[var(--theme-border)] bg-[var(--theme-card2)] px-3 py-2 text-sm text-primary-600">
+            <p className="mt-4 rounded-xl border border-[var(--theme-border)] bg-[var(--theme-card2)] px-3 py-2 text-sm text-muted-foreground">
               Slow local runners such as Ollama and `llama-server` often need
               more headroom before Hermes Agent decides a stream has stalled.
             </p>
@@ -1262,12 +1262,12 @@ function ProviderManagementSection(props: {
 
   return (
     <div className="space-y-5">
-      <header className="flex flex-col gap-4 rounded-xl border border-primary-200 bg-primary-50/80 px-5 py-4 shadow-sm md:flex-row md:items-center md:justify-between">
+      <header className="flex flex-col gap-4 rounded-xl border border-border bg-background/80 px-5 py-4 shadow-sm md:flex-row md:items-center md:justify-between">
         <div className="space-y-1.5">
-          <h2 className="text-base font-semibold text-primary-900">
+          <h2 className="text-base font-semibold text-foreground">
             Provider Setup
           </h2>
-          <p className="text-sm text-primary-600">
+          <p className="text-sm text-muted-foreground">
             View configured providers and walk through safe setup instructions
             for new providers.
           </p>
@@ -1278,32 +1278,32 @@ function ProviderManagementSection(props: {
         </Button>
       </header>
 
-      <section className="rounded-2xl border border-primary-200 bg-primary-50/80 p-4 shadow-sm md:p-5">
+      <section className="rounded-2xl border border-border bg-background/80 p-4 shadow-sm md:p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h3 className="text-base font-medium text-primary-900">
+            <h3 className="text-base font-medium text-foreground">
               Configured Providers
             </h3>
-            <p className="mt-1 text-xs text-primary-600">
+            <p className="mt-1 text-xs text-muted-foreground">
               API keys stay in your local Hermes config and are never sent to
               Studio.
             </p>
           </div>
-          <p className="text-xs text-primary-600 tabular-nums">
+          <p className="text-xs text-muted-foreground tabular-nums">
             {providerSummaries.length} provider
             {providerSummaries.length === 1 ? '' : 's'}
           </p>
         </div>
 
         {modelsQuery.isPending ? (
-          <p className="rounded-xl border border-primary-200 bg-white px-3 py-2 text-sm text-primary-600">
+          <p className="rounded-xl border border-border bg-white px-3 py-2 text-sm text-muted-foreground">
             Loading providers from Hermes Agent...
           </p>
         ) : null}
 
         {modelsQuery.error ? (
-          <div className="rounded-xl border border-primary-200 bg-white px-4 py-3">
-            <p className="mb-2 text-sm text-primary-700">
+          <div className="rounded-xl border border-border bg-white px-4 py-3">
+            <p className="mb-2 text-sm text-foreground">
               Unable to load providers right now. Check your Hermes Agent connection.
             </p>
             <Button
@@ -1319,8 +1319,8 @@ function ProviderManagementSection(props: {
         {!modelsQuery.isPending &&
         !modelsQuery.error &&
         providerSummaries.length === 0 ? (
-          <div className="rounded-xl border border-primary-200 bg-white px-4 py-4">
-            <p className="text-sm text-primary-700">
+          <div className="rounded-xl border border-border bg-white px-4 py-4">
+            <p className="text-sm text-foreground">
               No providers are configured yet. Use Add Provider to open setup
               instructions.
             </p>
@@ -1335,18 +1335,18 @@ function ProviderManagementSection(props: {
               return (
                 <article
                   key={provider.id}
-                  className="rounded-2xl border border-primary-200 bg-white p-3"
+                  className="rounded-2xl border border-border bg-white p-3"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-2.5">
-                      <span className="inline-flex size-9 items-center justify-center rounded-xl border border-primary-200 bg-primary-100/70">
+                      <span className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-card/70">
                         <ProviderIcon providerId={provider.id} />
                       </span>
                       <div className="min-w-0">
-                        <h3 className="truncate text-sm font-medium text-primary-900">
+                        <h3 className="truncate text-sm font-medium text-foreground">
                           {provider.name}
                         </h3>
-                        <p className="mt-0.5 text-xs text-primary-600 line-clamp-2">
+                        <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">
                           {provider.description}
                         </p>
                       </div>
@@ -1354,11 +1354,11 @@ function ProviderManagementSection(props: {
                     <ProviderStatusBadge status={provider.status} />
                   </div>
 
-                  <div className="mt-3 flex items-center justify-between rounded-xl border border-primary-200 bg-primary-50 px-2.5 py-2">
-                    <span className="text-xs text-primary-600">
+                  <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-background px-2.5 py-2">
+                    <span className="text-xs text-muted-foreground">
                       Available models
                     </span>
-                    <span className="text-sm font-medium text-primary-900 tabular-nums">
+                    <span className="text-sm font-medium text-foreground tabular-nums">
                       {provider.modelCount}
                     </span>
                   </div>
@@ -1583,7 +1583,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
     return (
       <div
         className={cn(
-          embedded ? 'h-full bg-primary-50' : 'min-h-full bg-surface',
+          embedded ? 'h-full bg-background' : 'min-h-full bg-background',
         )}
       >
         <BackendUnavailableState
@@ -1597,29 +1597,29 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
   return (
     <div
       className={cn(
-        embedded ? 'h-full bg-primary-50' : 'min-h-full bg-surface',
+        embedded ? 'h-full bg-background' : 'min-h-full bg-background',
       )}
     >
       <main
         className={cn(
-          'min-h-full px-4 pb-24 pt-5 text-primary-900 md:px-6 md:pt-8',
+          'min-h-full px-4 pb-24 pt-5 text-foreground md:px-6 md:pt-8',
           embedded && 'px-4 pb-6 pt-4 md:px-6 md:pb-6 md:pt-4',
         )}
       >
         <section className="mx-auto w-full max-w-[1480px] space-y-5">
-          <header className="flex flex-col gap-4 rounded-xl border border-primary-200 bg-primary-50/80 px-5 py-4 shadow-sm">
+          <header className="flex flex-col gap-4 rounded-xl border border-border bg-background/80 px-5 py-4 shadow-sm">
             <div className="space-y-1">
-              <h1 className="hidden md:block text-lg font-semibold text-primary-900">
+              <h1 className="hidden md:block text-lg font-semibold text-foreground">
                 Settings
               </h1>
-              <p className="text-sm text-primary-600">
+              <p className="text-sm text-muted-foreground">
                 Configure providers plus Hermes Agent defaults in one place.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <label className="relative w-full md:max-w-md">
-                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-primary-500">
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   <HugeiconsIcon
                     icon={Search01Icon}
                     size={18}
@@ -1637,7 +1637,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
                 />
               </label>
 
-              <div className="text-sm text-primary-600">
+              <div className="text-sm text-muted-foreground">
                 {searchQuery
                   ? `${totalSearchMatches} matching setting${totalSearchMatches === 1 ? '' : 's'}`
                   : `${SETTINGS.length} configurable defaults`}
@@ -1651,7 +1651,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
           >
             <TabsList
               variant="underline"
-              className="w-full flex-nowrap overflow-x-auto justify-start gap-2 rounded-xl border border-primary-200 bg-white px-3 py-2"
+              className="w-full flex-nowrap overflow-x-auto justify-start gap-2 rounded-xl border border-border bg-white px-3 py-2"
             >
               {TAB_ORDER.map((tab) => {
                 const count =
@@ -1665,7 +1665,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
                     className="rounded-lg px-3 py-2 text-sm"
                   >
                     {tab.label}
-                    <span className="ml-1 rounded-full bg-primary-100 px-1.5 py-0.5 text-[11px] text-primary-700">
+                    <span className="ml-1 rounded-full bg-card px-1.5 py-0.5 text-[11px] text-foreground">
                       {count}
                     </span>
                   </TabsTrigger>
@@ -1696,14 +1696,14 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
               return (
                 <TabsContent key={tab.id} value={tab.id} className="space-y-4">
                   {configQuery.isPending ? (
-                    <div className="rounded-xl border border-primary-200 bg-primary-50 px-4 py-3 text-sm text-primary-600">
+                    <div className="rounded-xl border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
                       Loading current configuration...
                     </div>
                   ) : null}
 
                   {configQuery.error ? (
-                    <div className="rounded-xl border border-primary-200 bg-white px-4 py-3">
-                      <p className="text-sm text-primary-700">
+                    <div className="rounded-xl border border-border bg-white px-4 py-3">
+                      <p className="text-sm text-foreground">
                         Unable to load configuration right now.
                       </p>
                       <Button
@@ -1720,7 +1720,7 @@ export function ProvidersScreen({ embedded = false }: ProvidersScreenProps) {
                   {!configQuery.isPending &&
                   !configQuery.error &&
                   items.length === 0 ? (
-                    <div className="rounded-xl border border-primary-200 bg-primary-50 px-4 py-4 text-sm text-primary-600">
+                    <div className="rounded-xl border border-border bg-background px-4 py-4 text-sm text-muted-foreground">
                       No settings in this tab match your current search.
                     </div>
                   ) : null}

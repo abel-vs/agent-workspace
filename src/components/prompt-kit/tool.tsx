@@ -68,28 +68,28 @@ function Tool({ toolPart, defaultOpen = false }: ToolProps) {
             />
           }
         >
-          <span className="text-sm font-medium text-primary-900">
+          <span className="text-sm font-medium text-foreground">
             {toolPart.type}
           </span>
           <HugeiconsIcon
             icon={ArrowDown01Icon}
             size={14}
             strokeWidth={1.5}
-            className="text-primary-900 transition-transform duration-150 group-data-panel-open:rotate-180"
+            className="text-foreground transition-transform duration-150 group-data-panel-open:rotate-180"
           />
         </CollapsibleTrigger>
         <CollapsiblePanel className="mt-1">
-          <div className="space-y-2 bg-primary-100 p-2 border border-primary-200">
+          <div className="space-y-2 bg-card p-2 border border-border">
             {input && Object.keys(input).length > 0 && (
-              <div className="border border-primary-200 bg-primary-50 p-3">
-                <h4 className="text-primary-600 mb-2 text-xs font-medium">
+              <div className="border border-border bg-background p-3">
+                <h4 className="text-muted-foreground mb-2 text-xs font-medium">
                   Input
                 </h4>
-                <div className="max-h-40 overflow-auto space-y-2 font-mono text-xs text-primary-800">
+                <div className="max-h-40 overflow-auto space-y-2 font-mono text-xs text-foreground">
                   {Object.entries(input).map(([key, value]) => (
                     <div key={key} className="break-all">
-                      <span className="text-primary-500">{key}:</span>{' '}
-                      <span className="text-primary-700">
+                      <span className="text-muted-foreground">{key}:</span>{' '}
+                      <span className="text-foreground">
                         {renderValue(value)}
                       </span>
                     </div>
@@ -99,11 +99,11 @@ function Tool({ toolPart, defaultOpen = false }: ToolProps) {
             )}
 
             {output && (
-              <div className="border border-primary-200 bg-primary-50 p-3">
-                <h4 className="text-primary-600 mb-2 text-xs font-medium">
+              <div className="border border-border bg-background p-3">
+                <h4 className="text-muted-foreground mb-2 text-xs font-medium">
                   Output
                 </h4>
-                <div className="max-h-40 overflow-auto font-mono text-xs text-primary-800">
+                <div className="max-h-40 overflow-auto font-mono text-xs text-foreground">
                   {renderValue(output)}
                 </div>
               </div>
@@ -117,11 +117,11 @@ function Tool({ toolPart, defaultOpen = false }: ToolProps) {
             )}
 
             {state === 'input-streaming' && (
-              <div className="text-primary-500 text-xs">Processing...</div>
+              <div className="text-muted-foreground text-xs">Processing...</div>
             )}
 
             {toolCallId && (
-              <div className="text-primary-400 text-xs">
+              <div className="text-muted-foreground text-xs">
                 <span className="font-mono tabular-nums">
                   ID: {toolCallId.slice(0, 16)}...
                 </span>

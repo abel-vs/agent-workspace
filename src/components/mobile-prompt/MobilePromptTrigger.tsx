@@ -105,7 +105,7 @@ export function MobilePromptTrigger() {
                     alt="Hermes Agent"
                     className="size-8 rounded-lg"
                   />
-                  <span className="text-xs text-primary-600">+</span>
+                  <span className="text-xs text-muted-foreground">+</span>
                   <div className="flex size-8 items-center justify-center rounded-lg bg-[#232b3b]">
                     <svg viewBox="0 0 100 100" className="size-5">
                       <circle
