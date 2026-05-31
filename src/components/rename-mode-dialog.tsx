@@ -94,11 +94,11 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
         role="dialog"
         aria-labelledby="rename-mode-title"
         aria-modal="true"
-        className="fixed left-1/2 top-1/2 z-[60] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-primary-200 bg-surface p-6 shadow-xl"
+        className="fixed left-1/2 top-1/2 z-[60] w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background p-6 shadow-xl"
       >
         <h2
           id="rename-mode-title"
-          className="mb-4 text-lg font-semibold text-primary-900"
+          className="mb-4 text-lg font-semibold text-foreground"
         >
           Rename Mode
         </h2>
@@ -107,7 +107,7 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
           <div className="mb-6">
             <label
               htmlFor="mode-name"
-              className="mb-2 block text-sm font-medium text-primary-700"
+              className="mb-2 block text-sm font-medium text-foreground"
             >
               Mode Name
             </label>
@@ -121,7 +121,7 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
                 setError(null)
               }}
               className={cn(
-                'w-full rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-sm text-primary-900 placeholder-primary-400 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400',
+                'w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder-muted-foreground focus:border-border focus:outline-none focus:ring-2 focus:ring-ring',
                 error &&
                   'border-red-500 focus:border-red-500 focus:ring-red-500',
               )}
@@ -144,13 +144,13 @@ export function RenameDialog({ mode, onClose }: RenameDialogProps) {
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="rounded-lg bg-muted-foreground px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Rename
             </button>

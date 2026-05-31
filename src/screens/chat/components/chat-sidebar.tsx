@@ -183,7 +183,7 @@ function NavItem({
     isCollapsed ? 'justify-center px-0' : 'justify-start px-3',
     item.active
       ? 'bg-accent-500/10 text-accent-500 hover:bg-accent-50 dark:hover:bg-accent-900/300/15'
-      : 'text-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800',
+      : 'text-foreground hover:bg-muted dark:hover:bg-primary',
   )
 
   const iconEl =
@@ -377,7 +377,7 @@ function SectionLabel({
   if (isCollapsed) return null
 
   const labelContent = (
-    <span className="text-[10px] font-semibold uppercase tracking-wider text-primary-500 dark:text-neutral-400 select-none">
+    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground dark:text-neutral-400 select-none">
       {label}
     </span>
   )
@@ -392,7 +392,7 @@ function SectionLabel({
         {navigateTo ? (
           <Link
             to={navigateTo}
-            className="text-[10px] font-semibold uppercase tracking-wider text-primary-500 dark:text-neutral-400 hover:text-primary-700 dark:hover:text-neutral-200 select-none transition-colors"
+            className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground dark:text-neutral-400 hover:text-foreground dark:hover:text-neutral-200 select-none transition-colors"
           >
             {label}
           </Link>
@@ -402,7 +402,7 @@ function SectionLabel({
         <button
           type="button"
           onClick={onToggle}
-          className="ml-auto p-0.5 rounded hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors"
+          className="ml-auto p-0.5 rounded hover:bg-muted dark:hover:bg-primary transition-colors"
           aria-label={expanded ? `Collapse ${label}` : `Expand ${label}`}
         >
           <HugeiconsIcon
@@ -410,7 +410,7 @@ function SectionLabel({
             size={12}
             strokeWidth={2}
             className={cn(
-              'text-primary-500 transition-transform duration-150',
+              'text-muted-foreground transition-transform duration-150',
               expanded ? 'rotate-0' : '-rotate-90',
             )}
           />
@@ -428,7 +428,7 @@ function SectionLabel({
       {navigateTo ? (
         <Link
           to={navigateTo}
-          className="text-[10px] font-semibold uppercase tracking-wider text-primary-500 dark:text-neutral-400 hover:text-primary-700 dark:hover:text-neutral-200 select-none transition-colors"
+          className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground dark:text-neutral-400 hover:text-foreground dark:hover:text-neutral-200 select-none transition-colors"
         >
           {label}
         </Link>
@@ -709,7 +709,7 @@ function ChatSidebarComponent({
 
   const asideProps = {
     className: cn(
-      'border-r h-full overflow-hidden flex flex-col theme-sidebar theme-border',
+      'border-r h-full overflow-hidden flex flex-col bg-sidebar border-border',
       isMobile && 'fixed inset-y-0 left-0 z-50 shadow-2xl',
       isMobile && isCollapsed && 'pointer-events-none',
     ),
@@ -1015,7 +1015,7 @@ function ChatSidebarComponent({
             }}
             className={cn(
               buttonVariants({ variant: 'ghost', size: 'sm' }),
-              'w-full justify-start gap-2.5 px-3 py-2 text-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800',
+              'w-full justify-start gap-2.5 px-3 py-2 text-foreground hover:bg-muted dark:hover:bg-primary',
               isNewSessionActive &&
                 'bg-accent-500/10 text-accent-500 hover:bg-accent-50 dark:hover:bg-accent-900/300/15',
             )}
@@ -1042,7 +1042,7 @@ function ChatSidebarComponent({
             onClick={() => onSelectSession?.()}
             className={cn(
               buttonVariants({ variant: 'ghost', size: 'sm' }),
-              'group w-full justify-start gap-2.5 px-3 py-2 text-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800',
+              'group w-full justify-start gap-2.5 px-3 py-2 text-foreground hover:bg-muted dark:hover:bg-primary',
               isPlaygroundActive &&
                 'bg-accent-500/10 text-accent-500 hover:bg-accent-50 dark:hover:bg-accent-900/300/15',
             )}
@@ -1153,7 +1153,7 @@ function ChatSidebarComponent({
       {/* end scrollable body */}
 
       {/* ── Footer with User Menu ─────────────────────────────────── */}
-      <div className="px-2 py-2.5 border-t shrink-0 theme-border theme-panel">
+      <div className="px-2 py-2.5 border-t shrink-0 border-border bg-card">
         {/* User card + actions */}
         <div
           className={cn(
@@ -1166,7 +1166,7 @@ function ChatSidebarComponent({
             <MenuTrigger
               data-tour="settings"
               className={cn(
-                'flex items-center gap-2.5 rounded-lg py-1 transition-colors hover:bg-primary-200 dark:hover:bg-neutral-800 flex-1 min-w-0',
+                'flex items-center gap-2.5 rounded-lg py-1 transition-colors hover:bg-muted dark:hover:bg-neutral-800 flex-1 min-w-0',
                 isVisuallyCollapsed ? 'justify-center px-0' : 'px-1.5',
               )}
             >
@@ -1184,7 +1184,7 @@ function ChatSidebarComponent({
                     transition={transition}
                     className="flex-1 min-w-0 flex items-center gap-1.5"
                   >
-                    <span className="block truncate text-sm font-medium text-primary-900 dark:text-neutral-100">
+                    <span className="block truncate text-sm font-medium text-foreground dark:text-neutral-100">
                       {profileDisplayName}
                     </span>
                     <StatusDot />
@@ -1217,7 +1217,7 @@ function ChatSidebarComponent({
               <button
                 type="button"
                 onClick={() => handleOpenSettings('claude')}
-                className="shrink-0 rounded-lg p-1.5 text-primary-400 hover:bg-primary-200 dark:hover:bg-neutral-800 hover:text-primary-600 dark:hover:text-neutral-300 transition-colors"
+                className="shrink-0 rounded-lg p-1.5 text-muted-foreground hover:bg-muted dark:hover:bg-neutral-800 hover:text-muted-foreground dark:hover:text-neutral-300 transition-colors"
                 aria-label="Settings"
               >
                 <HugeiconsIcon

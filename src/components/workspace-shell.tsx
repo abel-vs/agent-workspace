@@ -309,14 +309,14 @@ export function WorkspaceShell({ children }: WorkspaceShellProps) {
   return (
     <>
       <div
-        className="relative overflow-hidden theme-bg theme-text"
+        className="relative overflow-hidden bg-background text-foreground"
         style={shellStyle}
       >
         <ClaudeReconnectBanner enabled={authState.checked} />
         {/* Electron: native-style title bar (absolute over the padding) */}
         {isElectron && (
           <div
-            className="absolute inset-x-0 top-0 flex h-10 items-center border-b border-primary-200 z-40"
+            className="absolute inset-x-0 top-0 flex h-10 items-center border-b border-border z-40"
             style={
               {
                 WebkitAppRegion: 'drag',

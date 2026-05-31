@@ -358,7 +358,7 @@ export function Swarm2KanbanBoard({
               setLinkLatestMission(Boolean(latestMission))
               setComposerOpen((open) => !open)
             }}
-            className="rounded-full bg-[var(--theme-accent)] px-3 py-1.5 font-semibold text-primary-950 hover:bg-[var(--theme-accent-strong)]"
+            className="rounded-full bg-[var(--theme-accent)] px-3 py-1.5 font-semibold text-foreground hover:bg-[var(--theme-accent-strong)]"
           >
             New card
           </button>
@@ -432,7 +432,7 @@ export function Swarm2KanbanBoard({
               {createMutation.error ? <div className="rounded-xl border border-red-400/40 bg-red-500/10 px-3 py-2 text-xs text-red-700 md:col-span-2">{createMutation.error.message}</div> : null}
               <div className="flex justify-end gap-2 md:col-span-2">
                 <button type="button" onClick={() => setComposerOpen(false)} className="rounded-xl border border-[var(--theme-border)] px-3 py-2 text-xs font-semibold text-[var(--theme-muted)] hover:bg-[var(--theme-card2)]">Cancel</button>
-                <button type="button" disabled={!draftTitle.trim() || createMutation.isPending} onClick={() => void createMutation.mutateAsync()} className="rounded-xl bg-[var(--theme-accent)] px-3 py-2 text-xs font-semibold text-primary-950 disabled:opacity-50">{createMutation.isPending ? 'Saving…' : 'Create card'}</button>
+                <button type="button" disabled={!draftTitle.trim() || createMutation.isPending} onClick={() => void createMutation.mutateAsync()} className="rounded-xl bg-[var(--theme-accent)] px-3 py-2 text-xs font-semibold text-foreground disabled:opacity-50">{createMutation.isPending ? 'Saving…' : 'Create card'}</button>
               </div>
             </div>
           </div>

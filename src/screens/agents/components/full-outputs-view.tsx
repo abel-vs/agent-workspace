@@ -82,7 +82,7 @@ function getStatusPill(output: AgentOutput) {
   return {
     label: output.statusLabel || 'Unknown',
     icon: '•',
-    className: 'bg-primary-200/80 text-primary-700 border-primary-300',
+    className: 'bg-muted/80 text-foreground border-border',
   }
 }
 
@@ -119,7 +119,7 @@ function FilterPill({
       className={cn(
         'rounded-xl px-3.5 py-2 text-sm font-medium transition-all',
         active
-          ? 'bg-[var(--theme-accent)] text-primary-950'
+          ? 'bg-[var(--theme-accent)] text-foreground'
           : 'border border-[var(--theme-border)] bg-[var(--theme-card)] text-[var(--theme-muted)] hover:bg-[var(--theme-card2)]',
       )}
     >

@@ -258,9 +258,9 @@ export function MobileTabBar() {
           // Vertical position: above home indicator
           'mb-[max(env(safe-area-inset-bottom,8px),16px)]',
           // Keep the pill visually isolated from page and error-state backgrounds
-          'bg-surface/95 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-surface/90',
+          'bg-background/95 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/90',
           'rounded-full',
-          'border border-primary-200/40',
+          'border border-border/40',
           // Inner padding
           'px-3 py-2',
           // Hide/show animation
@@ -311,7 +311,7 @@ export function MobileTabBar() {
                     circleSize,
                     isActive
                       ? 'bg-accent-500 text-white shadow-sm'
-                      : 'text-primary-500',
+                      : 'text-muted-foreground',
                   )}
                 >
                   <HugeiconsIcon

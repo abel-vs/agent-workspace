@@ -1478,21 +1478,21 @@ export function Swarm2Screen() {
 
 
   return (
-    <div ref={topRef} className="min-h-full bg-surface text-primary-900" style={SWARM2_OPERATION_THEME}>
+    <div ref={topRef} className="min-h-full bg-background text-foreground" style={SWARM2_OPERATION_THEME}>
       <div
         className={cn(
           'mx-auto flex min-h-full max-w-[1680px] flex-col gap-3 px-3 pt-3 sm:px-4 lg:px-5',
           routerOpen ? 'pb-[30rem]' : 'pb-24',
         )}
       >
-        <header className="rounded-xl border border-primary-200 bg-primary-50/80 px-5 py-3 shadow-sm">
+        <header className="rounded-xl border border-border bg-background/80 px-5 py-3 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-center gap-3">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-card)] text-[var(--theme-accent)] shadow-sm">
                 <HugeiconsIcon icon={UserMultipleIcon} size={22} />
               </div>
               <div className="min-w-0">
-                <h1 className="truncate text-base font-semibold text-primary-900">
+                <h1 className="truncate text-base font-semibold text-foreground">
                   Swarm
                 </h1>
                 <p className="truncate text-xs text-[var(--theme-muted-2)]">
@@ -1585,7 +1585,7 @@ export function Swarm2Screen() {
               <button
                 type="button"
                 onClick={openAddSwarm}
-                className="inline-flex items-center gap-2 rounded-lg bg-[var(--theme-accent)] px-4 py-2 text-sm font-medium text-primary-950 shadow-sm hover:bg-[var(--theme-accent-strong)]"
+                className="inline-flex items-center gap-2 rounded-lg bg-[var(--theme-accent)] px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-[var(--theme-accent-strong)]"
               >
                 <HugeiconsIcon icon={MessageMultiple01Icon} size={13} />
                 Add Swarm
@@ -1747,7 +1747,7 @@ export function Swarm2Screen() {
             {addSwarmError ? <div className="mt-3 rounded-xl border border-red-400/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">{addSwarmError}</div> : null}
             <div className="mt-4 flex items-center justify-end gap-3">
               <button type="button" onClick={() => setAddSwarmOpen(false)} className="rounded-lg border border-[var(--theme-border)] bg-[var(--theme-card)] px-4 py-2 text-sm text-[var(--theme-muted)] hover:text-[var(--theme-text)]">Cancel</button>
-              <button type="button" disabled={addSwarmSaving || !newWorkerId.trim() || !newWorkerName.trim()} onClick={() => void saveAddSwarm()} className="rounded-lg bg-[var(--theme-accent)] px-4 py-2 text-sm font-medium text-primary-950 disabled:opacity-50">{addSwarmSaving ? 'Saving…' : 'Save swarm agent'}</button>
+              <button type="button" disabled={addSwarmSaving || !newWorkerId.trim() || !newWorkerName.trim()} onClick={() => void saveAddSwarm()} className="rounded-lg bg-[var(--theme-accent)] px-4 py-2 text-sm font-medium text-foreground disabled:opacity-50">{addSwarmSaving ? 'Saving…' : 'Save swarm agent'}</button>
             </div>
           </div>
         </div>

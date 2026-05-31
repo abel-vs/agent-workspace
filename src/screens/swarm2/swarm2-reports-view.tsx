@@ -655,7 +655,7 @@ export function Swarm2ReportsView({
             type="button"
             disabled={disabled}
             onClick={() => void sendGuidance(row)}
-            className="rounded-lg bg-[var(--theme-accent)] px-3 py-1.5 text-xs font-semibold text-primary-950 disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-lg bg-[var(--theme-accent)] px-3 py-1.5 text-xs font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-60"
           >
             {disabled ? 'Sending…' : 'Send guidance'}
           </button>
@@ -786,7 +786,7 @@ export function Swarm2ReportsView({
               className={cn(
                 'rounded-full px-3 py-1.5 text-xs font-medium transition-colors',
                 layout === id
-                  ? 'bg-[var(--theme-accent)] text-primary-950'
+                  ? 'bg-[var(--theme-accent)] text-foreground'
                   : 'text-[var(--theme-muted)] hover:text-[var(--theme-text)]',
               )}
             >

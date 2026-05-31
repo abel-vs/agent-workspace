@@ -410,7 +410,7 @@ export function Swarm2LiveChat({
                   'inline-flex h-7 items-center gap-1 rounded-lg px-2.5 text-[11px] font-semibold transition-colors',
                   isSending
                     ? 'bg-[var(--theme-accent-soft)] text-[var(--theme-text)]'
-                    : 'bg-[var(--theme-accent)] text-primary-950 hover:bg-[var(--theme-accent-strong)] disabled:opacity-40',
+                    : 'bg-[var(--theme-accent)] text-foreground hover:bg-[var(--theme-accent-strong)] disabled:opacity-40',
                 )}
               >
                 <HugeiconsIcon icon={SentIcon} size={11} />

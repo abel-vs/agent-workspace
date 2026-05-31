@@ -125,7 +125,7 @@ const SlashCommandMenu = forwardRef(function SlashCommandMenu(
   return (
     <div className="pointer-events-none absolute inset-x-2 bottom-[calc(100%+0.5rem)] z-[70]">
       <div
-        className="pointer-events-auto overflow-hidden rounded-xl border border-primary-200 shadow-lg"
+        className="pointer-events-auto overflow-hidden rounded-xl border border-border shadow-lg"
         style={{
           background: 'var(--color-surface, var(--theme-card, #1a1f2e))',
         }}
@@ -139,7 +139,7 @@ const SlashCommandMenu = forwardRef(function SlashCommandMenu(
           keepHighlight={false}
         >
           {filteredCommands.length === 0 ? (
-            <div className="px-3 py-2 text-sm text-primary-600">
+            <div className="px-3 py-2 text-sm text-muted-foreground">
               No commands found
             </div>
           ) : (
@@ -153,11 +153,11 @@ const SlashCommandMenu = forwardRef(function SlashCommandMenu(
                   onClick={() => onSelect(item)}
                   className={cn(
                     'flex flex-col items-start gap-0.5 rounded-md px-3 py-2',
-                    index === activeIndex && 'bg-primary-100 text-primary-900',
+                    index === activeIndex && 'bg-card text-foreground',
                   )}
                 >
                   <span className="text-sm font-semibold">{item.command}</span>
-                  <span className="text-xs text-primary-600">
+                  <span className="text-xs text-muted-foreground">
                     {item.description}
                   </span>
                 </CommandItem>

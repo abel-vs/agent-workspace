@@ -51,7 +51,7 @@ export function SessionRenameDialog({
                 onSave(renameValue)
               }
             }}
-            className="w-full rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-sm text-primary-900 outline-none focus:border-primary-400"
+            className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-border"
             placeholder="Session name"
             autoFocus
           />

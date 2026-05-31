@@ -72,7 +72,7 @@ export function MessageActionsBar({
   return (
     <div
       className={cn(
-        'flex items-center gap-2 text-xs text-primary-600 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 duration-100 ease-out',
+        'flex items-center gap-2 text-xs text-muted-foreground transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 duration-100 ease-out',
         forceVisible || isQueued || isFailed ? 'opacity-100' : 'opacity-0',
         positionClass,
       )}
@@ -99,7 +99,7 @@ export function MessageActionsBar({
             onClick={() => {
               handleCopy().catch(() => {})
             }}
-            className="inline-flex items-center justify-center rounded border border-transparent bg-transparent p-1 text-primary-700 hover:text-primary-900 hover:bg-primary-100 dark:hover:bg-primary-800"
+            className="inline-flex items-center justify-center rounded border border-transparent bg-transparent p-1 text-foreground hover:text-foreground hover:bg-card dark:hover:bg-primary"
           >
             <HugeiconsIcon
               icon={copied ? Tick02Icon : Copy01Icon}

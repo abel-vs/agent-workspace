@@ -310,7 +310,7 @@ export function OperationsNewAgentModal({
             Cancel
           </Button>
           <Button
-            className="bg-[var(--theme-accent)] text-primary-950 hover:bg-[var(--theme-accent-strong)]"
+            className="bg-[var(--theme-accent)] text-foreground hover:bg-[var(--theme-accent-strong)]"
             onClick={() =>
               void onCreate({
                 name,

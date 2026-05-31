@@ -26,18 +26,18 @@ export function EmptyState({
         className,
       )}
     >
-      <div className="flex size-12 items-center justify-center rounded-xl border border-primary-200 bg-primary-100/60">
+      <div className="flex size-12 items-center justify-center rounded-xl border border-border bg-card/60">
         <HugeiconsIcon
           icon={Icon}
           size={24}
           strokeWidth={1.5}
-          className="text-primary-500"
+          className="text-muted-foreground"
         />
       </div>
       <div>
-        <p className="text-sm font-medium text-primary-800">{title}</p>
+        <p className="text-sm font-medium text-foreground">{title}</p>
         {description && (
-          <p className="mt-1 text-xs text-primary-500 text-pretty">
+          <p className="mt-1 text-xs text-muted-foreground text-pretty">
             {description}
           </p>
         )}

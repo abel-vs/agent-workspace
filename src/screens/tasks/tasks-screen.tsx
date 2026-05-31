@@ -180,13 +180,13 @@ export function TasksScreen() {
   const colMaxWidth = Math.floor(1200 / visibleColumns.length)
 
   return (
-    <div className="min-h-full overflow-y-auto bg-surface text-ink">
+    <div className="min-h-full overflow-y-auto bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-5 px-4 py-6 pb-[calc(var(--tabbar-h,80px)+1.5rem)] sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="rounded-2xl border border-primary-200 bg-primary-50/85 p-4 backdrop-blur-xl">
+      <header className="rounded-2xl border border-border bg-background/85 p-4 backdrop-blur-xl">
         <div className="flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
-          <h1 className="text-2xl font-medium text-ink">Tasks</h1>
+          <h1 className="text-2xl font-medium text-foreground">Tasks</h1>
           {assigneeFilter && (
             <div className="flex items-center gap-2 text-xs text-[var(--theme-muted)]">
               <span>Filtered by: <span className="capitalize" style={{ color: '#f59e0b' }}>{assigneeFilter}</span></span>

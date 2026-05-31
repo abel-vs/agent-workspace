@@ -183,7 +183,7 @@ export function CollaborationPresence() {
   if (isSolo) return null
 
   return (
-    <div className="flex items-center gap-2 rounded-full border border-primary-800/80 bg-primary-900/80 px-2.5 py-1 text-[10px] text-primary-300 shadow-sm backdrop-blur">
+    <div className="flex items-center gap-2 rounded-full border border-foreground/80 bg-primary/80 px-2.5 py-1 text-[10px] text-muted-foreground shadow-sm backdrop-blur">
       <div className="flex -space-x-1">
         {shownUsers.map((user) => {
           const isSelf = user.userId === identityRef.current.userId
@@ -191,7 +191,7 @@ export function CollaborationPresence() {
           return (
             <div
               key={user.userId}
-              className="flex size-5 items-center justify-center rounded-full border border-primary-900 text-[9px] font-semibold text-primary-100"
+              className="flex size-5 items-center justify-center rounded-full border border-foreground text-[9px] font-semibold text-primary-foreground"
               style={{ backgroundColor: user.color }}
               title={label}
             >
@@ -200,8 +200,8 @@ export function CollaborationPresence() {
           )
         })}
       </div>
-      {overflowCount > 0 ? <span className="text-primary-400">+{overflowCount} more</span> : null}
-      <span className="hidden sm:inline text-primary-300">{isSolo ? 'Only you' : `${users.length} viewing`}</span>
+      {overflowCount > 0 ? <span className="text-muted-foreground">+{overflowCount} more</span> : null}
+      <span className="hidden sm:inline text-muted-foreground">{isSolo ? 'Only you' : `${users.length} viewing`}</span>
     </div>
   )
 }

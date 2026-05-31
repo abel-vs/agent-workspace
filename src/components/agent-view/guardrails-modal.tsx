@@ -107,7 +107,7 @@ export function GuardrailsModal({ open, agentName, agentId, sessionKey, onOpenCh
           </div>
 
           <section className="space-y-2">
-            <p className="text-xs font-medium text-primary-700">Max tokens per run</p>
+            <p className="text-xs font-medium text-foreground">Max tokens per run</p>
             <div className="inline-flex rounded-lg bg-neutral-100 dark:bg-neutral-800 p-1 gap-1">
               {TOKEN_PRESETS.map((preset) => (
                 <button
@@ -130,13 +130,13 @@ export function GuardrailsModal({ open, agentName, agentId, sessionKey, onOpenCh
                 const parsed = Number(event.target.value)
                 if (Number.isFinite(parsed) && parsed >= 0) setMaxTokens(Math.floor(parsed))
               }}
-              className="w-full rounded-lg border border-primary-200 bg-primary-100/70 px-3 py-2 text-sm text-primary-900 outline-none transition-colors focus:border-accent-400"
+              className="w-full rounded-lg border border-border bg-card/70 px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent-400"
             />
           </section>
 
           <section className="space-y-2">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-xs font-medium text-primary-700">Mode</p>
+              <p className="text-xs font-medium text-foreground">Mode</p>
               <div className="inline-flex rounded-lg bg-neutral-100 dark:bg-neutral-800 p-1 gap-1">
                 {(['allowlist', 'blocklist'] as const).map((mode) => (
                   <button
@@ -155,13 +155,13 @@ export function GuardrailsModal({ open, agentName, agentId, sessionKey, onOpenCh
               value={toolsText}
               onChange={(event) => setToolsText(event.target.value)}
               placeholder={'read\nwrite\nexec\nbrowser'}
-              className="w-full resize-y rounded-lg border border-primary-200 bg-primary-100/70 px-3 py-2 text-sm font-mono text-primary-900 outline-none transition-colors focus:border-accent-400"
+              className="w-full resize-y rounded-lg border border-border bg-card/70 px-3 py-2 text-sm font-mono text-foreground outline-none transition-colors focus:border-accent-400"
             />
-            <p className="text-[11px] text-primary-600">Enter tool names, one per line. Leave empty to allow all.</p>
+            <p className="text-[11px] text-muted-foreground">Enter tool names, one per line. Leave empty to allow all.</p>
           </section>
 
           <section className="space-y-1">
-            <p className="text-xs font-medium text-primary-700">Auto-Stop Triggers</p>
+            <p className="text-xs font-medium text-foreground">Auto-Stop Triggers</p>
             {stopRows.map((row) => (
               <button
                 key={row.label}
@@ -170,7 +170,7 @@ export function GuardrailsModal({ open, agentName, agentId, sessionKey, onOpenCh
                 className="flex w-full items-center gap-2 rounded-lg px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800 cursor-pointer text-left"
               >
                 <span>{row.checked ? '☑' : '☐'}</span>
-                <span className="text-sm text-primary-900 dark:text-primary-100">{row.label}</span>
+                <span className="text-sm text-foreground dark:text-primary-foreground">{row.label}</span>
               </button>
             ))}
           </section>

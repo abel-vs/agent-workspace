@@ -96,11 +96,11 @@ export const SaveModeDialog = memo(function SaveModeDialog({
         role="dialog"
         aria-labelledby="save-mode-title"
         aria-modal="true"
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-primary-200 bg-surface p-6 shadow-xl"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background p-6 shadow-xl"
       >
         <h2
           id="save-mode-title"
-          className="mb-4 text-lg font-semibold text-primary-900"
+          className="mb-4 text-lg font-semibold text-foreground"
         >
           Save Mode
         </h2>
@@ -109,7 +109,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
           <div className="mb-4">
             <label
               htmlFor="mode-name"
-              className="mb-2 block text-sm font-medium text-primary-700"
+              className="mb-2 block text-sm font-medium text-foreground"
             >
               Mode Name
             </label>
@@ -123,7 +123,7 @@ export const SaveModeDialog = memo(function SaveModeDialog({
                 setError(null)
               }}
               className={cn(
-                'w-full rounded-lg border border-primary-200 bg-primary-50 px-3 py-2 text-sm text-primary-900 placeholder-primary-400 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400',
+                'w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder-muted-foreground focus:border-border focus:outline-none focus:ring-2 focus:ring-ring',
                 error &&
                   'border-red-500 focus:border-red-500 focus:ring-red-500',
               )}
@@ -144,16 +144,16 @@ export const SaveModeDialog = memo(function SaveModeDialog({
           </div>
 
           <div className="mb-6">
-            <label className="flex items-center gap-2 text-sm text-primary-700">
+            <label className="flex items-center gap-2 text-sm text-foreground">
               <input
                 type="checkbox"
                 checked={includeModel}
                 onChange={(e) => setIncludeModel(e.target.checked)}
-                className="size-4 rounded border-primary-300 text-primary-600 focus:ring-2 focus:ring-primary-400 focus:ring-offset-0"
+                className="size-4 rounded border-border text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-0"
               />
               <span>Include current model ({currentModel || 'none'})</span>
             </label>
-            <p className="ml-6 mt-1 text-xs text-primary-500">
+            <p className="ml-6 mt-1 text-xs text-muted-foreground">
               If unchecked, applying this mode will only update settings (not
               model).
             </p>
@@ -163,13 +163,13 @@ export const SaveModeDialog = memo(function SaveModeDialog({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-primary-200 bg-surface px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-background focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+              className="rounded-lg bg-muted-foreground px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring"
             >
               Save Mode
             </button>

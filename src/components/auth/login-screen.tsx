@@ -34,9 +34,9 @@ export function LoginScreen() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background to-card px-4">
       <div className="w-full max-w-md">
-        <div className="rounded-2xl bg-primary-100 px-8 py-10 shadow-xl shadow-primary-900/5 ring-1 ring-primary-200">
+        <div className="rounded-2xl bg-card px-8 py-10 shadow-xl shadow-foreground/5 ring-1 ring-ring">
           {/* Logo */}
           <div className="mb-8 flex justify-center">
             <div className="flex items-center gap-2.5">
@@ -60,17 +60,17 @@ export function LoginScreen() {
                 />
                 <circle cx="50" cy="50" r="15" fill="currentColor" />
               </svg>
-              <h1 className="text-2xl font-bold tracking-tight text-primary-900">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 Hermes Workspace
               </h1>
             </div>
           </div>
 
           {/* Title */}
-          <h2 className="mb-2 text-center text-lg font-semibold text-primary-900">
+          <h2 className="mb-2 text-center text-lg font-semibold text-foreground">
             Enter Password
           </h2>
-          <p className="mb-6 text-center text-sm text-primary-600">
+          <p className="mb-6 text-center text-sm text-muted-foreground">
             This workspace is password-protected
           </p>
 
@@ -82,7 +82,7 @@ export function LoginScreen() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full rounded-lg border border-primary-200 bg-primary-50 px-4 py-2.5 text-primary-900 placeholder-primary-400 outline-none transition-all focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground placeholder-muted-foreground outline-none transition-all focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20"
                 disabled={loading}
                 autoFocus
               />
@@ -105,7 +105,7 @@ export function LoginScreen() {
         </div>
 
         {/* Footer */}
-        <p className="mt-6 text-center text-xs text-primary-500">
+        <p className="mt-6 text-center text-xs text-muted-foreground">
           Powered by{' '}
           <a
             href="https://github.com/NousResearch/hermes-agent"

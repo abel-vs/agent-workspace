@@ -37,9 +37,9 @@ const EMPTY: McpClientInput = {
 }
 
 const FIELD =
-  'h-9 w-full rounded-lg border border-primary-200 bg-primary-100/60 px-3 text-sm text-ink outline-none transition-colors focus:border-primary'
+  'h-9 w-full rounded-lg border border-border bg-card/60 px-3 text-sm text-foreground outline-none transition-colors focus:border-primary'
 
-const LABEL = 'flex flex-col gap-1.5 text-sm text-primary-500'
+const LABEL = 'flex flex-col gap-1.5 text-sm text-muted-foreground'
 
 function fromServer(server: McpServer): McpClientInput {
   return {
@@ -114,9 +114,9 @@ export function McpServerDialog({ open, initial, onClose }: Props) {
         if (!next) onClose()
       }}
     >
-      <DialogContent className="w-[min(720px,95vw)] border-primary-200 bg-primary-50/95 backdrop-blur-sm">
+      <DialogContent className="w-[min(720px,95vw)] border-border bg-background/95 backdrop-blur-sm">
         <div className="flex max-h-[85vh] flex-col">
-          <div className="border-b border-primary-200 px-5 py-4">
+          <div className="border-b border-border px-5 py-4">
             <DialogTitle className="text-balance">
               🔌 {draft.name || (initial ? 'Edit MCP Server' : 'Add MCP Server')}
             </DialogTitle>
@@ -126,10 +126,10 @@ export function McpServerDialog({ open, initial, onClose }: Props) {
               {draft.authType || 'none'} auth
             </DialogDescription>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              <span className="rounded-md border border-primary-200 bg-primary-100/50 px-2 py-0.5 text-xs text-primary-500">
+              <span className="rounded-md border border-border bg-card/50 px-2 py-0.5 text-xs text-muted-foreground">
                 {draft.transportType}
               </span>
-              <span className="rounded-md border border-primary-200 bg-primary-100/50 px-2 py-0.5 text-xs text-primary-500">
+              <span className="rounded-md border border-border bg-card/50 px-2 py-0.5 text-xs text-muted-foreground">
                 auth: {draft.authType || 'none'}
               </span>
               {fallbackMode ? (
@@ -258,7 +258,7 @@ export function McpServerDialog({ open, initial, onClose }: Props) {
                   </p>
                 ) : null}
                 {discover.data ? (
-                  <p className="text-xs text-primary-500">
+                  <p className="text-xs text-muted-foreground">
                     Discovered {discover.data.tools.length} tools.
                   </p>
                 ) : null}
@@ -279,8 +279,8 @@ export function McpServerDialog({ open, initial, onClose }: Props) {
             </ScrollAreaScrollbar>
           </ScrollAreaRoot>
 
-          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-primary-200 px-5 py-3">
-            <p className="min-w-0 flex-1 truncate text-sm text-primary-500 text-pretty">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-5 py-3">
+            <p className="min-w-0 flex-1 truncate text-sm text-muted-foreground text-pretty">
               Target:{' '}
               <code className="inline-code">
                 {draft.transportType === 'http'

@@ -27,7 +27,6 @@
     "electron:bundle-server": "esbuild dist/server/server.js --bundle --platform=node --format=cjs --outfile=electron/server-bundle.cjs"
   },
   "dependencies": {
-    "@base-ui/react": "^1.1.0",
     "@hugeicons/core-free-icons": "^3.1.1",
     "@hugeicons/react": "^1.1.4",
     "@lobehub/icons": "^5.0.1",
@@ -58,6 +57,7 @@
     "playwright-extra": "^4.3.6",
     "postprocessing": "^6.39.1",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "radix-ui": "^1.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-joyride": "^2.9.3",

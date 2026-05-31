@@ -374,14 +374,14 @@ export function RunConsole({
       'flex h-full flex-col overflow-hidden',
       minimalChrome
         ? 'bg-transparent text-[var(--theme-text)]'
-        : 'bg-[var(--theme-bg,#0b0e14)] text-primary-100 dark:bg-slate-900',
+        : 'bg-[var(--theme-bg,#0b0e14)] text-primary-foreground dark:bg-slate-900',
     )}>
       {!minimalChrome ? (
-        <header className="border-b border-primary-800/80 px-4 py-3 sm:px-5">
+        <header className="border-b border-foreground/80 px-4 py-3 sm:px-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="max-w-[300px] truncate text-sm font-semibold text-primary-100 sm:max-w-[500px] sm:text-base">
+              <h2 className="max-w-[300px] truncate text-sm font-semibold text-primary-foreground sm:max-w-[500px] sm:text-base">
                 {runTitle}
               </h2>
               <span
@@ -393,7 +393,7 @@ export function RunConsole({
                 {statusLabel}
               </span>
             </div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-primary-300">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
               <span>Duration: {resolvedDuration}</span>
               <span>Tokens: {resolvedTokens}</span>
               <span>Cost: {formatCost(costEstimate)}</span>
@@ -415,7 +415,7 @@ export function RunConsole({
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex h-8 items-center rounded-md border border-primary-700 bg-primary-900/70 px-3 text-xs font-medium text-primary-200 transition-colors hover:border-primary-600 hover:bg-primary-800"
+                className="inline-flex h-8 items-center rounded-md border border-foreground bg-primary/70 px-3 text-xs font-medium text-primary-foreground transition-colors hover:border-border hover:bg-primary"
               >
                 Close
               </button>
@@ -427,7 +427,7 @@ export function RunConsole({
 
       <nav className={cn(
         'px-4 py-3 sm:px-5',
-        minimalChrome ? 'border-b border-[var(--theme-border)] bg-[var(--theme-card)]/50' : 'border-b border-primary-800/70',
+        minimalChrome ? 'border-b border-[var(--theme-border)] bg-[var(--theme-card)]/50' : 'border-b border-foreground/70',
       )}>
         <div className="flex flex-wrap gap-2">
           {TAB_OPTIONS.filter((tab) => allowedTabs.includes(tab.id)).map((tab) => (
@@ -440,17 +440,17 @@ export function RunConsole({
                 activeTab === tab.id
                   ? minimalChrome
                     ? 'bg-[var(--theme-card2)] text-[var(--theme-text)]'
-                    : 'bg-primary-800 text-primary-100 underline underline-offset-4'
+                    : 'bg-primary text-primary-foreground underline underline-offset-4'
                   : minimalChrome
                     ? 'bg-[var(--theme-card)] text-[var(--theme-muted)] hover:bg-[var(--theme-card2)] hover:text-[var(--theme-text)]'
-                    : 'bg-primary-900/60 text-primary-300 hover:bg-primary-800/80 hover:text-primary-100',
+                    : 'bg-primary/60 text-muted-foreground hover:bg-primary/80 hover:text-primary-foreground',
               )}
             >
               {tab.label}
               {tab.id === 'stream' && displayEvents.length > 0 && (
                 <span className={cn(
                   'ml-1 inline-flex min-w-[16px] items-center justify-center rounded-full px-1 text-[9px] font-bold leading-none',
-                  minimalChrome ? 'bg-[var(--theme-border)] text-[var(--theme-text)]' : 'bg-primary-700 text-primary-200',
+                  minimalChrome ? 'bg-[var(--theme-border)] text-[var(--theme-text)]' : 'bg-primary text-primary-foreground',
                 )}>
                   {displayEvents.length}
                 </span>
@@ -462,10 +462,10 @@ export function RunConsole({
 
       {/* Agent control bar */}
       {!minimalChrome && (runStatus === 'running' || runStatus === 'needs_input') && agents.length > 0 ? (
-        <div className="border-b border-primary-800/60 px-4 py-2 sm:px-5">
+        <div className="border-b border-foreground/60 px-4 py-2 sm:px-5">
           <div className="flex flex-wrap items-center gap-2">
             {agents.map((agent) => (
-              <div key={agent.id} className="inline-flex items-center gap-1.5 rounded-lg border border-primary-700/80 bg-primary-900/50 px-2 py-1">
+              <div key={agent.id} className="inline-flex items-center gap-1.5 rounded-lg border border-foreground/80 bg-primary/50 px-2 py-1">
                 <span
                   className={cn(
                     'h-1.5 w-1.5 rounded-full',
@@ -477,15 +477,15 @@ export function RunConsole({
                           ? 'bg-red-400'
                           : agent.status === 'waiting_for_input'
                             ? 'bg-amber-400'
-                            : 'bg-primary-500',
+                            : 'bg-muted-foreground',
                   )}
                 />
-                <span className="text-[11px] font-medium text-primary-200">{agent.name}</span>
+                <span className="text-[11px] font-medium text-primary-foreground">{agent.name}</span>
                 {onSteerAgent ? (
                   <button
                     type="button"
                     onClick={() => setSteerTarget(steerTarget === agent.id ? null : agent.id)}
-                    className="rounded px-1.5 py-0.5 text-[10px] text-primary-400 transition-colors hover:bg-primary-800 hover:text-primary-200"
+                    className="rounded px-1.5 py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
                     Steer
                   </button>
@@ -504,7 +504,7 @@ export function RunConsole({
           </div>
           {steerTarget && onSteerAgent ? (
             <div className="mt-2 flex items-center gap-2">
-              <span className="text-[11px] text-primary-400">→ {agents.find(a => a.id === steerTarget)?.name}:</span>
+              <span className="text-[11px] text-muted-foreground">→ {agents.find(a => a.id === steerTarget)?.name}:</span>
               <input
                 type="text"
                 value={steerInput}
@@ -517,7 +517,7 @@ export function RunConsole({
                   }
                 }}
                 placeholder="Send directive..."
-                className="flex-1 rounded-md border border-primary-700 bg-primary-950 px-2 py-1 text-xs text-primary-100 placeholder:text-primary-500 focus:border-accent-500 focus:outline-none"
+                className="flex-1 rounded-md border border-foreground bg-primary px-2 py-1 text-xs text-primary-foreground placeholder:text-muted-foreground focus:border-accent-500 focus:outline-none"
               />
               <button
                 type="button"
@@ -535,7 +535,7 @@ export function RunConsole({
               <button
                 type="button"
                 onClick={() => { setSteerTarget(null); setSteerInput('') }}
-                className="text-[11px] text-primary-500 hover:text-primary-300"
+                className="text-[11px] text-muted-foreground hover:text-muted-foreground"
               >
                 ✕
               </button>
@@ -552,14 +552,14 @@ export function RunConsole({
         {activeTab === 'stream' ? (
           <div className="space-y-3 font-mono text-xs">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className={cn('text-sm font-medium', minimalChrome ? 'text-[var(--theme-muted)]' : 'text-primary-200')}>
+              <p className={cn('text-sm font-medium', minimalChrome ? 'text-[var(--theme-muted)]' : 'text-primary-foreground')}>
                 {displayEvents.length > 0 ? `${displayEvents.length} events` : 'Waiting for live agent output'}
               </p>
               <div className={cn(
                 'inline-flex items-center rounded-md p-0.5 text-xs',
                 minimalChrome
                   ? 'border border-[var(--theme-border)] bg-[var(--theme-card)]'
-                  : 'border border-primary-700 bg-primary-900/60',
+                  : 'border border-foreground bg-primary/60',
               )}>
                 <button
                   type="button"
@@ -569,10 +569,10 @@ export function RunConsole({
                     streamView === 'combined'
                       ? minimalChrome
                         ? 'bg-[var(--theme-card2)] text-[var(--theme-text)]'
-                        : 'bg-primary-800 text-primary-100'
+                        : 'bg-primary text-primary-foreground'
                       : minimalChrome
                         ? 'bg-transparent text-[var(--theme-muted)] hover:text-[var(--theme-text)]'
-                        : 'bg-primary-900/60 text-primary-300 hover:text-primary-100',
+                        : 'bg-primary/60 text-muted-foreground hover:text-primary-foreground',
                   )}
                 >
                   Combined
@@ -585,10 +585,10 @@ export function RunConsole({
                     streamView === 'lanes'
                       ? minimalChrome
                         ? 'bg-[var(--theme-card2)] text-[var(--theme-text)]'
-                        : 'bg-primary-800 text-primary-100'
+                        : 'bg-primary text-primary-foreground'
                       : minimalChrome
                         ? 'bg-transparent text-[var(--theme-muted)] hover:text-[var(--theme-text)]'
-                        : 'bg-primary-900/60 text-primary-300 hover:text-primary-100',
+                        : 'bg-primary/60 text-muted-foreground hover:text-primary-foreground',
                   )}
                 >
                   Lanes
@@ -603,17 +603,17 @@ export function RunConsole({
                   {pendingApprovals.map((approval) => (
                     <li
                       key={approval.id}
-                      className="rounded-md border border-amber-500/30 bg-primary-950/60 p-2"
+                      className="rounded-md border border-amber-500/30 bg-primary/60 p-2"
                     >
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="space-y-1">
                           <p className="text-xs text-amber-100">
                             Tool: <span className="font-semibold">{approval.tool}</span>
                           </p>
-                          <p className="text-xs text-primary-200">
+                          <p className="text-xs text-primary-foreground">
                             Agent: <span className="font-medium">{approval.agentName || 'Unknown agent'}</span>
                           </p>
-                          <p className="text-xs text-primary-300 break-all">
+                          <p className="text-xs text-muted-foreground break-all">
                             Args: {sanitizeArgsPreview(approval.args)}
                           </p>
                         </div>
@@ -630,7 +630,7 @@ export function RunConsole({
                             type="button"
                             onClick={() => onDeny?.(approval.id)}
                             disabled={!onDeny}
-                            className="rounded-md border border-primary-700 bg-primary-900/80 px-2.5 py-1 text-xs font-medium text-primary-200 transition-colors hover:bg-primary-800"
+                            className="rounded-md border border-foreground bg-primary/80 px-2.5 py-1 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary"
                           >
                             Deny
                           </button>
@@ -643,7 +643,7 @@ export function RunConsole({
             ) : null}
 
             {runStatus === 'needs_input' && (!pendingApprovals || pendingApprovals.length === 0) ? (
-              <div className="rounded-lg border border-primary-700/80 bg-primary-900/60 px-3 py-2 text-xs text-primary-300">
+              <div className="rounded-lg border border-foreground/80 bg-primary/60 px-3 py-2 text-xs text-muted-foreground">
                 Mission is waiting for input — check the approval queue
               </div>
             ) : null}
@@ -653,22 +653,22 @@ export function RunConsole({
                 'flex min-h-[28rem] flex-col items-center justify-center rounded-[28px] border border-dashed px-8 text-center',
                 minimalChrome
                   ? 'border-[var(--theme-border)] bg-[var(--theme-card)]/35'
-                  : 'border-primary-800/80 bg-primary-950/40',
+                  : 'border-foreground/80 bg-primary/40',
               )}>
                 <div className={cn(
                   'mb-4 flex size-14 items-center justify-center rounded-2xl border',
                   minimalChrome
                     ? 'border-[var(--theme-border)] bg-[var(--theme-card2)] text-[var(--theme-accent)]'
-                    : 'border-primary-700 bg-primary-900/70 text-primary-200',
+                    : 'border-foreground bg-primary/70 text-primary-foreground',
                 )}>
                   <HugeiconsIcon icon={Rocket01Icon} size={22} strokeWidth={1.8} />
                 </div>
-                <p className={cn('text-base font-semibold', minimalChrome ? 'text-[var(--theme-text)]' : 'text-primary-100')}>
+                <p className={cn('text-base font-semibold', minimalChrome ? 'text-[var(--theme-text)]' : 'text-primary-foreground')}>
                   Stream is ready
                 </p>
                 <p className={cn(
                   'mt-2 max-w-md text-sm leading-6',
-                  minimalChrome ? 'text-[var(--theme-muted)]' : 'text-primary-300',
+                  minimalChrome ? 'text-[var(--theme-muted)]' : 'text-muted-foreground',
                 )}>
                   Agent output, approvals, and system events will appear here as work begins. Use timeline or artifacts to inspect the run once activity starts.
                 </p>
@@ -684,12 +684,12 @@ export function RunConsole({
                       'rounded-lg border px-3 py-2',
                       minimalChrome
                         ? 'border-[var(--theme-border)] bg-[var(--theme-card)]'
-                        : 'border-primary-800/80 bg-primary-950/60',
+                        : 'border-foreground/80 bg-primary/60',
                     )}
                   >
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                      <span className={cn(minimalChrome ? 'text-[var(--theme-muted)]' : 'text-primary-400')}>[{event.timestamp}]</span>
-                      <span className={cn(minimalChrome ? 'text-[var(--theme-text)]' : 'text-primary-200')}>{event.agentName}</span>
+                      <span className={cn(minimalChrome ? 'text-[var(--theme-muted)]' : 'text-muted-foreground')}>[{event.timestamp}]</span>
+                      <span className={cn(minimalChrome ? 'text-[var(--theme-text)]' : 'text-primary-foreground')}>{event.agentName}</span>
                       <span
                         className={cn(
                           'rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase',
@@ -703,7 +703,7 @@ export function RunConsole({
                     </div>
                     <p className={cn(
                       'mt-1 whitespace-pre-wrap break-words line-clamp-3',
-                      minimalChrome ? 'text-[var(--theme-text)]/80' : 'text-primary-300',
+                      minimalChrome ? 'text-[var(--theme-text)]/80' : 'text-muted-foreground',
                     )}>
                       {event.message}
                     </p>
@@ -728,20 +728,20 @@ export function RunConsole({
                     return (
                       <section
                         key={lane.agentName}
-                        className="min-w-[240px] shrink-0 rounded-lg border border-primary-800/80 bg-primary-950/60 p-3"
+                        className="min-w-[240px] shrink-0 rounded-lg border border-foreground/80 bg-primary/60 p-3"
                       >
                         <div className="mb-2 flex items-center gap-2">
                           <span className={cn('h-2 w-2 rounded-full', laneDotClass)} />
-                          <h3 className="text-xs font-semibold text-primary-100">{lane.agentName}</h3>
+                          <h3 className="text-xs font-semibold text-primary-foreground">{lane.agentName}</h3>
                         </div>
                         <ol className="space-y-2">
                           {lane.events.map((event) => (
                             <li
                               key={event.id}
-                              className="rounded-md border border-primary-800/80 bg-primary-900/60 px-2 py-1.5"
+                              className="rounded-md border border-foreground/80 bg-primary/60 px-2 py-1.5"
                             >
                               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                                <span className="text-primary-400">[{event.timestamp}]</span>
+                                <span className="text-muted-foreground">[{event.timestamp}]</span>
                                 <span
                                   className={cn(
                                     'rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase',
@@ -751,7 +751,7 @@ export function RunConsole({
                                   {getEventPillLabel(event)}
                                 </span>
                               </div>
-                              <p className="mt-1 whitespace-pre-wrap break-words text-primary-300 line-clamp-3">{event.message}</p>
+                              <p className="mt-1 whitespace-pre-wrap break-words text-muted-foreground line-clamp-3">{event.message}</p>
                             </li>
                           ))}
                         </ol>
@@ -779,20 +779,20 @@ export function RunConsole({
                     return (
                       <section
                         key={lane.agentName}
-                        className="rounded-lg border border-primary-800/80 bg-primary-950/60 p-3"
+                        className="rounded-lg border border-foreground/80 bg-primary/60 p-3"
                       >
                         <div className="mb-2 flex items-center gap-2">
                           <span className={cn('h-2 w-2 rounded-full', laneDotClass)} />
-                          <h3 className="text-xs font-semibold text-primary-100">{lane.agentName}</h3>
+                          <h3 className="text-xs font-semibold text-primary-foreground">{lane.agentName}</h3>
                         </div>
                         <ol className="space-y-2">
                           {lane.events.map((event) => (
                             <li
                               key={event.id}
-                              className="rounded-md border border-primary-800/80 bg-primary-900/60 px-2 py-1.5"
+                              className="rounded-md border border-foreground/80 bg-primary/60 px-2 py-1.5"
                             >
                               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                                <span className="text-primary-400">[{event.timestamp}]</span>
+                                <span className="text-muted-foreground">[{event.timestamp}]</span>
                                 <span
                                   className={cn(
                                     'rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase',
@@ -802,7 +802,7 @@ export function RunConsole({
                                   {getEventPillLabel(event)}
                                 </span>
                               </div>
-                              <p className="mt-1 whitespace-pre-wrap break-words text-primary-300 line-clamp-3">{event.message}</p>
+                              <p className="mt-1 whitespace-pre-wrap break-words text-muted-foreground line-clamp-3">{event.message}</p>
                             </li>
                           ))}
                         </ol>
@@ -820,7 +820,7 @@ export function RunConsole({
                   streamEndRef.current?.scrollIntoView({ behavior: 'smooth' })
                   setIsAutoScroll(true)
                 }}
-                className="sticky bottom-2 mx-auto flex items-center gap-1 rounded-full border border-primary-700 bg-primary-900/90 px-3 py-1.5 text-[11px] font-medium text-primary-200 shadow-lg backdrop-blur transition-colors hover:bg-primary-800"
+                className="sticky bottom-2 mx-auto flex items-center gap-1 rounded-full border border-foreground bg-primary/90 px-3 py-1.5 text-[11px] font-medium text-primary-foreground shadow-lg backdrop-blur transition-colors hover:bg-primary"
               >
                 ↓ Jump to latest
               </button>
@@ -829,30 +829,30 @@ export function RunConsole({
         ) : null}
 
         {activeTab === 'timeline' ? (
-          <div className="rounded-xl border border-primary-800/80 bg-primary-950/50 p-4 sm:p-5">
+          <div className="rounded-xl border border-foreground/80 bg-primary/50 p-4 sm:p-5">
             {timelineBuckets.length === 0 ? (
-              <p className="text-sm text-primary-300">No timeline events yet</p>
+              <p className="text-sm text-muted-foreground">No timeline events yet</p>
             ) : (
               <ol className="space-y-4">
                 {timelineBuckets.map((bucket) => (
                   <li key={bucket.id} className="grid grid-cols-[84px_minmax(0,1fr)] gap-3">
                     <div className="space-y-1 pt-0.5 text-right">
-                      <p className="text-[11px] font-semibold text-primary-200">{bucket.elapsed}</p>
-                      <p className="text-[10px] text-primary-400">{bucket.minuteLabel}</p>
+                      <p className="text-[11px] font-semibold text-primary-foreground">{bucket.elapsed}</p>
+                      <p className="text-[10px] text-muted-foreground">{bucket.minuteLabel}</p>
                     </div>
-                    <div className="relative border-l-2 border-primary-700/80 pl-5">
+                    <div className="relative border-l-2 border-foreground/80 pl-5">
                       <ol className="space-y-2">
                         {bucket.events.map((event) => (
-                          <li key={event.id} className="relative rounded-lg border border-primary-800/80 bg-primary-900/60 px-3 py-2">
+                          <li key={event.id} className="relative rounded-lg border border-foreground/80 bg-primary/60 px-3 py-2">
                             <span
                               className={cn(
-                                'absolute -left-[22px] top-3 h-2.5 w-2.5 rounded-full ring-2 ring-primary-950',
+                                'absolute -left-[22px] top-3 h-2.5 w-2.5 rounded-full ring-2 ring-ring',
                                 getEventDotClass(event.eventType),
                               )}
                             />
                             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                              <span className="text-primary-400">[{event.timestamp}]</span>
-                              <span className="text-primary-200">{event.agentName}</span>
+                              <span className="text-muted-foreground">[{event.timestamp}]</span>
+                              <span className="text-primary-foreground">{event.agentName}</span>
                               <span
                                 className={cn(
                                   'rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase',
@@ -862,7 +862,7 @@ export function RunConsole({
                                 {getEventPillLabel(event)}
                               </span>
                             </div>
-                            <p className="mt-1 whitespace-pre-wrap break-words text-xs text-primary-300">{event.message}</p>
+                            <p className="mt-1 whitespace-pre-wrap break-words text-xs text-muted-foreground">{event.message}</p>
                           </li>
                         ))}
                       </ol>
@@ -875,9 +875,9 @@ export function RunConsole({
         ) : null}
 
         {activeTab === 'artifacts' ? (
-          <div className="rounded-xl border border-primary-800/80 bg-primary-950/50 p-4 sm:p-5">
+          <div className="rounded-xl border border-foreground/80 bg-primary/50 p-4 sm:p-5">
             {!artifacts || artifacts.length === 0 ? (
-              <p className="text-sm text-primary-300">No artifacts collected yet</p>
+              <p className="text-sm text-muted-foreground">No artifacts collected yet</p>
             ) : (
               <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {artifacts
@@ -888,16 +888,16 @@ export function RunConsole({
                     const commitHash = artifact.name.split(' ')[0] || artifact.name
                     const commitMessage = artifact.content || artifact.name.slice(commitHash.length).trim() || 'No commit message'
                     return (
-                      <article key={artifact.id} className="rounded-lg border border-primary-800/80 bg-primary-900/60 p-3">
+                      <article key={artifact.id} className="rounded-lg border border-foreground/80 bg-primary/60 p-3">
                         <div className="mb-2 flex items-start justify-between gap-2">
                           <div className="min-w-0">
-                            <p className="truncate text-xs font-semibold uppercase tracking-wide text-primary-300">{artifact.type}</p>
-                            <p className="truncate text-sm font-medium text-primary-100">{artifact.name}</p>
+                            <p className="truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">{artifact.type}</p>
+                            <p className="truncate text-sm font-medium text-primary-foreground">{artifact.name}</p>
                           </div>
                           <button
                             type="button"
                             onClick={() => void copyArtifactContent(artifact)}
-                            className="inline-flex items-center gap-1 rounded-md border border-primary-700 bg-primary-900/80 px-2 py-1 text-[11px] text-primary-200 transition-colors hover:bg-primary-800"
+                            className="inline-flex items-center gap-1 rounded-md border border-foreground bg-primary/80 px-2 py-1 text-[11px] text-primary-foreground transition-colors hover:bg-primary"
                           >
                             <HugeiconsIcon icon={Copy01Icon} size={12} strokeWidth={1.8} />
                             {copiedArtifactId === artifact.id ? 'Copied' : 'Copy'}
@@ -905,18 +905,18 @@ export function RunConsole({
                         </div>
 
                         {artifact.type === 'file' ? (
-                          <div className="space-y-2 text-xs text-primary-300">
-                            <p className="truncate text-primary-200">Path: {artifact.path || 'Unknown path'}</p>
+                          <div className="space-y-2 text-xs text-muted-foreground">
+                            <p className="truncate text-primary-foreground">Path: {artifact.path || 'Unknown path'}</p>
                             <button
                               type="button"
                               onClick={() => setExpandedArtifactId(isExpanded ? null : artifact.id)}
-                              className="inline-flex items-center gap-1 rounded-md border border-primary-700 bg-primary-900/80 px-2 py-1 text-[11px] font-medium text-primary-200 transition-colors hover:bg-primary-800"
+                              className="inline-flex items-center gap-1 rounded-md border border-foreground bg-primary/80 px-2 py-1 text-[11px] font-medium text-primary-foreground transition-colors hover:bg-primary"
                             >
                               <HugeiconsIcon icon={ViewIcon} size={12} strokeWidth={1.8} />
                               View
                             </button>
                             {isExpanded ? (
-                              <pre className="max-h-32 overflow-auto rounded-md border border-primary-800 bg-primary-950/80 p-2 text-[11px] text-primary-200">
+                              <pre className="max-h-32 overflow-auto rounded-md border border-foreground bg-primary/80 p-2 text-[11px] text-primary-foreground">
                                 {artifact.content || artifact.path || 'No file preview available'}
                               </pre>
                             ) : null}
@@ -924,15 +924,15 @@ export function RunConsole({
                         ) : null}
 
                         {artifact.type === 'output' ? (
-                          <pre className="max-h-32 overflow-auto rounded-md border border-primary-800 bg-primary-950/80 p-2 text-[11px] text-primary-200">
+                          <pre className="max-h-32 overflow-auto rounded-md border border-foreground bg-primary/80 p-2 text-[11px] text-primary-foreground">
                             {(artifact.content || 'No output content').slice(0, 200)}
                             {(artifact.content || '').length > 200 ? '...' : ''}
                           </pre>
                         ) : null}
 
                         {artifact.type === 'commit' ? (
-                          <div className="space-y-1.5 text-xs text-primary-300">
-                            <p className="font-mono text-primary-200">Hash: {commitHash}</p>
+                          <div className="space-y-1.5 text-xs text-muted-foreground">
+                            <p className="font-mono text-primary-foreground">Hash: {commitHash}</p>
                             <p className="line-clamp-3 break-words">{commitMessage}</p>
                           </div>
                         ) : null}
@@ -947,7 +947,7 @@ export function RunConsole({
         {activeTab === 'events' ? (
           <div className="min-h-[200px]">
             {!missionEvents || missionEvents.length === 0 ? (
-              <p className="text-sm text-primary-300">No mission events recorded for this run yet.</p>
+              <p className="text-sm text-muted-foreground">No mission events recorded for this run yet.</p>
             ) : (
               <MissionEventLog
                 events={missionEvents}
@@ -975,51 +975,51 @@ export function RunConsole({
         ) : null}
 
         {activeTab === 'report' ? (
-          <div className="rounded-xl border border-primary-800/80 bg-primary-950/50 p-4 sm:p-5">
+          <div className="rounded-xl border border-foreground/80 bg-primary/50 p-4 sm:p-5">
             {!report ? (
-              <p className="text-sm text-primary-300">Report will be generated when the mission completes</p>
+              <p className="text-sm text-muted-foreground">Report will be generated when the mission completes</p>
             ) : (
               <div className="space-y-4">
-                <section className="rounded-lg border border-primary-800/80 bg-primary-900/50 p-3">
-                  <h3 className="text-sm font-semibold text-primary-100">Summary</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary-300">{report.summary}</p>
+                <section className="rounded-lg border border-foreground/80 bg-primary/50 p-3">
+                  <h3 className="text-sm font-semibold text-primary-foreground">Summary</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{report.summary}</p>
                 </section>
 
-                <section className="rounded-lg border border-primary-800/80 bg-primary-900/50 p-3">
-                  <h3 className="text-sm font-semibold text-primary-100">Key Findings</h3>
+                <section className="rounded-lg border border-foreground/80 bg-primary/50 p-3">
+                  <h3 className="text-sm font-semibold text-primary-foreground">Key Findings</h3>
                   {report.keyFindings.length > 0 ? (
                     <ul className="mt-2 space-y-2">
                       {report.keyFindings.map((finding, index) => (
-                        <li key={`${finding}-${index}`} className="flex items-start gap-2 text-sm text-primary-300">
+                        <li key={`${finding}-${index}`} className="flex items-start gap-2 text-sm text-muted-foreground">
                           <HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} strokeWidth={1.9} className="mt-0.5 text-emerald-300" />
                           <span>{finding}</span>
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="mt-2 text-sm text-primary-400">No key findings available</p>
+                    <p className="mt-2 text-sm text-muted-foreground">No key findings available</p>
                   )}
                 </section>
 
-                <section className="grid gap-2 rounded-lg border border-primary-800/80 bg-primary-900/50 p-3 text-xs sm:grid-cols-3">
-                  <div className="rounded-md border border-primary-800 bg-primary-950/70 px-2 py-1.5">
-                    <p className="text-primary-400">Duration</p>
-                    <p className="mt-0.5 text-sm font-semibold text-primary-100">{report.duration}</p>
+                <section className="grid gap-2 rounded-lg border border-foreground/80 bg-primary/50 p-3 text-xs sm:grid-cols-3">
+                  <div className="rounded-md border border-foreground bg-primary/70 px-2 py-1.5">
+                    <p className="text-muted-foreground">Duration</p>
+                    <p className="mt-0.5 text-sm font-semibold text-primary-foreground">{report.duration}</p>
                   </div>
-                  <div className="rounded-md border border-primary-800 bg-primary-950/70 px-2 py-1.5">
-                    <p className="text-primary-400">Total Tokens</p>
-                    <p className="mt-0.5 text-sm font-semibold text-primary-100">{report.totalTokens.toLocaleString()}</p>
+                  <div className="rounded-md border border-foreground bg-primary/70 px-2 py-1.5">
+                    <p className="text-muted-foreground">Total Tokens</p>
+                    <p className="mt-0.5 text-sm font-semibold text-primary-foreground">{report.totalTokens.toLocaleString()}</p>
                   </div>
-                  <div className="rounded-md border border-primary-800 bg-primary-950/70 px-2 py-1.5">
-                    <p className="text-primary-400">Total Cost</p>
-                    <p className="mt-0.5 text-sm font-semibold text-primary-100">${report.totalCost.toFixed(2)}</p>
+                  <div className="rounded-md border border-foreground bg-primary/70 px-2 py-1.5">
+                    <p className="text-muted-foreground">Total Cost</p>
+                    <p className="mt-0.5 text-sm font-semibold text-primary-foreground">${report.totalCost.toFixed(2)}</p>
                   </div>
                 </section>
 
-                <section className="overflow-hidden rounded-lg border border-primary-800/80 bg-primary-900/50">
-                  <h3 className="border-b border-primary-800/80 px-3 py-2 text-sm font-semibold text-primary-100">Agent Breakdown</h3>
+                <section className="overflow-hidden rounded-lg border border-foreground/80 bg-primary/50">
+                  <h3 className="border-b border-foreground/80 px-3 py-2 text-sm font-semibold text-primary-foreground">Agent Breakdown</h3>
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-primary-950/70 text-primary-300">
+                    <thead className="bg-primary/70 text-muted-foreground">
                       <tr>
                         <th className="px-3 py-2 font-medium">Agent</th>
                         <th className="px-3 py-2 font-medium">Tasks Completed</th>
@@ -1028,7 +1028,7 @@ export function RunConsole({
                     </thead>
                     <tbody>
                       {report.agentSummaries.map((agent, index) => (
-                        <tr key={`${agent.name}-${index}`} className="border-t border-primary-800/70 text-primary-200">
+                        <tr key={`${agent.name}-${index}`} className="border-t border-foreground/70 text-primary-foreground">
                           <td className="px-3 py-2">{agent.name}</td>
                           <td className="px-3 py-2">{agent.tasks}</td>
                           <td className="px-3 py-2">{agent.tokens.toLocaleString()}</td>

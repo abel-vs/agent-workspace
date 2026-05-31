@@ -142,7 +142,7 @@ function ToolCallCard({ name, phase }: { name: string; phase: string }) {
 
   return (
     <div
-      className="rounded-lg border border-primary-200 bg-primary-50 text-[11px] overflow-hidden"
+      className="rounded-lg border border-border bg-background text-[11px] overflow-hidden"
       style={{
         borderLeftWidth: '3px',
         borderLeftColor: isRunning ? '#6366f1' : isDone ? '#22c55e' : '#ef4444',
@@ -151,10 +151,10 @@ function ToolCallCard({ name, phase }: { name: string; phase: string }) {
     >
       <div className="flex items-center gap-1.5 px-2.5 py-1.5">
         <span className="text-sm leading-none">{emoji}</span>
-        <span className="font-mono font-semibold text-ink">{displayName}</span>
+        <span className="font-mono font-semibold text-foreground">{displayName}</span>
         <span className="flex-1" />
         {isRunning && (
-          <span className="text-[10px] tabular-nums text-primary-400">
+          <span className="text-[10px] tabular-nums text-muted-foreground">
             {elapsedLabel}
           </span>
         )}
@@ -165,7 +165,7 @@ function ToolCallCard({ name, phase }: { name: string; phase: string }) {
         )}
       </div>
       {isRunning && (
-        <div className="px-2.5 pb-1.5 text-[10px] text-primary-400">
+        <div className="px-2.5 pb-1.5 text-[10px] text-muted-foreground">
           {verb}
           {'.'.repeat(dots)}
         </div>
@@ -244,7 +244,7 @@ function ThinkingBubble({
       </div>
 
       {/* Chat bubble */}
-      <div className="relative max-w-[36rem] overflow-hidden rounded-2xl rounded-bl-sm border border-primary-200 dark:border-primary-200/20 bg-primary-100 dark:bg-primary-100 thinking-shimmer-bubble">
+      <div className="relative max-w-[36rem] overflow-hidden rounded-2xl rounded-bl-sm border border-border dark:border-border/20 bg-card dark:bg-card thinking-shimmer-bubble">
         {/* Shimmer overlay */}
         <div
           className="thinking-shimmer-sweep pointer-events-none absolute inset-0"
@@ -257,7 +257,7 @@ function ThinkingBubble({
               <div className="flex items-center gap-1.5">
                 {isCompacting ? (
                   <span
-                    className="inline-block size-3 rounded-full border border-primary-300 border-t-primary-500 animate-spin"
+                    className="inline-block size-3 rounded-full border border-border border-t-border animate-spin"
                     aria-hidden="true"
                   />
                 ) : (
@@ -272,7 +272,7 @@ function ThinkingBubble({
                     'thinking-label ml-1.5 text-xs font-medium transition-opacity duration-300',
                     isStale
                       ? 'text-amber-500 dark:text-amber-400'
-                      : 'text-primary-500 dark:text-primary-500',
+                      : 'text-muted-foreground dark:text-muted-foreground',
                   )}
                   style={{ opacity: visible ? 1 : 0 }}
                 >
@@ -285,7 +285,7 @@ function ThinkingBubble({
                 </span>
               </div>
               {canExpandResearch ? (
-                <div className="mt-1 flex items-center gap-2 text-[11px] text-primary-500 dark:text-primary-400">
+                <div className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground dark:text-muted-foreground">
                   <span>
                     {completedResearchSteps}/
                     {expandedResearchCard?.steps.length ?? 0} tools
@@ -309,7 +309,7 @@ function ThinkingBubble({
                     !expandedResearchCard.collapsed,
                   )
                 }
-                className="relative z-10 inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-primary-200/80 bg-primary-50/90 text-primary-500 transition-colors hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/80 dark:text-primary-300 dark:hover:bg-primary-800"
+                className="relative z-10 inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-border/80 bg-background/90 text-muted-foreground transition-colors hover:bg-card dark:border-foreground dark:bg-primary/80 dark:text-muted-foreground dark:hover:bg-primary"
                 aria-label={
                   expandedResearchCard?.collapsed
                     ? 'Expand research timeline'
@@ -1559,17 +1559,17 @@ function ChatMessageListComponent({
       >
         <div className="w-full">
           {isMessageSearchOpen && (
-            <div className="sticky top-0 z-30 flex items-center gap-2 border-b border-primary-200 bg-primary-50/95 px-3 py-2 backdrop-blur-sm">
+            <div className="sticky top-0 z-30 flex items-center gap-2 border-b border-border bg-background/95 px-3 py-2 backdrop-blur-sm">
               <input
                 ref={searchInputRef}
                 type="text"
                 value={messageSearchValue}
                 onChange={(e) => setMessageSearchValue(e.target.value)}
                 placeholder="Search messages..."
-                className="min-w-0 flex-1 rounded-md border border-primary-200 bg-primary-50 px-2.5 py-1.5 text-sm text-primary-900 outline-none placeholder:text-primary-400 focus:border-primary-400 focus:ring-1 focus:ring-primary-400"
+                className="min-w-0 flex-1 rounded-md border border-border bg-background px-2.5 py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-border focus:ring-1 focus:ring-ring"
               />
               {isMessageSearchActive && (
-                <span className="shrink-0 text-xs text-primary-500 dark:text-neutral-400">
+                <span className="shrink-0 text-xs text-muted-foreground dark:text-neutral-400">
                   {messageSearchMatches.length > 0
                     ? `${activeSearchMatchIndex + 1} of ${messageSearchMatches.length}`
                     : 'No matches'}
@@ -1580,7 +1580,7 @@ function ChatMessageListComponent({
                   type="button"
                   onClick={jumpToPreviousMatch}
                   disabled={messageSearchMatches.length === 0}
-                  className="rounded p-1 text-primary-500 dark:text-neutral-400 hover:bg-primary-200 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-neutral-200 disabled:opacity-30"
+                  className="rounded p-1 text-muted-foreground dark:text-neutral-400 hover:bg-muted dark:hover:bg-primary hover:text-foreground dark:hover:text-neutral-200 disabled:opacity-30"
                   aria-label="Previous match"
                 >
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -1597,7 +1597,7 @@ function ChatMessageListComponent({
                   type="button"
                   onClick={jumpToNextMatch}
                   disabled={messageSearchMatches.length === 0}
-                  className="rounded p-1 text-primary-500 dark:text-neutral-400 hover:bg-primary-200 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-neutral-200 disabled:opacity-30"
+                  className="rounded p-1 text-muted-foreground dark:text-neutral-400 hover:bg-muted dark:hover:bg-primary hover:text-foreground dark:hover:text-neutral-200 disabled:opacity-30"
                   aria-label="Next match"
                 >
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -1613,7 +1613,7 @@ function ChatMessageListComponent({
                 <button
                   type="button"
                   onClick={closeMessageSearch}
-                  className="rounded p-1 text-primary-500 dark:text-neutral-400 hover:bg-primary-200 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-neutral-200"
+                  className="rounded p-1 text-muted-foreground dark:text-neutral-400 hover:bg-muted dark:hover:bg-primary hover:text-foreground dark:hover:text-neutral-200"
                   aria-label="Close search"
                 >
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -1684,25 +1684,25 @@ function ChatMessageListComponent({
             {loading && displayEntries.length === 0 ? (
               <div className="flex flex-col gap-4 animate-pulse">
                 <div className="flex gap-3">
-                  <div className="size-6 rounded-full bg-primary-200" />
+                  <div className="size-6 rounded-full bg-muted" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-primary-200 rounded w-3/4" />
-                    <div className="h-4 bg-primary-200 rounded w-1/2" />
+                    <div className="h-4 bg-muted rounded w-3/4" />
+                    <div className="h-4 bg-muted rounded w-1/2" />
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="size-6 rounded-full bg-primary-200" />
+                  <div className="size-6 rounded-full bg-muted" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-primary-200 rounded w-2/3" />
-                    <div className="h-4 bg-primary-200 rounded w-5/6" />
-                    <div className="h-4 bg-primary-200 rounded w-1/3" />
+                    <div className="h-4 bg-muted rounded w-2/3" />
+                    <div className="h-4 bg-muted rounded w-5/6" />
+                    <div className="h-4 bg-muted rounded w-1/3" />
                   </div>
                 </div>
               </div>
             ) : empty && !notice && !isMessageSearchActive ? (
               (emptyState ?? <div aria-hidden></div>)
             ) : isMessageSearchActive && visibleEntries.length === 0 ? (
-              <div className="rounded-xl border border-primary-200 bg-primary-50 px-4 py-6 text-sm text-primary-600">
+              <div className="rounded-xl border border-border bg-background px-4 py-6 text-sm text-muted-foreground">
                 No messages match “{messageSearchValue.trim()}”.
               </div>
             ) : hasGroup ? (
@@ -1940,7 +1940,7 @@ function getToolGroupClass(
   }
 
   if (previousUserIndex === -1 || nextUserIndex === -1) return ''
-  return 'border-l border-primary-200/70 pl-3'
+  return 'border-l border-border/70 pl-3'
 }
 
 function getStableMessageId(message: ChatMessage, index: number): string {

@@ -31,7 +31,7 @@ export const Route = createFileRoute('/memory')({
           onValueChange={(value) => setTab(value as 'memory' | 'knowledge')}
           className="h-full min-h-0 gap-0"
         >
-          <div className="border-b border-primary-200 px-3 pt-3 dark:border-neutral-800 md:px-4 md:pt-4">
+          <div className="border-b border-border px-3 pt-3 dark:border-neutral-800 md:px-4 md:pt-4">
             <TabsList
               variant="underline"
               className="w-full justify-start gap-1"
@@ -79,7 +79,7 @@ export const Route = createFileRoute('/memory')({
 
 function RouteLoadingState({ label }: { label: string }) {
   return (
-    <div className="flex h-full min-h-[240px] items-center justify-center px-4 text-sm text-primary-500 dark:text-neutral-400">
+    <div className="flex h-full min-h-[240px] items-center justify-center px-4 text-sm text-muted-foreground dark:text-neutral-400">
       {label}
     </div>
   )

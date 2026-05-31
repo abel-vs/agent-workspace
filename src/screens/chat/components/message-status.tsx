@@ -22,11 +22,11 @@ export function MessageStatus({
   return (
     <div className={cn('w-full max-w-[var(--chat-content-max-width)]', className)}>
       <Message>
-        <div className="w-full rounded-xl border border-primary-200 bg-primary-50 p-4 text-primary-900">
+        <div className="w-full rounded-xl border border-border bg-background p-4 text-foreground">
           <div className="text-balance font-medium">{title}</div>
-          <div className="mt-2 text-pretty text-primary-700">{description}</div>
+          <div className="mt-2 text-pretty text-foreground">{description}</div>
           {detail ? (
-            <div className="mt-2 text-xs text-primary-600">{detail}</div>
+            <div className="mt-2 text-xs text-muted-foreground">{detail}</div>
           ) : null}
           {actionLabel && onAction ? (
             <div className="mt-3">

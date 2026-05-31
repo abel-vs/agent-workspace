@@ -208,12 +208,12 @@ export function TeamPanel({
   }
 
   return (
-    <div className="flex h-full flex-col border-r border-primary-200 bg-primary-50/40 dark:bg-neutral-900/20">
-      <div className="border-b border-primary-200 px-3 pb-3 pt-2">
-        <h2 className="text-sm font-semibold text-primary-900 dark:text-neutral-100">
+    <div className="flex h-full flex-col border-r border-border bg-background/40 dark:bg-neutral-900/20">
+      <div className="border-b border-border px-3 pb-3 pt-2">
+        <h2 className="text-sm font-semibold text-foreground dark:text-neutral-100">
           Team Setup
         </h2>
-        <p className="text-[11px] text-primary-500">Choose a template or build your own.</p>
+        <p className="text-[11px] text-muted-foreground">Choose a template or build your own.</p>
         <div className="mt-2 space-y-1.5">
           {TEAM_TEMPLATES.map((template) => (
             <button
@@ -221,26 +221,26 @@ export function TeamPanel({
               type="button"
               onClick={() => onApplyTemplate(template.id)}
               className={cn(
-                'flex w-full cursor-pointer items-center justify-between rounded-lg border border-primary-200 bg-white px-3 py-2.5 text-left transition-colors hover:border-accent-400 hover:bg-accent-50/50 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-accent-700 dark:hover:bg-accent-950/10',
+                'flex w-full cursor-pointer items-center justify-between rounded-lg border border-border bg-white px-3 py-2.5 text-left transition-colors hover:border-accent-400 hover:bg-accent-50/50 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-accent-700 dark:hover:bg-accent-950/10',
                 activeTemplateId === template.id &&
                   'border-accent-400 bg-accent-50/60 dark:border-accent-700 dark:bg-accent-950/10',
               )}
             >
-              <span className="text-xs font-medium text-primary-800 dark:text-neutral-100">
+              <span className="text-xs font-medium text-foreground dark:text-neutral-100">
                 {template.icon} {template.name}
               </span>
-              <span className="text-[10px] text-primary-500">{template.agents.length} agents</span>
+              <span className="text-[10px] text-muted-foreground">{template.agents.length} agents</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="border-b border-primary-200 px-3 py-2.5">
+      <div className="border-b border-border px-3 py-2.5">
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-primary-500">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Your Team
           </h3>
-          <span className="rounded-full bg-primary-100 px-2 py-0.5 text-[11px] font-medium text-primary-700 dark:bg-neutral-800 dark:text-neutral-300">
+          <span className="rounded-full bg-card px-2 py-0.5 text-[11px] font-medium text-foreground dark:bg-neutral-800 dark:text-neutral-300">
             {team.length}
           </span>
         </div>
@@ -248,7 +248,7 @@ export function TeamPanel({
 
       <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-2 py-2">
         {team.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-primary-300 bg-white/70 px-3 py-4 text-center text-xs text-primary-500 dark:border-neutral-700 dark:bg-neutral-900/40 dark:text-neutral-400">
+          <div className="rounded-lg border border-dashed border-border bg-white/70 px-3 py-4 text-center text-xs text-muted-foreground dark:border-neutral-700 dark:bg-neutral-900/40 dark:text-neutral-400">
             No agents yet. Apply a template or add one manually.
           </div>
         ) : null}
@@ -280,7 +280,7 @@ export function TeamPanel({
               key={agent.id}
               title={cardTitle}
               className={cn(
-                'rounded-xl border border-primary-200 bg-white/90 p-2 shadow-sm transition-colors dark:border-neutral-700 dark:bg-neutral-900/70',
+                'rounded-xl border border-border bg-white/90 p-2 shadow-sm transition-colors dark:border-neutral-700 dark:bg-neutral-900/70',
                 expanded &&
                   'border-accent-300 dark:border-accent-700 bg-accent-50/60 dark:bg-accent-950/10',
               )}
@@ -307,7 +307,7 @@ export function TeamPanel({
 
                   {/* Name + badges */}
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-primary-900 dark:text-neutral-100">
+                    <p className="truncate text-sm font-semibold text-foreground dark:text-neutral-100">
                       {agent.name}
                     </p>
                     <div className="mt-1 flex items-center gap-1.5">
@@ -319,10 +319,10 @@ export function TeamPanel({
                       >
                         {modelLabel}
                       </span>
-                      <span className="text-[10px] uppercase tracking-wide text-primary-500">
+                      <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
                         {agent.status}
                       </span>
-                      <span className="rounded-full bg-primary-100 px-2 py-0.5 text-[10px] font-medium text-primary-600 dark:bg-neutral-800 dark:text-neutral-300">
+                      <span className="rounded-full bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground dark:bg-neutral-800 dark:text-neutral-300">
                         {taskCount} {taskCount === 1 ? 'task' : 'tasks'}
                       </span>
                     </div>
@@ -342,7 +342,7 @@ export function TeamPanel({
                   <span
                     aria-hidden
                     className={cn(
-                      'mt-0.5 shrink-0 text-sm text-primary-400 transition-transform',
+                      'mt-0.5 shrink-0 text-sm text-muted-foreground transition-transform',
                       expanded && 'rotate-90 text-accent-500',
                     )}
                   >
@@ -367,34 +367,34 @@ export function TeamPanel({
               </div>
 
               {expanded ? (
-                <div className="mt-2 space-y-2 border-t border-primary-200 pt-2 dark:border-neutral-700">
+                <div className="mt-2 space-y-2 border-t border-border pt-2 dark:border-neutral-700">
                   {/* Quick-look: Model + Session */}
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md bg-primary-50/60 px-2 py-1.5 text-[10px] dark:bg-neutral-800/60">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md bg-background/60 px-2 py-1.5 text-[10px] dark:bg-neutral-800/60">
                     <span className="flex items-center gap-1">
-                      <span className="text-primary-400 dark:text-neutral-500">Model:</span>
+                      <span className="text-muted-foreground dark:text-neutral-500">Model:</span>
                       <span className={cn('rounded px-1.5 py-0.5 font-medium', getModelBadgeColor(agent.modelId))}>
                         {modelLabel}
                       </span>
                     </span>
                     {agentSessionKey ? (
                       <span className="flex min-w-0 items-center gap-1">
-                        <span className="shrink-0 text-primary-400 dark:text-neutral-500">Session:</span>
-                        <code className="max-w-[14ch] truncate rounded bg-white px-1 font-mono text-primary-700 dark:bg-neutral-900 dark:text-neutral-400">
+                        <span className="shrink-0 text-muted-foreground dark:text-neutral-500">Session:</span>
+                        <code className="max-w-[14ch] truncate rounded bg-white px-1 font-mono text-foreground dark:bg-neutral-900 dark:text-neutral-400">
                           {agentSessionKey}
                         </code>
                       </span>
                     ) : (
-                      <span className="text-primary-300 dark:text-neutral-600">No session</span>
+                      <span className="text-muted-foreground dark:text-neutral-600">No session</span>
                     )}
                   </div>
                   {agentSessionEntry?.lastMessage ? (
-                    <p className="truncate text-[10px] italic text-primary-400 dark:text-neutral-500">
+                    <p className="truncate text-[10px] italic text-muted-foreground dark:text-neutral-500">
                       {agentSessionEntry.lastMessage}
                     </p>
                   ) : null}
 
                   <label className="block">
-                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                       Model
                     </span>
                     <select
@@ -404,7 +404,7 @@ export function TeamPanel({
                           modelId: event.target.value,
                         })
                       }}
-                      className="w-full rounded-md border border-primary-200 bg-white px-2 py-1.5 text-xs text-primary-900 outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
+                      className="w-full rounded-md border border-border bg-white px-2 py-1.5 text-xs text-foreground outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
                     >
                       <optgroup label="Presets">
                         {MODEL_PRESETS.map((preset) => (
@@ -426,7 +426,7 @@ export function TeamPanel({
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                       Role Description
                     </span>
                     <textarea
@@ -438,12 +438,12 @@ export function TeamPanel({
                       }}
                       rows={3}
                       placeholder="Define responsibilities and deliverables"
-                      className="w-full resize-none rounded-md border border-primary-200 bg-white px-2 py-1.5 text-xs text-primary-900 outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
+                      className="w-full resize-none rounded-md border border-border bg-white px-2 py-1.5 text-xs text-foreground outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
                     />
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                       Goal
                     </span>
                     <textarea
@@ -455,12 +455,12 @@ export function TeamPanel({
                       }}
                       rows={3}
                       placeholder="e.g. Find the most actionable competitive insights"
-                      className="w-full resize-none rounded-md border border-primary-200 bg-white px-2 py-1.5 text-xs text-primary-900 outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
+                      className="w-full resize-none rounded-md border border-border bg-white px-2 py-1.5 text-xs text-foreground outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
                     />
                   </label>
 
                   <label className="block">
-                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                    <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                       Backstory
                     </span>
                     <textarea
@@ -472,17 +472,17 @@ export function TeamPanel({
                       }}
                       rows={3}
                       placeholder="e.g. You have 10 years of experience in competitive intelligence..."
-                      className="w-full resize-none rounded-md border border-primary-200 bg-white px-2 py-1.5 text-xs text-primary-900 outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
+                      className="w-full resize-none rounded-md border border-border bg-white px-2 py-1.5 text-xs text-foreground outline-none ring-accent-400 focus:ring-1 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
                     />
                   </label>
 
                   {/* Session key display */}
                   {agentSessionKey ? (
                     <div>
-                      <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                      <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                         Session Key
                       </span>
-                      <p className="truncate rounded-md bg-primary-50 px-2 py-1.5 font-mono text-[10px] text-primary-700 dark:bg-neutral-800 dark:text-neutral-300">
+                      <p className="truncate rounded-md bg-background px-2 py-1.5 font-mono text-[10px] text-foreground dark:bg-neutral-800 dark:text-neutral-300">
                         {agentSessionKey}
                       </p>
                     </div>
@@ -491,14 +491,14 @@ export function TeamPanel({
                   {/* Assigned tasks list */}
                   {assignedTasks.length > 0 ? (
                     <div>
-                      <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-primary-500">
+                      <span className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                         Active Tasks
                       </span>
                       <ul className="space-y-1">
                         {assignedTasks.map((task) => (
                           <li
                             key={task.id}
-                            className="truncate rounded-md bg-primary-50 px-2 py-1 text-[10px] text-primary-700 dark:bg-neutral-800 dark:text-neutral-300"
+                            className="truncate rounded-md bg-background px-2 py-1 text-[10px] text-foreground dark:bg-neutral-800 dark:text-neutral-300"
                           >
                             • {task.title}
                           </li>
@@ -528,7 +528,7 @@ export function TeamPanel({
         <button
           type="button"
           onClick={onAddAgent}
-          className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-primary-300 py-2.5 text-xs font-semibold text-primary-500 transition-colors hover:border-accent-400 hover:text-accent-600 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-accent-700 dark:hover:text-accent-300"
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-border py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-accent-400 hover:text-accent-600 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-accent-700 dark:hover:text-accent-300"
         >
           <span aria-hidden>+</span>
           <span>Add Agent</span>

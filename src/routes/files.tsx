@@ -21,11 +21,11 @@ export const Route = createFileRoute('/files')({
   component: FilesRoute,
   errorComponent: function FilesError({ error }) {
     return (
-      <div className="flex flex-col items-center justify-center h-full p-6 text-center bg-primary-50">
-        <h2 className="text-xl font-semibold text-primary-900 mb-3">
+      <div className="flex flex-col items-center justify-center h-full p-6 text-center bg-background">
+        <h2 className="text-xl font-semibold text-foreground mb-3">
           Failed to Load Files
         </h2>
-        <p className="text-sm text-primary-600 mb-4 max-w-md">
+        <p className="text-sm text-muted-foreground mb-4 max-w-md">
           {error instanceof Error
             ? error.message
             : 'An unexpected error occurred'}
@@ -44,7 +44,7 @@ export const Route = createFileRoute('/files')({
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent-500 border-r-transparent mb-3" />
-          <p className="text-sm text-primary-500">Loading file explorer...</p>
+          <p className="text-sm text-muted-foreground">Loading file explorer...</p>
         </div>
       </div>
     )
@@ -79,7 +79,7 @@ function FilesRoute() {
   }, [])
 
   return (
-    <div className="h-full min-h-0 overflow-hidden bg-surface text-primary-900">
+    <div className="h-full min-h-0 overflow-hidden bg-background text-foreground">
       <div className="flex h-full min-h-0 overflow-hidden">
         <FileExplorerSidebar
           collapsed={fileExplorerCollapsed}
@@ -89,13 +89,13 @@ function FilesRoute() {
           onInsertReference={handleInsertReference}
         />
         <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <header className="flex items-center gap-3 border-b border-primary-200 px-3 py-2 md:px-4 md:py-3">
+          <header className="flex items-center gap-3 border-b border-border px-3 py-2 md:px-4 md:py-3">
             <button
               type="button"
               onClick={function onToggleFileExplorerHeader() {
                 setFileExplorerCollapsed((prev) => !prev)
               }}
-              className="rounded-lg p-1.5 text-primary-600 hover:bg-primary-100 transition-colors"
+              className="rounded-lg p-1.5 text-muted-foreground hover:bg-card transition-colors"
               aria-label={fileExplorerCollapsed ? 'Show files' : 'Hide files'}
               title={fileExplorerCollapsed ? 'Show files' : 'Hide files'}
             >
@@ -105,7 +105,7 @@ function FilesRoute() {
               <h1 className="text-base font-medium text-balance md:text-lg">
                 Files
               </h1>
-              <p className="hidden text-sm text-primary-600 text-pretty sm:block">
+              <p className="hidden text-sm text-muted-foreground text-pretty sm:block">
                 Explore your workspace and draft notes in the editor.
               </p>
             </div>

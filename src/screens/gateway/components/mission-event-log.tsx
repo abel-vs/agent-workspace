@@ -44,7 +44,7 @@ function getEventVisual(eventType: MissionEvent['type']): EventVisual {
     case 'agent.thinking':
       return { icon: AiBrain01Icon, toneClassName: 'border-violet-500/30 bg-violet-500/10 text-violet-300' }
     case 'agent.output':
-      return { icon: Chat01Icon, toneClassName: 'border-primary-700 bg-primary-800/70 text-primary-300' }
+      return { icon: Chat01Icon, toneClassName: 'border-foreground bg-primary/70 text-muted-foreground' }
     case 'agent.completed':
       return { icon: CheckmarkCircle02Icon, toneClassName: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300' }
     case 'agent.failed':
@@ -137,11 +137,11 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
   return (
     <section
       className={cn(
-        'flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-primary-800 bg-primary-900/70 shadow-[0_18px_60px_rgba(0,0,0,0.35)]',
+        'flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-foreground bg-primary/70 shadow-[0_18px_60px_rgba(0,0,0,0.35)]',
         className,
       )}
     >
-      <div className="border-b border-primary-800 px-4 py-3">
+      <div className="border-b border-foreground px-4 py-3">
         <div className="flex flex-wrap items-center gap-2">
           {FILTER_OPTIONS.map((option) => (
             <button
@@ -152,7 +152,7 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                 'rounded-full border px-3 py-1.5 text-xs font-medium transition-colors',
                 filter === option.key
                   ? 'border-accent-500 bg-accent-500/15 text-accent-300'
-                  : 'border-primary-700 bg-primary-800/80 text-primary-300 hover:border-primary-700 hover:bg-primary-800 hover:text-primary-100',
+                  : 'border-foreground bg-primary/80 text-muted-foreground hover:border-foreground hover:bg-primary hover:text-primary-foreground',
               )}
             >
               {option.label}
@@ -163,8 +163,8 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
 
       <div className="flex-1 overflow-y-auto px-4 py-3">
         {filteredEvents.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-primary-700 bg-primary-950/60 px-4 py-8 text-center">
-            <p className="text-sm text-primary-300">No mission events yet.</p>
+          <div className="rounded-xl border border-dashed border-foreground bg-primary/60 px-4 py-8 text-center">
+            <p className="text-sm text-muted-foreground">No mission events yet.</p>
           </div>
         ) : (
           <ol className="space-y-2">
@@ -181,10 +181,10 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
-                    className="rounded-xl border border-primary-800 bg-primary-950/60 px-3 py-2"
+                    className="rounded-xl border border-foreground bg-primary/60 px-3 py-2"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="min-w-[72px] pt-0.5 font-mono text-[11px] text-primary-400">
+                      <span className="min-w-[72px] pt-0.5 font-mono text-[11px] text-muted-foreground">
                         [{formatTimestamp(event.timestamp)}]
                       </span>
                       <span
@@ -197,10 +197,10 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-                          <span className="font-semibold text-primary-100">
+                          <span className="font-semibold text-primary-foreground">
                             {getAgentLabel(event, agentNames)}
                           </span>
-                          <span className="text-primary-300">
+                          <span className="text-muted-foreground">
                             {getEventDescription(event, agentNames)}
                           </span>
                         </div>
@@ -215,7 +215,7 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                                   [event.id]: !current[event.id],
                                 }))
                               }
-                              className="text-xs font-medium text-primary-400 transition-colors hover:text-primary-100"
+                              className="text-xs font-medium text-muted-foreground transition-colors hover:text-primary-foreground"
                             >
                               {isExpanded ? 'Hide output' : 'Show output'}
                             </button>
@@ -225,7 +225,7 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
-                                  className="mt-2 overflow-x-auto rounded-lg border border-primary-800 bg-primary-900 px-3 py-2 font-mono text-[11px] leading-relaxed text-primary-200"
+                                  className="mt-2 overflow-x-auto rounded-lg border border-foreground bg-primary px-3 py-2 font-mono text-[11px] leading-relaxed text-primary-foreground"
                                 >
                                   {event.payload.text}
                                 </motion.pre>
@@ -235,19 +235,19 @@ export function MissionEventLog({ events, agentNames, className }: MissionEventL
                         ) : null}
 
                         {event.type === 'agent.completed' && event.payload.finalOutput ? (
-                          <p className="mt-2 line-clamp-2 text-xs text-primary-300">
+                          <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
                             {event.payload.finalOutput}
                           </p>
                         ) : null}
 
                         {event.type === 'mission.completed' && event.payload.report ? (
-                          <p className="mt-2 line-clamp-2 text-xs text-primary-300">
+                          <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
                             {event.payload.report}
                           </p>
                         ) : null}
 
                         {event.type === 'task.completed' && event.payload.result ? (
-                          <p className="mt-2 line-clamp-2 text-xs text-primary-300">
+                          <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">
                             {event.payload.result}
                           </p>
                         ) : null}

@@ -1611,11 +1611,11 @@ function AvatarPicker({
 
   return (
     <div
-      className="flex flex-col gap-3 rounded-2xl border border-primary-300/70 bg-primary-100/95 p-3 shadow-xl backdrop-blur-xl"
+      className="flex flex-col gap-3 rounded-2xl border border-border/70 bg-card/95 p-3 shadow-xl backdrop-blur-xl"
       style={{ minWidth: 240, maxWidth: 320 }}
     >
       <div className="flex items-center justify-between">
-        <p className="text-[11px] font-semibold text-primary-700">
+        <p className="text-[11px] font-semibold text-foreground">
           {showGreek ? 'Greek Gods' : 'Choose Avatar'}
         </p>
         <button
@@ -1640,7 +1640,7 @@ function AvatarPicker({
                   'flex flex-col items-center gap-1 rounded-xl p-1.5 transition-all',
                   active
                     ? 'bg-accent-500/20 ring-2 ring-accent-500'
-                    : 'hover:bg-primary-200/60',
+                    : 'hover:bg-muted/60',
                 )}
               >
                 <img
@@ -1652,7 +1652,7 @@ function AvatarPicker({
                   )}
                   draggable={false}
                 />
-                <span className="text-[10px] font-medium text-primary-700">
+                <span className="text-[10px] font-medium text-foreground">
                   {opt.label}
                 </span>
               </button>
@@ -1672,11 +1672,11 @@ function AvatarPicker({
                   'flex flex-col items-center gap-1 rounded-xl p-2 transition-all',
                   active
                     ? 'bg-accent-500/20 ring-2 ring-accent-500 scale-105'
-                    : 'hover:bg-primary-200/60 hover:scale-105',
+                    : 'hover:bg-muted/60 hover:scale-105',
                 )}
               >
                 <span className="text-2xl">{opt.emoji}</span>
-                <span className="text-[10px] font-medium text-primary-700">
+                <span className="text-[10px] font-medium text-foreground">
                   {opt.label}
                 </span>
               </button>
@@ -1724,7 +1724,7 @@ function OrchestratorAvatarComponent({ size = 48, compact = false }: Orchestrato
       >
         <Renderer state={state} size={size} />
         <span
-          className="absolute bottom-0 right-0 block rounded-full border-2 border-surface"
+          className="absolute bottom-0 right-0 block rounded-full border-2 border-background"
           style={{
             width: Math.max(6, size / 6),
             height: Math.max(6, size / 6),
@@ -1749,7 +1749,7 @@ function OrchestratorAvatarComponent({ size = 48, compact = false }: Orchestrato
                 <Renderer state={state} size={size} />
                 {/* State dot */}
                 <span
-                  className="absolute bottom-0 right-0 block rounded-full border-2 border-primary-50"
+                  className="absolute bottom-0 right-0 block rounded-full border-2 border-border"
                   style={{
                     width: Math.max(8, size / 6),
                     height: Math.max(8, size / 6),
@@ -1770,7 +1770,7 @@ function OrchestratorAvatarComponent({ size = 48, compact = false }: Orchestrato
       <button
         type="button"
         onClick={() => setShowPicker((v) => !v)}
-        className="absolute -right-1 -top-1 rounded-full border border-primary-300/70 bg-primary-100/90 p-1 text-primary-500 shadow-sm transition-all hover:bg-primary-200 hover:text-primary-800 hover:scale-110"
+        className="absolute -right-1 -top-1 rounded-full border border-border/70 bg-card/90 p-1 text-muted-foreground shadow-sm transition-all hover:bg-muted hover:text-foreground hover:scale-110"
         aria-label="Change avatar"
       >
         <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor">

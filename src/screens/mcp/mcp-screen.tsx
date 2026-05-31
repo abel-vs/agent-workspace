@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button'
 type Tab = 'installed' | 'marketplace'
 
 const TOOLBAR_FIELD =
-  'h-9 w-full min-w-0 rounded-lg border border-primary-200 bg-primary-100/60 px-3 text-sm text-ink outline-none transition-colors focus:border-primary sm:min-w-[220px]'
+  'h-9 w-full min-w-0 rounded-lg border border-border bg-card/60 px-3 text-sm text-foreground outline-none transition-colors focus:border-primary sm:min-w-[220px]'
 
 export function McpScreen() {
   const queryClient = useQueryClient()
@@ -53,18 +53,18 @@ export function McpScreen() {
       : `${servers.length.toLocaleString()} servers`
 
   return (
-    <div className="min-h-full overflow-y-auto bg-surface text-ink">
+    <div className="min-h-full overflow-y-auto bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-5 px-4 py-6 pb-[calc(var(--tabbar-h,80px)+1.5rem)] sm:px-6 lg:px-8">
-        <header className="rounded-2xl border border-primary-200 bg-primary-50/85 p-4 backdrop-blur-xl">
+        <header className="rounded-2xl border border-border bg-background/85 p-4 backdrop-blur-xl">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="space-y-1.5">
-              <p className="text-xs font-medium uppercase text-primary-500 tabular-nums">
+              <p className="text-xs font-medium uppercase text-muted-foreground tabular-nums">
                 Hermes Workspace · MCP
               </p>
-              <h1 className="text-2xl font-medium text-ink text-balance sm:text-3xl">
+              <h1 className="text-2xl font-medium text-foreground text-balance sm:text-3xl">
                 MCP Servers
               </h1>
-              <p className="text-sm text-primary-500 text-pretty sm:text-base">
+              <p className="text-sm text-muted-foreground text-pretty sm:text-base">
                 Discover, install, and manage Model Context Protocol servers
                 exposed to Hermes Agent.
               </p>
@@ -91,11 +91,11 @@ export function McpScreen() {
           ) : null}
         </header>
 
-        <section className="rounded-2xl border border-primary-200 bg-primary-50/80 p-3 backdrop-blur-xl sm:p-4">
+        <section className="rounded-2xl border border-border bg-background/80 p-3 backdrop-blur-xl sm:p-4">
           <Tabs value={tab} onValueChange={handleTabChange}>
             <div className="flex flex-wrap items-center gap-2">
               <TabsList
-                className="rounded-xl border border-primary-200 bg-primary-100/60 p-1"
+                className="rounded-xl border border-border bg-card/60 p-1"
                 variant="default"
               >
                 <TabsTab value="installed" className="min-w-[110px]">
@@ -121,7 +121,7 @@ export function McpScreen() {
                 <select
                   value={category}
                   onChange={(event) => setCategory(event.target.value)}
-                  className="h-9 rounded-lg border border-primary-200 bg-primary-100/60 px-3 text-sm text-ink outline-none"
+                  className="h-9 rounded-lg border border-border bg-card/60 px-3 text-sm text-foreground outline-none"
                 >
                   {categories.map((c) => (
                     <option key={c} value={c}>
@@ -144,7 +144,7 @@ export function McpScreen() {
             <TabsPanel value="marketplace" className="pt-3 space-y-3">
               <div className="flex items-center justify-between gap-2">
                 {hubQuery.data?.source ? (
-                  <div className="text-xs text-primary-500">
+                  <div className="text-xs text-muted-foreground">
                     Source: {hubQuery.data.source}
                   </div>
                 ) : (
@@ -164,7 +164,7 @@ export function McpScreen() {
                 hubQuery.data.results && hubQuery.data.results.length > 0 ? (
                   <p className="text-xs text-amber-700 dark:text-amber-300">
                     ⚠ One or more sources unavailable; showing local results.
-                    <span className="ml-1 text-[11px] text-primary-500">
+                    <span className="ml-1 text-[11px] text-muted-foreground">
                       ({hubQuery.data.warnings[0]})
                     </span>
                   </p>
@@ -209,7 +209,7 @@ export function McpScreen() {
           </Tabs>
         </section>
 
-        <footer className="flex items-center justify-between rounded-xl border border-primary-200 bg-primary-50/80 px-3 py-2.5 text-sm text-primary-500 tabular-nums">
+        <footer className="flex items-center justify-between rounded-xl border border-border bg-background/80 px-3 py-2.5 text-sm text-muted-foreground tabular-nums">
           <span>{totalLabel}</span>
           <span className="text-xs">
             mode: {capabilityMode === 'fallback' ? 'config fallback' : 'native'}
@@ -291,14 +291,14 @@ function EmptyCard({ title, description, tone = 'neutral' }: EmptyCardProps) {
   const toneClasses =
     tone === 'danger'
       ? 'border-red-200 bg-red-50 text-red-700 dark:border-red-700 dark:bg-red-950/40 dark:text-red-200'
-      : 'border-primary-200 bg-primary-50/80 text-primary-500'
+      : 'border-border bg-background/80 text-muted-foreground'
   return (
     <div
       className={`rounded-xl border border-dashed px-4 py-10 text-center ${toneClasses}`}
     >
-      <p className="text-sm font-medium text-ink">{title}</p>
+      <p className="text-sm font-medium text-foreground">{title}</p>
       {description ? (
-        <p className="mt-1 text-xs text-primary-500">{description}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{description}</p>
       ) : null}
     </div>
   )
@@ -348,12 +348,12 @@ function MarketplaceGrid({
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
-            className="animate-pulse rounded-2xl border border-primary-200 bg-primary-50/70 p-4 min-h-[160px]"
+            className="animate-pulse rounded-2xl border border-border bg-background/70 p-4 min-h-[160px]"
           >
-            <div className="mb-3 h-4 w-2/5 rounded-md bg-primary-100" />
-            <div className="mb-2 h-3 w-3/4 rounded-md bg-primary-100" />
-            <div className="h-3 w-1/2 rounded-md bg-primary-100" />
-            <div className="mt-4 h-8 w-1/3 rounded-md bg-primary-100" />
+            <div className="mb-3 h-4 w-2/5 rounded-md bg-card" />
+            <div className="mb-2 h-3 w-3/4 rounded-md bg-card" />
+            <div className="h-3 w-1/2 rounded-md bg-card" />
+            <div className="mt-4 h-8 w-1/3 rounded-md bg-card" />
           </div>
         ))}
       </div>
@@ -382,12 +382,12 @@ function MarketplaceGrid({
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.18 }}
-              className="flex flex-col gap-2 rounded-xl border border-primary-200 bg-primary-50/85 p-4"
+              className="flex flex-col gap-2 rounded-xl border border-border bg-background/85 p-4"
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 space-y-1">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <h3 className="text-base font-medium text-ink text-balance line-clamp-1">
+                    <h3 className="text-base font-medium text-foreground text-balance line-clamp-1">
                       {entry.name}
                     </h3>
                     {entry.installed ? (
@@ -399,7 +399,7 @@ function MarketplaceGrid({
                       </span>
                     ) : null}
                   </div>
-                  <p className="line-clamp-2 text-xs text-primary-500 text-pretty">
+                  <p className="line-clamp-2 text-xs text-muted-foreground text-pretty">
                     {entry.description || 'No description.'}
                   </p>
                 </div>
@@ -411,13 +411,13 @@ function MarketplaceGrid({
                 >
                   {trust.label}
                 </span>
-                <span className="rounded-md border border-primary-200 bg-primary-100/60 px-2 py-0.5 text-[11px] font-medium text-primary-500">
+                <span className="rounded-md border border-border bg-card/60 px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
                   {sourceLabel}
                 </span>
                 {entry.tags.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-md border border-primary-200 bg-primary-100/50 px-2 py-0.5 text-[11px] text-primary-500"
+                    className="rounded-md border border-border bg-card/50 px-2 py-0.5 text-[11px] text-muted-foreground"
                   >
                     {tag}
                   </span>
@@ -426,7 +426,7 @@ function MarketplaceGrid({
 
               <div className="mt-auto flex items-center justify-end gap-2 pt-2">
                 {entry.installed ? (
-                  <span className="text-xs text-primary-500">
+                  <span className="text-xs text-muted-foreground">
                     Already installed
                   </span>
                 ) : (

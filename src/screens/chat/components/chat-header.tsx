@@ -240,7 +240,7 @@ function ChatHeaderComponent({
     return (
       <div
         ref={wrapperRef}
-        className="shrink-0 bg-surface transition-transform"
+        className="shrink-0 bg-background transition-transform"
         style={
           pullOffset > 0
             ? { transform: `translateY(${pullOffset}px)` }
@@ -260,7 +260,7 @@ function ChatHeaderComponent({
               height="16"
               viewBox="0 0 20 16"
               fill="none"
-              className="text-ink opacity-70"
+              className="text-foreground opacity-70"
             >
               <path
                 d="M1 1.5H19M1 8H19M1 14.5H13"
@@ -275,10 +275,10 @@ function ChatHeaderComponent({
           <button
             type="button"
             onClick={onOpenSessions}
-            className="flex items-center gap-1 min-w-0 max-w-[55vw] px-3 py-1.5 rounded-full bg-primary-100/70 hover:bg-primary-200/80 dark:bg-neutral-700/80 dark:hover:bg-neutral-600/80 transition-colors"
+            className="flex items-center gap-1 min-w-0 max-w-[55vw] px-3 py-1.5 rounded-full bg-card/70 hover:bg-muted/80 dark:bg-neutral-700/80 dark:hover:bg-neutral-600/80 transition-colors"
             aria-label="Switch session"
           >
-            <span className="truncate text-[13px] font-medium text-primary-600 dark:text-primary-300">
+            <span className="truncate text-[13px] font-medium text-muted-foreground dark:text-muted-foreground">
               {mobileTitle === 'new' ? 'New Chat' : mobileTitle}
             </span>
             <svg
@@ -306,7 +306,7 @@ function ChatHeaderComponent({
   }
 
   return (
-    <div ref={wrapperRef} className="shrink-0 bg-surface">
+    <div ref={wrapperRef} className="shrink-0 bg-background">
       <div className="px-4 h-12 flex items-center">
         {showFileExplorerButton ? (
           <TooltipProvider>
@@ -317,7 +317,7 @@ function ChatHeaderComponent({
                   <Button
                     size="icon-sm"
                     variant="ghost"
-                    className="mr-2 text-primary-800 hover:bg-primary-100 dark:hover:bg-primary-800"
+                    className="mr-2 text-foreground hover:bg-card dark:hover:bg-primary"
                     aria-label={
                       fileExplorerCollapsed ? 'Show files' : 'Hide files'
                     }
@@ -357,7 +357,7 @@ function ChatHeaderComponent({
                   cancelTitleEdit()
                 }
               }}
-              className="h-7 w-full min-w-0 border-b border-transparent bg-transparent px-0 text-sm font-medium text-balance text-ink outline-none transition-colors focus:border-primary-300"
+              className="h-7 w-full min-w-0 border-b border-transparent bg-transparent px-0 text-sm font-medium text-balance text-foreground outline-none transition-colors focus:border-border"
               aria-label="Session name"
             />
           ) : (
@@ -377,7 +377,7 @@ function ChatHeaderComponent({
                 <button
                   type="button"
                   onClick={startTitleEdit}
-                  className="text-xs text-primary-400 opacity-0 group-hover:opacity-100 hover:text-primary-600 transition-opacity shrink-0"
+                  className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-muted-foreground transition-opacity shrink-0"
                   title="Rename session"
                 >
                   ✏️
@@ -487,7 +487,7 @@ function ChatHeaderComponent({
         </div>
         {renamingTitle ? (
           <span
-            className="mr-1 inline-flex size-3 animate-spin rounded-full border border-primary-300 border-t-primary-700"
+            className="mr-1 inline-flex size-3 animate-spin rounded-full border border-border border-t-foreground"
             aria-label="Saving session name"
           />
         ) : null}
@@ -554,7 +554,7 @@ function ChatHeaderComponent({
                   <Button
                     size="icon-sm"
                     variant="ghost"
-                    className="text-primary-500 hover:bg-primary-100 dark:hover:bg-primary-800"
+                    className="text-muted-foreground hover:bg-card dark:hover:bg-primary"
                     aria-label="Undo last message"
                   >
                     <span className="text-sm">↩️</span>
@@ -583,8 +583,8 @@ function ChatHeaderComponent({
                     size="icon-sm"
                     variant="ghost"
                     className={cn(
-                      'hover:bg-primary-100 dark:hover:bg-primary-800',
-                      clearConfirm ? 'text-red-500' : 'text-primary-500',
+                      'hover:bg-card dark:hover:bg-primary',
+                      clearConfirm ? 'text-red-500' : 'text-muted-foreground',
                     )}
                     aria-label={
                       clearConfirm ? 'Confirm clear' : 'Clear session'

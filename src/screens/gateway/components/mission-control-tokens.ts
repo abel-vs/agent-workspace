@@ -21,14 +21,14 @@ export const HUB_RADIUS = {
 
 export const HUB_COLORS = {
   surface:
-    'border border-primary-200 bg-white/80 dark:border-neutral-700 dark:bg-neutral-900/70',
+    'border border-border bg-white/80 dark:border-neutral-700 dark:bg-neutral-900/70',
   mutedSurface:
-    'border border-primary-200 bg-primary-50/60 dark:border-neutral-700 dark:bg-neutral-800/40',
+    'border border-border bg-background/60 dark:border-neutral-700 dark:bg-neutral-800/40',
   softSurface:
-    'border border-primary-200 bg-primary-50/40 dark:border-neutral-700 dark:bg-neutral-900/20',
-  heading: 'text-primary-900 dark:text-neutral-100',
-  body: 'text-primary-700 dark:text-neutral-300',
-  muted: 'text-primary-500 dark:text-neutral-400',
+    'border border-border bg-background/40 dark:border-neutral-700 dark:bg-neutral-900/20',
+  heading: 'text-foreground dark:text-neutral-100',
+  body: 'text-foreground dark:text-neutral-300',
+  muted: 'text-muted-foreground dark:text-neutral-400',
 } as const
 
 export const HUB_STATUS = {

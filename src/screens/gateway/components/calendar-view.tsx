@@ -316,29 +316,29 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
   }, [cursorDate, mode, weekRange.end, weekRange.start])
 
   return (
-    <section className="rounded-xl border border-primary-800 bg-primary-950 p-3 sm:p-4">
+    <section className="rounded-xl border border-foreground bg-primary p-3 sm:p-4">
       <header className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => stepCursor(-1)}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-primary-800 text-primary-200 transition-colors hover:bg-primary-900"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-foreground text-primary-foreground transition-colors hover:bg-primary"
             aria-label="Previous"
           >
             <HugeiconsIcon icon={ArrowLeft01Icon} size={16} strokeWidth={1.7} />
           </button>
-          <h3 className="text-sm font-semibold text-primary-100">{title}</h3>
+          <h3 className="text-sm font-semibold text-primary-foreground">{title}</h3>
           <button
             type="button"
             onClick={() => stepCursor(1)}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-primary-800 text-primary-200 transition-colors hover:bg-primary-900"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-foreground text-primary-foreground transition-colors hover:bg-primary"
             aria-label="Next"
           >
             <HugeiconsIcon icon={ArrowRight01Icon} size={16} strokeWidth={1.7} />
           </button>
         </div>
 
-        <div className="inline-flex rounded-md border border-primary-800 bg-primary-900/60 p-0.5">
+        <div className="inline-flex rounded-md border border-foreground bg-primary/60 p-0.5">
           {(['month', 'week', 'day'] as const).map((view) => (
             <button
               key={view}
@@ -346,7 +346,7 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
               onClick={() => setMode(view)}
               className={cn(
                 'rounded px-2.5 py-1 text-xs font-medium capitalize transition-colors',
-                mode === view ? 'bg-accent-500 text-primary-950' : 'text-primary-300 hover:bg-primary-800 hover:text-primary-100',
+                mode === view ? 'bg-accent-500 text-foreground' : 'text-muted-foreground hover:bg-primary hover:text-primary-foreground',
               )}
             >
               {view}
@@ -367,7 +367,7 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
           >
             <div className="grid grid-cols-7 gap-2">
               {WEEKDAY_LABELS.map((day) => (
-                <div key={day} className="px-1 py-1 text-center text-[11px] font-semibold uppercase tracking-wide text-primary-400">
+                <div key={day} className="px-1 py-1 text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                   {day}
                 </div>
               ))}
@@ -386,11 +386,11 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
                     key={key}
                     className={cn(
                       'min-h-[96px] rounded-lg border p-2',
-                      isToday ? 'border-accent-500 bg-primary-900/80' : 'border-primary-800 bg-primary-900/40',
+                      isToday ? 'border-accent-500 bg-primary/80' : 'border-foreground bg-primary/40',
                       isOutsideMonth && 'opacity-55',
                     )}
                   >
-                    <div className="mb-1.5 text-xs font-semibold text-primary-200">{day.getDate()}</div>
+                    <div className="mb-1.5 text-xs font-semibold text-primary-foreground">{day.getDate()}</div>
                     <div className="space-y-1">
                       {visibleEvents.map((event) => (
                         <button
@@ -409,7 +409,7 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
                         </button>
                       ))}
                       {dayEvents.length > 3 ? (
-                        <div className="px-1.5 text-[11px] font-medium text-primary-400">+{dayEvents.length - 3} more</div>
+                        <div className="px-1.5 text-[11px] font-medium text-muted-foreground">+{dayEvents.length - 3} more</div>
                       ) : null}
                     </div>
                   </div>
@@ -428,11 +428,11 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
             transition={{ duration: 0.16 }}
             className="overflow-x-auto"
           >
-            <div className="min-w-[760px] rounded-lg border border-primary-800">
-              <div className="grid grid-cols-[64px_repeat(7,minmax(0,1fr))] border-b border-primary-800 bg-primary-900/50">
-                <div className="border-r border-primary-800 p-2 text-[11px] font-semibold uppercase tracking-wide text-primary-400">Time</div>
+            <div className="min-w-[760px] rounded-lg border border-foreground">
+              <div className="grid grid-cols-[64px_repeat(7,minmax(0,1fr))] border-b border-foreground bg-primary/50">
+                <div className="border-r border-foreground p-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Time</div>
                 {weekRange.days.map((day) => (
-                  <div key={getDayKey(day)} className={cn('border-r border-primary-800 p-2 text-center text-xs font-semibold last:border-r-0', isSameDay(day, today) ? 'text-accent-300' : 'text-primary-200')}>
+                  <div key={getDayKey(day)} className={cn('border-r border-foreground p-2 text-center text-xs font-semibold last:border-r-0', isSameDay(day, today) ? 'text-accent-300' : 'text-primary-foreground')}>
                     {WEEKDAY_LABELS[day.getDay()]} {day.getDate()}
                   </div>
                 ))}
@@ -441,13 +441,13 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
               <div className="grid grid-cols-[64px_repeat(7,minmax(0,1fr))]">
                 {HOUR_LABELS.map((label, hour) => (
                   <>
-                    <div key={`time-${label}`} className="border-r border-t border-primary-800 px-2 py-1.5 text-[10px] text-primary-400">
+                    <div key={`time-${label}`} className="border-r border-t border-foreground px-2 py-1.5 text-[10px] text-muted-foreground">
                       {label}
                     </div>
                     {weekRange.days.map((day) => {
                       const dayEvents = (eventsByDay.get(getDayKey(day)) ?? []).filter((event) => event.date.getHours() === hour)
                       return (
-                        <div key={`${getDayKey(day)}-${hour}`} className="min-h-[44px] border-r border-t border-primary-800 p-1 last:border-r-0">
+                        <div key={`${getDayKey(day)}-${hour}`} className="min-h-[44px] border-r border-t border-foreground p-1 last:border-r-0">
                           <div className="space-y-1">
                             {dayEvents.slice(0, 2).map((event) => (
                               <button
@@ -464,7 +464,7 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
                                 {event.title}
                               </button>
                             ))}
-                            {dayEvents.length > 2 ? <div className="text-[10px] text-primary-400">+{dayEvents.length - 2} more</div> : null}
+                            {dayEvents.length > 2 ? <div className="text-[10px] text-muted-foreground">+{dayEvents.length - 2} more</div> : null}
                           </div>
                         </div>
                       )
@@ -483,17 +483,17 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.16 }}
-            className="rounded-lg border border-primary-800"
+            className="rounded-lg border border-foreground"
           >
             <div className="grid grid-cols-[72px_minmax(0,1fr)]">
               {HOUR_LABELS.map((label, hour) => {
                 const dayEvents = (eventsByDay.get(getDayKey(cursorDate)) ?? []).filter((event) => event.date.getHours() === hour)
                 return (
                   <>
-                    <div key={`day-time-${label}`} className="border-r border-t border-primary-800 px-2 py-2 text-[10px] text-primary-400 first:border-t-0">
+                    <div key={`day-time-${label}`} className="border-r border-t border-foreground px-2 py-2 text-[10px] text-muted-foreground first:border-t-0">
                       {label}
                     </div>
-                    <div key={`day-cell-${hour}`} className="border-t border-primary-800 p-2 first:border-t-0">
+                    <div key={`day-cell-${hour}`} className="border-t border-foreground p-2 first:border-t-0">
                       <div className="space-y-1.5">
                         {dayEvents.map((event) => (
                           <button
@@ -511,7 +511,7 @@ export function CalendarView({ cronJobs, missionRuns, onSelectEvent }: CalendarV
                               <HugeiconsIcon icon={event.type === 'cron' ? RefreshIcon : Clock01Icon} size={13} strokeWidth={1.8} />
                               <span className="truncate">{event.title}</span>
                             </div>
-                            <div className="mt-1 text-[11px] text-primary-300">
+                            <div className="mt-1 text-[11px] text-muted-foreground">
                               {new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit' }).format(event.date)}
                             </div>
                           </button>

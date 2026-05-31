@@ -46,15 +46,15 @@ export class ErrorBoundary extends Component<
     return (
       <div
         className={cn(
-          'flex h-full min-h-0 items-center justify-center bg-primary-50 p-6',
+          'flex h-full min-h-0 items-center justify-center bg-background p-6',
           this.props.className,
         )}
       >
-        <div className="w-full max-w-md rounded-xl border border-primary-200 bg-primary-100 p-6 text-center shadow-sm">
-          <h2 className="text-balance text-xl font-medium text-primary-900">
+        <div className="w-full max-w-md rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+          <h2 className="text-balance text-xl font-medium text-foreground">
             {title}
           </h2>
-          <p className="mt-2 text-pretty text-sm text-primary-700">
+          <p className="mt-2 text-pretty text-sm text-foreground">
             {description}
           </p>
           {this.state.error ? (

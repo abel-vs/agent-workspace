@@ -82,7 +82,7 @@ function compareStatus(base: string, next: string): DeltaResult {
 function deltaClassName(tone: DeltaTone): string {
   if (tone === 'better') return 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
   if (tone === 'worse') return 'border-red-500/30 bg-red-500/10 text-red-300'
-  if (tone === 'same') return 'border-primary-700 bg-primary-800/60 text-primary-300'
+  if (tone === 'same') return 'border-foreground bg-primary/60 text-muted-foreground'
   return 'border-accent-500/30 bg-accent-500/10 text-accent-300'
 }
 
@@ -104,16 +104,16 @@ export function RunCompare({ runA, runB, onClose }: RunCompareProps) {
   const statusDelta = compareStatus(runA.status, runB.status)
 
   return (
-    <section className="w-full rounded-xl border border-primary-800 bg-primary-900 p-4">
+    <section className="w-full rounded-xl border border-foreground bg-primary p-4">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-semibold text-primary-100">Compare Runs</h3>
-          <p className="text-xs text-primary-400">Run metrics side by side</p>
+          <h3 className="text-sm font-semibold text-primary-foreground">Compare Runs</h3>
+          <p className="text-xs text-muted-foreground">Run metrics side by side</p>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg border border-primary-700 bg-primary-800 px-2 py-1 text-xs font-medium text-primary-200 transition-colors hover:border-accent-500 hover:text-accent-300"
+          className="rounded-lg border border-foreground bg-primary px-2 py-1 text-xs font-medium text-primary-foreground transition-colors hover:border-accent-500 hover:text-accent-300"
           aria-label="Close compare view"
         >
           Close
@@ -123,16 +123,16 @@ export function RunCompare({ runA, runB, onClose }: RunCompareProps) {
       <div className="overflow-x-auto">
         <div className="min-w-[640px] space-y-2">
           <div className="grid grid-cols-[1fr_auto_1fr] gap-2">
-            <div className="rounded-xl border border-primary-800 bg-primary-950 p-3">
-              <p className="text-[11px] uppercase tracking-wide text-primary-400">Run A</p>
-              <p className="truncate text-xs font-semibold text-primary-100">{runA.title}</p>
-              <p className="truncate text-xs text-primary-300">{runA.id}</p>
+            <div className="rounded-xl border border-foreground bg-primary p-3">
+              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Run A</p>
+              <p className="truncate text-xs font-semibold text-primary-foreground">{runA.title}</p>
+              <p className="truncate text-xs text-muted-foreground">{runA.id}</p>
             </div>
             <div />
-            <div className="rounded-xl border border-primary-800 bg-primary-950 p-3">
-              <p className="text-[11px] uppercase tracking-wide text-primary-400">Run B</p>
-              <p className="truncate text-xs font-semibold text-primary-100">{runB.title}</p>
-              <p className="truncate text-xs text-primary-300">{runB.id}</p>
+            <div className="rounded-xl border border-foreground bg-primary p-3">
+              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Run B</p>
+              <p className="truncate text-xs font-semibold text-primary-foreground">{runB.title}</p>
+              <p className="truncate text-xs text-muted-foreground">{runB.id}</p>
             </div>
           </div>
 
@@ -185,9 +185,9 @@ function MetricRow({
 }) {
   return (
     <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-      <div className="rounded-xl border border-primary-800 bg-primary-950 p-3">
-        <p className="text-[11px] text-primary-400">{label}</p>
-        <p className="text-xs font-medium text-primary-100">{leftValue}</p>
+      <div className="rounded-xl border border-foreground bg-primary p-3">
+        <p className="text-[11px] text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium text-primary-foreground">{leftValue}</p>
       </div>
 
       <div className={`min-w-[88px] rounded-lg border px-2 py-1 text-center text-xs font-semibold ${deltaClassName(delta.tone)}`}>
@@ -195,9 +195,9 @@ function MetricRow({
         <p>{delta.label}</p>
       </div>
 
-      <div className="rounded-xl border border-primary-800 bg-primary-950 p-3">
-        <p className="text-[11px] text-primary-400">{label}</p>
-        <p className="text-xs font-medium text-primary-100">{rightValue}</p>
+      <div className="rounded-xl border border-foreground bg-primary p-3">
+        <p className="text-[11px] text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium text-primary-foreground">{rightValue}</p>
       </div>
     </div>
   )
